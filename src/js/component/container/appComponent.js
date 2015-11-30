@@ -1,6 +1,9 @@
 import React from 'react';
 import * as reactRedux from 'react-redux';
 import * as actionFactory from '../../actions/actionFactory';
+import TodoGroupListComponent from './../presentation/TodoGroupListComponent';
+import AddTodoGroupComponent from './../presentation/AddTodoGroupComponent';
+import { createAddGroupAction, createChangeTodoIsCompletedStatusAction, createAddTodoAction } from './../../actions/actionFactory';
 
 /**
  * @author Gijs Nieuwenhuis <gijs.nieuwenhuis@freshheads.com>
@@ -8,14 +11,39 @@ import * as actionFactory from '../../actions/actionFactory';
 class AppComponent extends React.Component {
 
     /**
-     * @param {Object} event
+     * @param {String} title
      *
      * @private
      */
-    _onClick(event) {
-        event.preventDefault();
+    _onAddTodoGroup(title) {
+        this.props.dispatch(
+            createAddGroupAction(title)
+        );
+    }
 
-        this.props.dispatch(actionFactory.createSomeAction());
+    /**
+     * @param {String} cid
+     * @param {Boolean} newIsCompleted
+     * @param {String} groupCid
+     *
+     * @private
+     */
+    _onTodoCompletedStatusChange(cid, newIsCompleted, groupCid) {
+        this.props.dispatch(
+            createChangeTodoIsCompletedStatusAction(cid, newIsCompleted, groupCid)
+        );
+    }
+
+    /**
+     * @param {String} title
+     * @param {String} groupCid
+     *
+     * @private
+     */
+    _onAddTodo(title, groupCid) {
+        this.props.dispatch(
+            createAddTodoAction(title, groupCid)
+        );
     }
 
     /**
@@ -23,9 +51,12 @@ class AppComponent extends React.Component {
      */
     render() {
         return (
-            <div>
-                <h1>@todo</h1>
-                <a href="#" onClick={this._onClick.bind(this)}>@todo</a>
+            <div className="row">
+                <TodoGroupListComponent todoGroups={this.props.todoGroups}
+                                        onAddTodo={this._onAddTodo.bind(this)}
+                                        onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
+
+                <AddTodoGroupComponent onAddTodoGroup={this._onAddTodoGroup.bind(this)}/>
             </div>
         );
     }
@@ -38,7 +69,7 @@ class AppComponent extends React.Component {
  */
 var mapCompleteStateToAppComponentProps = function (completeState) {
     return {
-        someKey: completeState.someKey
+        todoGroups: completeState.todoGroups
     }
 };
 

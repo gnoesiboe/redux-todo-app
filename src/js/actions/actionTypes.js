@@ -1,1 +1,3 @@
-export const SOME_ACTION = 'SOME_ACTION';
+export const ADD_GROUP = 'ADD_GROUP';
+export const CHANGE_TODO_IS_COMPLETED_STATUS = 'CHANGE_TODO_IS_COMPLETED_STATUS';
+export const ADD_TODO = 'ADD_TODO';

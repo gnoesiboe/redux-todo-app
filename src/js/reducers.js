@@ -1,8 +1,8 @@
 import * as redux from 'redux';
-import someActionReducer from './reducer/someActionReducer';
+import todoGroupsReducer from './reducer/todoGroupsReducer';
 
 const reducers = redux.combineReducers({
-    someKey: someActionReducer
+    todoGroups: todoGroupsReducer
 });
 
 export default reducers;

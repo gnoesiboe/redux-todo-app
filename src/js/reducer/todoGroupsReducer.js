@@ -115,7 +115,7 @@ var _locateTodoInListState = function (cid, state) {
         foundTodoAtIndex = null;
 
     state.map(function (todo, index) {
-        if (todo.get('cid') === action.cid) {
+        if (todo.get('cid') === cid) {
             foundTodo = todo;
             foundTodoAtIndex = index;
         }

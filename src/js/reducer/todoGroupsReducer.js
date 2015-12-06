@@ -52,6 +52,28 @@ var _handleChangeTodoIsCompletedStatus = function (currentState, action) {
 };
 
 /**
+ * @param {Object} currentState
+ * @param {Object} action
+ *
+ * @private
+ */
+var _handleDeleteTodoAction = function (currentState, action) {
+    var [ foundGroup, foundGroupAtIndex ] = _locateGroupInState(action.groupCid, currentState);
+
+    if (foundGroup === null || foundGroupAtIndex === null) {
+        return currentState;
+    }
+
+    var groupTodos = foundGroup.get('todos'),
+        foundTodoAtIndex = _locateTodoInListState(action.cid, groupTodos)[1];
+
+    var newGroupTodos = groupTodos.splice(foundTodoAtIndex, 1),
+        newGroup = foundGroup.set('todos', newGroupTodos);
+
+    return currentState.set(foundGroupAtIndex, newGroup);
+};
+
+/**
  * @param {List} currentState
  * @param {Object} action
  *
@@ -137,6 +159,9 @@ export default function todoGroupsReducer(currentState = _defaultState, action) 
 
         case actionTypes.ADD_TODO:
             return _handleAddTodoAction(currentState, action);
+
+        case actionTypes.DELETE_TODO:
+            return _handleDeleteTodoAction(currentState, action);
 
         default:
             return currentState;

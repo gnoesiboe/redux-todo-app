@@ -6,10 +6,7 @@ import { createTodo } from './../model/todoFactory';
 /**
  * @type {List}
  */
-var _defaultState = List.of(
-    createTodoGroup('Vulputate Inceptos Etiam'),
-    createTodoGroup('Fermentum Vestibulum')
-);
+var _defaultState = List();
 
 /**
  * @param {List} currentState

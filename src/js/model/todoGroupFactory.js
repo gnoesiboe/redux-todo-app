@@ -11,9 +11,6 @@ export function createTodoGroup(title) {
     return Map({
         cid: generateId(),
         title: title,
-        todos: List.of(
-            createTodo('Parturient Magna Euismod'),
-            createTodo('Quam Vestibulum')
-        )
+        todos: List()
     });
 }

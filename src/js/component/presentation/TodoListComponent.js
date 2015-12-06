@@ -31,8 +31,8 @@ class TodoListComponent extends React.Component {
      */
     render() {
         return (
-            <div>
-                <ul>
+            <div className="todo-list-component">
+                <ul className="todo-list-component-list">
                     {this._renderTodos()}
                 </ul>
             </div>

@@ -75,7 +75,7 @@ class AddTodoComponent extends React.Component {
                 <form action="#" onSubmit={this._onFormSubmit.bind(this)}>
                     <div className="form-group">
                         <input type="text"
-                               placeholder="Summary.."
+                               placeholder="Add todo.."
                                name="title"
                                value={this.state.title}
                                className="form-control"

@@ -2,7 +2,6 @@ import React from 'react';
 import * as reactRedux from 'react-redux';
 import * as actionFactory from '../../actions/actionFactory';
 import TodoGroupListComponent from './../presentation/TodoGroupListComponent';
-import AddTodoGroupComponent from './../presentation/AddTodoGroupComponent';
 import { createAddGroupAction, createChangeTodoIsCompletedStatusAction, createAddTodoAction } from './../../actions/actionFactory';
 
 /**
@@ -51,12 +50,11 @@ class AppComponent extends React.Component {
      */
     render() {
         return (
-            <div className="row">
+            <div className="app-container-wrapper">
                 <TodoGroupListComponent todoGroups={this.props.todoGroups}
                                         onAddTodo={this._onAddTodo.bind(this)}
+                                        onAddTodoGroup={this._onAddTodoGroup.bind(this)}
                                         onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
-
-                <AddTodoGroupComponent onAddTodoGroup={this._onAddTodoGroup.bind(this)}/>
             </div>
         );
     }

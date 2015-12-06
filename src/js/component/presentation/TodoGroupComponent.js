@@ -31,8 +31,8 @@ class TodoGroupComponent extends React.Component {
      */
     render() {
         return (
-            <div className="col-lg-3 todo-group-component">
-                <h3>{ this.props.title }</h3>
+            <div className="todo-group-component">
+                <h3 className="todo-group-component-title">{ this.props.title }</h3>
                 <TodoListComponent todos={this.props.todos}
                                    groupCid={this.props.cid}
                                    onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />

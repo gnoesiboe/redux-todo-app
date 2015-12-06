@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoGroupComponent from './TodoGroupComponent';
+import AddTodoGroupComponent from './../presentation/AddTodoGroupComponent';
 
 /**
  * @author Gijs Nieuwenhuis <gijs.nieuwenhuis@freshheads.com>
@@ -31,14 +32,16 @@ class TodoGroupListComponent extends React.Component {
      */
     render() {
         return (
-            <div>
+            <div className="todo-group-list-component clearfix">
                 {this._renderTodoGroupComponents()}
+                <AddTodoGroupComponent onAddTodoGroup={this.props.onAddTodoGroup}/>
             </div>
         )
     }
 }
 
-TodoGroupListComponent.propTypes= {
+TodoGroupListComponent.propTypes = {
+    onAddTodoGroup: React.PropTypes.func.isRequired,
     onTodoCompletedStatusChange: React.PropTypes.func.isRequired,
     todoGroups: React.PropTypes.object.isRequired,
     onAddTodo: React.PropTypes.func.isRequired

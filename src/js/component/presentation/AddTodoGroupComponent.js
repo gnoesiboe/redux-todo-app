@@ -65,7 +65,8 @@ class AddTodoGroupComponent extends React.Component {
      */
     render() {
         return (
-            <div className="add-todo-group-component col-lg-3">
+            <div className="add-todo-group-component">
+                <h3>Add todo group</h3>
                 <form action="" className="form" onSubmit={this._onFormSubmit.bind(this)}>
                     <div className="form-group">
                         <label htmlFor="group-name-input" className="control-label">Title</label>
@@ -76,6 +77,7 @@ class AddTodoGroupComponent extends React.Component {
                                className="form-control"
                                onChange={this._onFormFieldValueChange.bind(this)} />
                     </div>
+                    <button type="submit" className="btn btn-success">Save</button>
                 </form>
             </div>
         );

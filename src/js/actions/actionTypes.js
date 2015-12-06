@@ -1,3 +1,4 @@
 export const ADD_GROUP = 'ADD_GROUP';
 export const CHANGE_TODO_IS_COMPLETED_STATUS = 'CHANGE_TODO_IS_COMPLETED_STATUS';
 export const ADD_TODO = 'ADD_TODO';
+export const DELETE_TODO = 'DELETE_TODO';

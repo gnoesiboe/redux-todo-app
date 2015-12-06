@@ -21,6 +21,7 @@ class TodoGroupListComponent extends React.Component {
                                         title={todoGroup.get('title')}
                                         onTodoCompletedStatusChange={this.props.onTodoCompletedStatusChange}
                                         onAddTodo={this.props.onAddTodo}
+                                        onTodoDelete={this.props.onTodoDelete}
                                         todos={todoGroup.get('todos')} />
                 )
             }.bind(this)
@@ -41,6 +42,7 @@ class TodoGroupListComponent extends React.Component {
 }
 
 TodoGroupListComponent.propTypes = {
+    onTodoDelete: React.PropTypes.func.isRequired,
     onAddTodoGroup: React.PropTypes.func.isRequired,
     onTodoCompletedStatusChange: React.PropTypes.func.isRequired,
     todoGroups: React.PropTypes.object.isRequired,

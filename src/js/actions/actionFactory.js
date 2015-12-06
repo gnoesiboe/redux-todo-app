@@ -41,3 +41,17 @@ export function createAddTodoAction(title, groupCid) {
         groupCid: groupCid
     };
 }
+
+/**
+ * @param {String} cid
+ * @param {String} groupCid
+ *
+ * @returns {Object}
+ */
+export function createDeleteTodoAction(cid, groupCid) {
+    return {
+        type: actionTypes.DELETE_TODO,
+        cid: cid,
+        groupCid: groupCid
+    };
+}

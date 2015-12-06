@@ -13,6 +13,7 @@ var buildFactoryWithMiddelware = redux.applyMiddleware(
     thunkMiddelware
 )(redux.createStore);
 
-var store = buildFactoryWithMiddelware(reducers, localStorageRepository.getPersistedState());
+var persistedState = localStorageRepository.getPersistedState(),
+    store = buildFactoryWithMiddelware(reducers, persistedState || undefined);
 
 export default store;

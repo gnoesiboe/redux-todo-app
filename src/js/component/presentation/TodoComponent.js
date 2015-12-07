@@ -27,17 +27,40 @@ class TodoComponent extends React.Component {
 
     /**
      * @returns {XML}
+     *
+     * @private
+     */
+    _renderActionsList() {
+        return (
+            <ul className="list-inline todo-component-actions">
+                <li>
+                    <a href="#" className="todo-component-action">
+                        edit
+                    </a>
+                </li>
+                <li className="todo-component-action-seperator">|</li>
+                <li>
+                    <a href="#" onClick={this._onTodoDeleteClick.bind(this)} className="todo-component-action">
+                        remove
+                    </a>
+                </li>
+            </ul>
+        );
+    }
+
+    /**
+     * @returns {XML}
      */
     render() {
         return (
-            <div>
+            <div className="todo-component">
                 <div className="checkbox">
-                    <a href="#" className="pull-right" onClick={this._onTodoDeleteClick.bind(this)}>x</a>
                     <label>
                         <input type="checkbox"
                                onChange={this._onIsCompletedChange.bind(this)}
                                checked={this.props.isCompleted} /> {this.props.title}
                     </label>
+                    {this._renderActionsList()}
                 </div>
             </div>
         );

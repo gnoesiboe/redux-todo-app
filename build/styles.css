@@ -46,3 +46,19 @@ html,
     list-style: none;
     padding: 0 10px;
 }
+
+.todo-component-actions {
+    margin-left: 15px;
+}
+
+.todo-component-action-seperator {
+    color: #ddd;
+}
+
+.todo-component-action {
+    color: #aaa;
+}
+
+.todo-component-action:hover {
+    color: #999;
+}

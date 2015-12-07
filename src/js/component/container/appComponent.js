@@ -2,7 +2,7 @@ import React from 'react';
 import * as reactRedux from 'react-redux';
 import * as actionFactory from '../../actions/actionFactory';
 import TodoGroupListComponent from './../presentation/TodoGroupListComponent';
-import { createAddGroupAction, createChangeTodoIsCompletedStatusAction, createAddTodoAction, createDeleteTodoAction } from './../../actions/actionFactory';
+import { createAddGroupAction, createChangeTodoIsCompletedStatusAction, createAddTodoAction, createDeleteTodoAction, createEditTodoAction } from './../../actions/actionFactory';
 
 /**
  * @author Gijs Nieuwenhuis <gijs.nieuwenhuis@freshheads.com>
@@ -58,6 +58,19 @@ class AppComponent extends React.Component {
     }
 
     /**
+     * @param {String} cid
+     * @param {String} newTitle
+     * @param {String} groupCid
+     *
+     * @private
+     */
+    _onTodoEdit(cid, newTitle, groupCid) {
+        this.props.dispatch(
+            createEditTodoAction(cid, newTitle, groupCid)
+        )
+    }
+
+    /**
      * @returns {XML}
      */
     render() {
@@ -67,6 +80,7 @@ class AppComponent extends React.Component {
                                         onAddTodo={this._onAddTodo.bind(this)}
                                         onAddTodoGroup={this._onAddTodoGroup.bind(this)}
                                         onTodoDelete={this._onTodoDelete.bind(this)}
+                                        onTodoEdit={this._onTodoEdit.bind(this)}
                                         onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
             </div>
         );

@@ -40,6 +40,18 @@ class TodoGroupComponent extends React.Component {
     }
 
     /**
+     * @param {String} todoCid
+     * @param {String} newTodoTitle
+     *
+     * @private
+     */
+    _onTodoEdit(todoCid, newTodoTitle) {
+
+        // add our group cid to the callback, to apply context
+        this.props.onTodoEdit(todoCid, newTodoTitle, this.props.cid);
+    }
+
+    /**
      * @returns {XML}
      */
     render() {
@@ -49,6 +61,7 @@ class TodoGroupComponent extends React.Component {
                 <TodoListComponent todos={this.props.todos}
                                    groupCid={this.props.cid}
                                    onTodoDelete={this._onTodoDelete.bind(this)}
+                                   onTodoEdit={this._onTodoEdit.bind(this)}
                                    onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
                 <AddTodoComponent onAddTodo={this._onAddTodo.bind(this)} />
             </div>
@@ -62,7 +75,8 @@ TodoGroupComponent.propTypes = {
     todos: React.PropTypes.object.isRequired,
     onTodoCompletedStatusChange: React.PropTypes.func.isRequired,
     onAddTodo: React.PropTypes.func.isRequired,
-    onTodoDelete: React.PropTypes.func.isRequired
+    onTodoDelete: React.PropTypes.func.isRequired,
+    onTodoEdit: React.PropTypes.func.isRequired
 };
 
 export default TodoGroupComponent;

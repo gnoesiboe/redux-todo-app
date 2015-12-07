@@ -20,6 +20,7 @@ class TodoListComponent extends React.Component {
                     <TodoComponent cid={todo.get('cid')}
                                    title={todo.get('title')}
                                    onTodoDelete={this.props.onTodoDelete}
+                                   onTodoEdit={this.props.onTodoEdit}
                                    onTodoCompletedStatusChange={this.props.onTodoCompletedStatusChange}
                                    isCompleted={todo.get('isCompleted')} />
                 </li>
@@ -45,7 +46,8 @@ TodoListComponent.propTypes = {
     groupCid: React.PropTypes.string.isRequired,
     onTodoCompletedStatusChange: React.PropTypes.func.isRequired,
     todos: React.PropTypes.object.isRequired,
-    onTodoDelete: React.PropTypes.func.isRequired
+    onTodoDelete: React.PropTypes.func.isRequired,
+    onTodoEdit: React.PropTypes.func.isRequired
 };
 
 export default TodoListComponent;

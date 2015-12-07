@@ -117,7 +117,7 @@ class TodoComponent extends React.Component {
         // prevent packend submission
         event.preventDefault();
 
-        console.log('submit state: ', this.state);
+        this.props.onTodoEdit(this.props.cid, this.state.title);
 
         this.setState({
             mode: MODE_VIEW
@@ -170,7 +170,8 @@ TodoComponent.propTypes = {
     isCompleted: React.PropTypes.bool.isRequired,
     title: React.PropTypes.string.isRequired,
     onTodoCompletedStatusChange: React.PropTypes.func.isRequired,
-    onTodoDelete: React.PropTypes.func.isRequired
+    onTodoDelete: React.PropTypes.func.isRequired,
+    onTodoEdit: React.PropTypes.func.isRequired
 };
 
 export default TodoComponent;

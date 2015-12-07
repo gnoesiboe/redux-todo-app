@@ -55,3 +55,19 @@ export function createDeleteTodoAction(cid, groupCid) {
         groupCid: groupCid
     };
 }
+
+/**
+ * @param {String} cid
+ * @param {String} newTitle
+ * @param {String} groupCid
+ *
+ * @returns {Object}
+ */
+export function createEditTodoAction(cid, newTitle, groupCid) {
+    return {
+        type: actionTypes.EDIT_TODO,
+        cid: cid,
+        newTitle: newTitle,
+        groupCid: groupCid
+    };
+}

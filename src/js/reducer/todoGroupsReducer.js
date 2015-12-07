@@ -74,6 +74,33 @@ var _handleDeleteTodoAction = function (currentState, action) {
 };
 
 /**
+ * @param {Object} currentState
+ * @param {Object} action
+ *
+ * @private
+ */
+var _handleEditTodoAction = function (currentState, action) {
+    var [ foundGroup, foundGroupAtIndex ] = _locateGroupInState(action.groupCid, currentState);
+
+    if (foundGroup === null || foundGroupAtIndex === null) {
+        return currentState;
+    }
+
+    var groupTodos = foundGroup.get('todos'),
+        [ foundTodo, foundTodoAtIndex ] = _locateTodoInListState(action.cid, groupTodos);
+
+    if (foundTodo === null || foundTodoAtIndex === null) {
+        return currentState;
+    }
+
+    var newTodo = foundTodo.set('title', action.newTitle),
+        newGroupTodos = groupTodos.set(foundTodoAtIndex, newTodo),
+        newGroup = foundGroup.set('todos', newGroupTodos);
+
+    return currentState.set(foundGroupAtIndex, newGroup);
+};
+
+/**
  * @param {List} currentState
  * @param {Object} action
  *
@@ -162,6 +189,9 @@ export default function todoGroupsReducer(currentState = _defaultState, action) 
 
         case actionTypes.DELETE_TODO:
             return _handleDeleteTodoAction(currentState, action);
+
+        case actionTypes.EDIT_TODO:
+            return _handleEditTodoAction(currentState, action);
 
         default:
             return currentState;

@@ -1,0 +1,48 @@
+body,
+html,
+.app-container,
+.app-container-wrapper,
+.todo-group-list-component {
+    height: 100%;
+    width: 100%;
+    vertical-align: top;
+}
+
+.todo-group-component,
+.add-todo-group-component {
+    height: 50%;
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-left: 0;
+    border-top: 0;
+    overflow-y: scroll;
+    position: relative;
+}
+
+.todo-group-component-title {
+    background: #faf8bf;
+    margin: 0 0 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+.add-todo-component {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 10px 0;
+    background: #efefef;
+}
+
+.todo-list-component-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    padding: 0 10px;
+}

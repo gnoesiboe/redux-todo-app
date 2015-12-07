@@ -132,17 +132,17 @@ class TodoComponent extends React.Component {
     _renderEditMode() {
         return (
             <div className="todo-component">
-                <form className="form" onSubmit={this._onFormSubmit.bind(this)}>
+                <form className="form" className="todo-component-form" onSubmit={this._onFormSubmit.bind(this)}>
                     <div className="form-group">
-                        <label>
-                            <input type="text"
-                                   className="form-control"
-                                   placeholder="Title.."
-                                   onChange={this._onFieldChange.bind(this)}
-                                   name="title"
-                                   value={this.state.title} />
-                        </label>
+                        <label className="control-label">Title</label>
+                        <input type="text"
+                               className="form-control"
+                               placeholder="Title.."
+                               onChange={this._onFieldChange.bind(this)}
+                               name="title"
+                               value={this.state.title} />
                     </div>
+                    <button type="submit" className="btn btn-success">Save</button>
                 </form>
             </div>
         );

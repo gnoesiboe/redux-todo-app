@@ -62,3 +62,10 @@ html,
 .todo-component-action:hover {
     color: #999;
 }
+
+.todo-component-form {
+    background: #ddd;
+    padding: 15px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}

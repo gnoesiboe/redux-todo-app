@@ -1,5 +1,8 @@
 import React from 'react';
 
+const MODE_CREATE = 'CREATE';
+const MODE_VIEW = 'VIEW';
+
 /**
  * @author Gijs Nieuwenhuis <gijs.nieuwenhuis@freshheads.com>
  */
@@ -21,6 +24,7 @@ class AddTodoGroupComponent extends React.Component {
      */
     _getResetState() {
         return {
+            mode: MODE_VIEW,
             title: null
         };
     }
@@ -62,17 +66,18 @@ class AddTodoGroupComponent extends React.Component {
 
     /**
      * @returns {XML}
+     *
+     * @private
      */
-    render() {
+    _renderCreateMode() {
         return (
             <div className="add-todo-group-component">
-                <h3>Add todo group</h3>
                 <form action="" className="form" onSubmit={this._onFormSubmit.bind(this)}>
                     <div className="form-group">
-                        <label htmlFor="group-name-input" className="control-label">Title</label>
                         <input type="text"
                                id="group-name-input"
                                name="title"
+                               placeholder="Title.."
                                value={this.state.title}
                                className="form-control"
                                onChange={this._onFormFieldValueChange.bind(this)} />
@@ -81,6 +86,47 @@ class AddTodoGroupComponent extends React.Component {
                 </form>
             </div>
         );
+    }
+
+    /**
+     * @param {Object} event
+     *
+     * @private
+     */
+    _onAddLinkClick(event) {
+
+        // prevent follow link href
+        event.preventDefault();
+
+        this.setState({
+            mode: MODE_CREATE
+        });
+    }
+
+    /**
+     * @returns {XML}
+     *
+     * @private
+     */
+    _renderViewMode() {
+        return (
+            <div className="add-todo-group-component">
+                <a href="#" className="add-todo-group-component-add-link" onClick={this._onAddLinkClick.bind(this)}>+</a>
+            </div>
+        )
+    }
+
+    /**
+     * @returns {XML}
+     */
+    render() {
+        switch (this.state.mode) {
+            case MODE_VIEW:
+                return this._renderViewMode();
+
+            case MODE_CREATE:
+                return this._renderCreateMode();
+        }
     }
 }
 

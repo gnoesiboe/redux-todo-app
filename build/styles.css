@@ -41,7 +41,6 @@ html,
 }
 
 .todo-list-component-list {
-    padding: 0;
     margin: 0;
     list-style: none;
     padding: 0 10px;
@@ -68,4 +67,21 @@ html,
     padding: 15px;
     border-radius: 3px;
     margin-bottom: 10px;
+}
+
+.add-todo-group-component {
+    text-align: center;
+}
+
+.add-todo-group-component-add-link {
+    font-size: 100px;
+    padding: 10%;
+    color: #ddd;
+    border-radius: 10px;
+    margin: auto;
+}
+
+.add-todo-group-component-add-link:hover {
+    text-decoration: none;
+    color: #999;
 }

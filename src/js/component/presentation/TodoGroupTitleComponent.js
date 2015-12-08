@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 const MODE_EDIT = 'EDIT';
 const MODE_VIEW = 'VIEW';
@@ -15,6 +16,22 @@ class TodoGroupTitleComponent extends React.Component {
         super(props);
 
         this.state = this._getResetState();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    componentDidUpdate() {
+        if (this.state.mode === MODE_EDIT) {
+            this._focusTitleField();
+        }
+    }
+
+    /**
+     * @private
+     */
+    _focusTitleField() {
+        ReactDOM.findDOMNode(this.refs.title).focus();
     }
 
     /**
@@ -107,6 +124,7 @@ class TodoGroupTitleComponent extends React.Component {
                                onChange={this._onFormFieldChange.bind(this)}
                                placeholder="Title.."
                                value={this.state.title}
+                               ref="title"
                                name="title" />
                     </div>
                     <button type="submit" className="btn btn-success">Save</button>

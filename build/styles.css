@@ -125,3 +125,11 @@ html,
         text-decoration: none;
         color: #999;
     }
+
+
+/* -------------------------------------------------------*/
+
+
+.todo-group-actions-component {
+    padding: 0 0 10px;
+}

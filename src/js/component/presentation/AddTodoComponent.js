@@ -82,6 +82,8 @@ class AddTodoComponent extends React.Component {
                                onChange={this._onFieldChange.bind(this)}/>
                     </div>
                 </form>
+
+                {this.props.children}
             </div>
         );
     }

@@ -24,6 +24,7 @@ class TodoGroupListComponent extends React.Component {
                                         onTodoEdit={this.props.onTodoEdit}
                                         onTodoDelete={this.props.onTodoDelete}
                                         onTodoGroupTitleEdit={this.props.onTodoGroupTitleEdit}
+                                        onTodoGroupDelete={this.props.onTodoGroupDelete}
                                         todos={todoGroup.get('todos')} />
                 )
             }.bind(this)
@@ -50,7 +51,8 @@ TodoGroupListComponent.propTypes = {
     todoGroups: React.PropTypes.object.isRequired,
     onAddTodo: React.PropTypes.func.isRequired,
     onTodoEdit: React.PropTypes.func.isRequired,
-    onTodoGroupTitleEdit: React.PropTypes.func.isRequired
+    onTodoGroupTitleEdit: React.PropTypes.func.isRequired,
+    onTodoGroupDelete: React.PropTypes.func.isRequired
 };
 
 export default TodoGroupListComponent;

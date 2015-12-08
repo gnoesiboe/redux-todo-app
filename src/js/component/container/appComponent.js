@@ -2,14 +2,6 @@ import React from 'react';
 import * as reactRedux from 'react-redux';
 import * as actionFactory from '../../actions/actionFactory';
 import TodoGroupListComponent from './../presentation/TodoGroupListComponent';
-import {
-    createAddGroupAction,
-    createChangeTodoIsCompletedStatusAction,
-    createAddTodoAction,
-    createDeleteTodoAction,
-    createEditTodoAction,
-    createChangeTodoGroupTitleAction
-} from './../../actions/actionFactory';
 
 /**
  * @author Gijs Nieuwenhuis <gijs.nieuwenhuis@freshheads.com>
@@ -23,7 +15,7 @@ class AppComponent extends React.Component {
      */
     _onAddTodoGroup(title) {
         this.props.dispatch(
-            createAddGroupAction(title)
+            actionFactory.createAddGroupAction(title)
         );
     }
 
@@ -36,7 +28,7 @@ class AppComponent extends React.Component {
      */
     _onTodoCompletedStatusChange(cid, newIsCompleted, groupCid) {
         this.props.dispatch(
-            createChangeTodoIsCompletedStatusAction(cid, newIsCompleted, groupCid)
+            actionFactory.createChangeTodoIsCompletedStatusAction(cid, newIsCompleted, groupCid)
         );
     }
 
@@ -48,7 +40,7 @@ class AppComponent extends React.Component {
      */
     _onAddTodo(title, groupCid) {
         this.props.dispatch(
-            createAddTodoAction(title, groupCid)
+            actionFactory.createAddTodoAction(title, groupCid)
         );
     }
 
@@ -60,7 +52,7 @@ class AppComponent extends React.Component {
      */
     _onTodoDelete(cid, groupCid) {
         this.props.dispatch(
-            createDeleteTodoAction(cid, groupCid)
+            actionFactory.createDeleteTodoAction(cid, groupCid)
         );
     }
 
@@ -73,7 +65,7 @@ class AppComponent extends React.Component {
      */
     _onTodoEdit(cid, newTitle, groupCid) {
         this.props.dispatch(
-            createEditTodoAction(cid, newTitle, groupCid)
+            actionFactory.createEditTodoAction(cid, newTitle, groupCid)
         );
     }
 
@@ -85,7 +77,18 @@ class AppComponent extends React.Component {
      */
     _onTodoGroupTitleEdit(cid, newTitle) {
         this.props.dispatch(
-            createChangeTodoGroupTitleAction(cid, newTitle)
+            actionFactory.createChangeTodoGroupTitleAction(cid, newTitle)
+        );
+    }
+
+    /**
+     * @param {String} cid
+     *
+     * @private
+     */
+    _onTodoGroupDelete(cid) {
+        this.props.dispatch(
+            actionFactory.createDeleteTodoGroupAction(cid)
         );
     }
 
@@ -101,6 +104,7 @@ class AppComponent extends React.Component {
                                         onTodoDelete={this._onTodoDelete.bind(this)}
                                         onTodoEdit={this._onTodoEdit.bind(this)}
                                         onTodoGroupTitleEdit={this._onTodoGroupTitleEdit.bind(this)}
+                                        onTodoGroupDelete={this._onTodoGroupDelete.bind(this)}
                                         onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
             </div>
         );

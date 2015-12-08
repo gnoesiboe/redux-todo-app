@@ -85,3 +85,15 @@ export function createChangeTodoGroupTitleAction(cid, newTitle) {
         newTitle: newTitle
     };
 }
+
+/**
+ * @param {String} cid
+ *
+ * @returns {Object}
+ */
+export function createDeleteTodoGroupAction(cid) {
+    return {
+        type: actionTypes.DELETE_TODO_GROUP,
+        cid: cid
+    };
+}

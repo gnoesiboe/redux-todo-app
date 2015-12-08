@@ -74,10 +74,10 @@ var _handleDeleteTodoAction = function (currentState, action) {
 };
 
 /**
- * @param {Object} currentState
+ * @param {List} currentState
  * @param {Object} action
  *
- * @returns {Object}
+ * @returns {List}
  *
  * @private
  */
@@ -103,10 +103,10 @@ var _handleEditTodoAction = function (currentState, action) {
 };
 
 /**
- * @param {Object} currentState
+ * @param {List} currentState
  * @param {Object} action
  *
- * @returns {Object}
+ * @returns {List}
  *
  * @private
  */
@@ -121,6 +121,24 @@ var _handleEditTodoGroupTitleAction = function (currentState, action) {
         foundGroupAtIndex,
         foundGroup.set('title', action.newTitle)
     );
+};
+
+/**
+ * @param {List} currentState
+ * @param {Object} action
+ *
+ * @returns {List}
+ *
+ * @private
+ */
+var _handleDeleteTodoGroupAction = function (currentState, action) {
+    var foundGroupAtIndex = _locateGroupInState(action.cid, currentState)[1];
+
+    if (foundGroupAtIndex === null) {
+        return currentState;
+    }
+
+    return currentState.splice(foundGroupAtIndex, 1);
 };
 
 /**
@@ -218,6 +236,9 @@ export default function todoGroupsReducer(currentState = _defaultState, action) 
 
         case actionTypes.EDIT_TODO_GROUP_TITLE:
             return _handleEditTodoGroupTitleAction(currentState, action);
+
+        case actionTypes.DELETE_TODO_GROUP:
+            return _handleDeleteTodoGroupAction(currentState, action);
 
         default:
             return currentState;

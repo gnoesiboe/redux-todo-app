@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 const MODE_EDIT = 'MODE_EDIT';
 const MODE_VIEW = 'MODE_VIEW';
@@ -15,6 +16,22 @@ class TodoComponent extends React.Component {
         super(props);
 
         this.state = this._getDefaultState();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    componentDidUpdate() {
+        if (this.state.mode === MODE_EDIT) {
+            this._focusTitleField();
+        }
+    }
+
+    /**
+     * @private
+     */
+    _focusTitleField() {
+        ReactDOM.findDOMNode(this.refs.title).focus();
     }
 
     /**
@@ -140,6 +157,7 @@ class TodoComponent extends React.Component {
                                placeholder="Title.."
                                onChange={this._onFieldChange.bind(this)}
                                name="title"
+                               ref="title"
                                value={this.state.title} />
                     </div>
                     <button type="submit" className="btn btn-success">Save</button>

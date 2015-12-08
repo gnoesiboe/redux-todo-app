@@ -23,6 +23,10 @@ html,
     position: relative;
 }
 
+
+/* -------------------------------------------------------*/
+
+
 .todo-group-title-component-title {
     background: #faf8bf;
     margin: 0 0 20px;
@@ -31,19 +35,23 @@ html,
     position: relative;
 }
 
-.todo-group-title-component-title .todo-group-title-component-edit-link {
-    display: none;
-}
+    .todo-group-title-component-title .todo-group-title-component-edit-link {
+        display: none;
+    }
 
-.todo-group-title-component-title:hover .todo-group-title-component-edit-link {
-    display: inherit;
-}
+    .todo-group-title-component-title:hover .todo-group-title-component-edit-link {
+        display: inherit;
+    }
 
-.todo-group-title-component-edit-link {
-    position: absolute;
-    right: 10px;
-    top: 9px;
-}
+    .todo-group-title-component-edit-link {
+        position: absolute;
+        right: 10px;
+        top: 9px;
+    }
+
+
+/* -------------------------------------------------------*/
+
 
 .add-todo-component {
     position: absolute;
@@ -55,27 +63,39 @@ html,
     background: #efefef;
 }
 
+
+/* -------------------------------------------------------*/
+
+
 .todo-list-component-list {
     margin: 0;
     list-style: none;
     padding: 0 10px;
 }
 
+
+/* -------------------------------------------------------*/
+
+
 .todo-component-actions {
     margin-left: 15px;
 }
 
-.todo-component-action-seperator {
-    color: #ddd;
-}
+    .todo-component-action-seperator {
+        color: #ddd;
+    }
 
-.todo-component-action {
-    color: #aaa;
-}
+    .todo-component-action {
+        color: #aaa;
+    }
 
-.todo-component-action:hover {
-    color: #999;
-}
+    .todo-component-action:hover {
+        color: #999;
+    }
+
+
+/* -------------------------------------------------------*/
+
 
 .todo-component-form,
 .todo-group-title-component-form {
@@ -85,19 +105,23 @@ html,
     margin-bottom: 10px;
 }
 
+
+/* -------------------------------------------------------*/
+
+
 .add-todo-group-component {
     text-align: center;
 }
 
-.add-todo-group-component-add-link {
-    font-size: 100px;
-    padding: 10%;
-    color: #ddd;
-    border-radius: 10px;
-    margin: auto;
-}
+    .add-todo-group-component-add-link {
+        font-size: 100px;
+        padding: 10%;
+        color: #ddd;
+        border-radius: 10px;
+        margin: auto;
+    }
 
-.add-todo-group-component-add-link:hover {
-    text-decoration: none;
-    color: #999;
-}
+    .add-todo-group-component-add-link:hover {
+        text-decoration: none;
+        color: #999;
+    }

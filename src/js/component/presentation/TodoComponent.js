@@ -85,8 +85,10 @@ class TodoComponent extends React.Component {
      * @private
      */
     _renderViewMode() {
+        var className = 'todo-component' + (this.props.isCompleted ? ' todo-component--is-completed' : '');
+
         return (
-            <div className="todo-component">
+            <div className={className}>
                 <div className="checkbox">
                     <label>
                         <input type="checkbox"

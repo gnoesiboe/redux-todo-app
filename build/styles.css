@@ -133,3 +133,11 @@ html,
 .todo-group-actions-component {
     padding: 0 0 10px;
 }
+
+
+/* -------------------------------------------------------*/
+
+.todo-component--is-completed label,
+.todo-component--is-completed .todo-component-action {
+    color: #ddd;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoListComponent from './TodoListComponent';
 import AddTodoComponent from './AddTodoComponent';
+import TodoGroupTitleComponent from './TodoGroupTitleComponent';
 
 /**
  * @author Gijs Nieuwenhuis <gijs.nieuwenhuis@freshheads.com>
@@ -52,12 +53,22 @@ class TodoGroupComponent extends React.Component {
     }
 
     /**
+     * @param {String} newTitle
+     *
+     * @private
+     */
+    _onTodoGroupTitleEdit(newTitle) {
+        this.props.onTodoGroupTitleEdit(this.props.cid, newTitle);
+    }
+
+    /**
      * @returns {XML}
      */
     render() {
         return (
             <div className="todo-group-component">
-                <h3 className="todo-group-component-title">{ this.props.title }</h3>
+                <TodoGroupTitleComponent title={this.props.title}
+                                         onTodoGroupTitleEdit={this._onTodoGroupTitleEdit.bind(this)} />
                 <TodoListComponent todos={this.props.todos}
                                    groupCid={this.props.cid}
                                    onTodoDelete={this._onTodoDelete.bind(this)}
@@ -76,7 +87,8 @@ TodoGroupComponent.propTypes = {
     onTodoCompletedStatusChange: React.PropTypes.func.isRequired,
     onAddTodo: React.PropTypes.func.isRequired,
     onTodoDelete: React.PropTypes.func.isRequired,
-    onTodoEdit: React.PropTypes.func.isRequired
+    onTodoEdit: React.PropTypes.func.isRequired,
+    onTodoGroupTitleEdit: React.PropTypes.func.isRequired
 };
 
 export default TodoGroupComponent;

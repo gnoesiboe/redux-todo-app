@@ -71,3 +71,17 @@ export function createEditTodoAction(cid, newTitle, groupCid) {
         groupCid: groupCid
     };
 }
+
+/**
+ * @param {String} cid
+ * @param {String} newTitle
+ *
+ * @returns {Object}
+ */
+export function createChangeTodoGroupTitleAction(cid, newTitle) {
+    return {
+        type: actionTypes.EDIT_TODO_GROUP_TITLE,
+        cid: cid,
+        newTitle: newTitle
+    };
+}

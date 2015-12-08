@@ -23,11 +23,17 @@ html,
     position: relative;
 }
 
-.todo-group-component-title {
+.todo-group-title-component-title {
     background: #faf8bf;
     margin: 0 0 20px;
-    padding: 10px;
-    text-align: center;
+    padding: 10px 20px;
+    font-size: 18px;
+    position: relative;
+}
+
+.todo-group-title-component-edit-link {
+    position: absolute;
+    right: 10px;
 }
 
 .add-todo-component {

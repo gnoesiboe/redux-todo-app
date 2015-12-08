@@ -31,6 +31,14 @@ html,
     position: relative;
 }
 
+.todo-group-title-component-title .todo-group-title-component-edit-link {
+    display: none;
+}
+
+.todo-group-title-component-title:hover .todo-group-title-component-edit-link {
+    display: inherit;
+}
+
 .todo-group-title-component-edit-link {
     position: absolute;
     right: 10px;

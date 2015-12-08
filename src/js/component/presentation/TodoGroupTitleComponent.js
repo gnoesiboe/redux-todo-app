@@ -100,7 +100,7 @@ class TodoGroupTitleComponent extends React.Component {
     _renderEditMode() {
         return (
             <div className="todo-group-title-component">
-                <form className="form" action="#" onSubmit={this._onFormSubmit.bind(this)}>
+                <form className="todo-group-title-component-form" action="#" onSubmit={this._onFormSubmit.bind(this)}>
                     <div className="form-group">
                         <input type="text"
                                className="form-control"
@@ -109,6 +109,7 @@ class TodoGroupTitleComponent extends React.Component {
                                value={this.state.title}
                                name="title" />
                     </div>
+                    <button type="submit" className="btn btn-success">Save</button>
                 </form>
             </div>
         );

@@ -68,7 +68,8 @@ html,
     color: #999;
 }
 
-.todo-component-form {
+.todo-component-form,
+.todo-group-title-component-form {
     background: #ddd;
     padding: 15px;
     border-radius: 3px;

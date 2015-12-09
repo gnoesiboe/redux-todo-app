@@ -40,7 +40,11 @@ class AppComponent extends React.Component {
     /**
      * @private
      */
-    _onRedoKeybindingPressed() {
+    _onRedoKeybindingPressed(event) {
+
+        // prevent browser from re-entering inputs
+        event.preventDefault();
+
         if (!this.props.redoPossible) {
             console.log('kan niet');
             return;
@@ -52,7 +56,11 @@ class AppComponent extends React.Component {
     /**
      * @private
      */
-    _onUndoKeybindingPressed() {
+    _onUndoKeybindingPressed(event) {
+
+        // prevent browser from re-entering inputs
+        event.preventDefault();
+
         if (!this.props.undoPossible) {
             return;
         }

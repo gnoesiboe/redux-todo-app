@@ -11,7 +11,7 @@ class TodoDeadlineComponent extends React.Component {
      */
     render() {
         if (!this.props.value) {
-            return <span />;
+            return <span>-</span>;
         }
 
         var date = moment(this.props.value);
@@ -30,8 +30,13 @@ class TodoDeadlineComponent extends React.Component {
 
         var startOfToday = moment().startOf('day');
 
-        var className = date.isBefore(startOfToday) ? 'alert-danger' : 'alert-info';
-
+        var className = null;
+        if (this.props.isCompleted) {
+            className = '';
+        } else {
+            className = date.isBefore(startOfToday) ? 'alert-danger' : 'alert-info';
+        }
+        
         return (
             <span className={className}>
                 {deadline}
@@ -41,7 +46,8 @@ class TodoDeadlineComponent extends React.Component {
 }
 
 TodoDeadlineComponent.propTypes = {
-    value: React.PropTypes.string
+    value: React.PropTypes.string,
+    isCompleted: React.PropTypes.bool.isRequired
 };
 
 export default TodoDeadlineComponent;

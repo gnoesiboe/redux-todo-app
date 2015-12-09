@@ -99,8 +99,9 @@ class TodoComponent extends React.Component {
                     </label>
 
                     <ul className="list-inline todo-component-actions">
-                        <li className="todo-component-action-date">
-                            <TodoDeadlineComponent value={this.props.deadline}/>
+                        <li className="todo-component-action">
+                            <TodoDeadlineComponent value={this.props.deadline}
+                                                   isCompleted={this.props.isCompleted} />
                         </li>
                         <li className="todo-component-action-seperator">|</li>
                         <li>

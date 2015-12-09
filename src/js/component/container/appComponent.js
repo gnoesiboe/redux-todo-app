@@ -2,6 +2,7 @@ import React from 'react';
 import * as reactRedux from 'react-redux';
 import * as actionFactory from '../../actions/actionFactory';
 import TodoGroupListComponent from './../presentation/TodoGroupListComponent';
+import * as stateNamespace from './../../state/stateNamespace';
 
 /**
  * @author Gijs Nieuwenhuis <gijs.nieuwenhuis@freshheads.com>
@@ -119,8 +120,8 @@ class AppComponent extends React.Component {
  */
 var mapCompleteStateToAppComponentProps = function (completeState) {
     return {
-        todoGroups: completeState.todoGroups
-    }
+        [stateNamespace.TODO_GROUPS]: completeState.todoGroups.present
+    };
 };
 
 export default reactRedux.connect(mapCompleteStateToAppComponentProps)(AppComponent);

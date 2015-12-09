@@ -12,25 +12,12 @@ const NAMESPACE = 'state';
  * @param {List} state
  */
 export function persist(state) {
-    var serializedState = {};
-
-    for (let key in state) {
-        if (state.hasOwnProperty(key)) {
-            let stateItem = state[key];
-
-            if (typeof stateItem.toJSON !== 'undefined') {
-                serializedState[key] = stateItem.toJSON();
-            } else {
-                serializedState[key] = stateItem;
-            }
-        }
-    }
-
-    store.set(NAMESPACE, serializedState);
+    store.set(NAMESPACE, state);
 }
 
 /**
- * Get store state from local storage and makes it Immutable again
+ * Get store state from local storage and makes it Immutable again + apply
+ * undoable functionality.
  *
  * @return {Object|null}
  */
@@ -41,13 +28,22 @@ export function getPersistedState() {
         return null;
     }
 
-    var out = {};
+    var out = {},
+        undoableStates = ['future', 'history', 'past', 'present'];
 
     for (let key in stateNamespaces) {
         if (stateNamespaces.hasOwnProperty(key)) {
             let stateNamespace = stateNamespaces[key];
 
-            out[stateNamespace] = Immutable.fromJS(fromStorage[stateNamespace]);
+            for (let i = 0, l = undoableStates.length; i < l; i++) {
+                let undableState = undoableStates[i];
+
+                out[stateNamespace] = {};
+
+                out[stateNamespace][undableState] = Immutable.fromJS(
+                    fromStorage[stateNamespace][undableState]
+                );
+            }
         }
     }
 

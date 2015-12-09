@@ -59,15 +59,17 @@ export function createDeleteTodoAction(cid, groupCid) {
 /**
  * @param {String} cid
  * @param {String} newTitle
+ * @param {String} newDeadline
  * @param {String} groupCid
  *
  * @returns {Object}
  */
-export function createEditTodoAction(cid, newTitle, groupCid) {
+export function createEditTodoAction(cid, newTitle, newDeadline, groupCid) {
     return {
         type: actionTypes.EDIT_TODO,
         cid: cid,
         newTitle: newTitle,
+        newDeadline: newDeadline,
         groupCid: groupCid
     };
 }

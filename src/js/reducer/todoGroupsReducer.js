@@ -95,8 +95,11 @@ var _handleEditTodoAction = function (currentState, action) {
         return currentState;
     }
 
-    var newTodo = foundTodo.set('title', action.newTitle),
-        newGroupTodos = groupTodos.set(foundTodoAtIndex, newTodo),
+    var newTodo = foundTodo
+        .set('title', action.newTitle)
+        .set('deadline', action.newDeadline);
+
+    var newGroupTodos = groupTodos.set(foundTodoAtIndex, newTodo),
         newGroup = foundGroup.set('todos', newGroupTodos);
 
     return currentState.set(foundGroupAtIndex, newGroup);

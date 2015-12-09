@@ -59,13 +59,14 @@ class AppComponent extends React.Component {
     /**
      * @param {String} cid
      * @param {String} newTitle
+     * @param {String} newDeadline
      * @param {String} groupCid
      *
      * @private
      */
-    _onTodoEdit(cid, newTitle, groupCid) {
+    _onTodoEdit(cid, newTitle, newDeadline, groupCid) {
         this.props.dispatch(
-            actionFactory.createEditTodoAction(cid, newTitle, groupCid)
+            actionFactory.createEditTodoAction(cid, newTitle, newDeadline, groupCid)
         );
     }
 

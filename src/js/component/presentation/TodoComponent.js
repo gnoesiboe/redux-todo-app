@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import TodoDeadlineComponent from './TodoDeadlineComponent';
 
 const MODE_EDIT = 'MODE_EDIT';
 const MODE_VIEW = 'MODE_VIEW';
@@ -42,7 +43,8 @@ class TodoComponent extends React.Component {
     _getDefaultState() {
         return {
             mode: MODE_VIEW,
-            title: this.props.title
+            title: this.props.title,
+            deadline: this.props.deadline
         };
     }
 
@@ -95,7 +97,12 @@ class TodoComponent extends React.Component {
                                onChange={this._onIsCompletedChange.bind(this)}
                                checked={this.props.isCompleted} /> {this.props.title}
                     </label>
+
                     <ul className="list-inline todo-component-actions">
+                        <li className="todo-component-action-date">
+                            <TodoDeadlineComponent value={this.props.deadline}/>
+                        </li>
+                        <li className="todo-component-action-seperator">|</li>
                         <li>
                             <a href="#" className="todo-component-action" onClick={this._onTodoEditClick.bind(this)}>
                                 edit
@@ -136,7 +143,7 @@ class TodoComponent extends React.Component {
         // prevent packend submission
         event.preventDefault();
 
-        this.props.onTodoEdit(this.props.cid, this.state.title);
+        this.props.onTodoEdit(this.props.cid, this.state.title, this.state.deadline);
 
         this.setState({
             mode: MODE_VIEW
@@ -161,6 +168,15 @@ class TodoComponent extends React.Component {
                                name="title"
                                ref="title"
                                value={this.state.title} />
+                    </div>
+                    <div className="form-group">
+                        <label className="control-label">Deadline</label>
+                        <input type="date"
+                               className="form-control"
+                               placeholder="Deadline.."
+                               onChange={this._onFieldChange.bind(this)}
+                               name="deadline"
+                               value={this.state.deadline} />
                     </div>
                     <button type="submit" className="btn btn-success">Save</button>
                 </form>
@@ -189,6 +205,7 @@ TodoComponent.propTypes = {
     cid: React.PropTypes.string.isRequired,
     isCompleted: React.PropTypes.bool.isRequired,
     title: React.PropTypes.string.isRequired,
+    deadline: React.PropTypes.string,
     onTodoCompletedStatusChange: React.PropTypes.func.isRequired,
     onTodoDelete: React.PropTypes.func.isRequired,
     onTodoEdit: React.PropTypes.func.isRequired

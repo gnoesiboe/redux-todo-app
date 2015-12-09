@@ -19,6 +19,7 @@ class TodoListComponent extends React.Component {
                 <li key={key}>
                     <TodoComponent cid={todo.get('cid')}
                                    title={todo.get('title')}
+                                   deadline={todo.get('deadline')}
                                    onTodoDelete={this.props.onTodoDelete}
                                    onTodoEdit={this.props.onTodoEdit}
                                    onTodoCompletedStatusChange={this.props.onTodoCompletedStatusChange}

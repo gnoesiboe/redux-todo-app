@@ -44,13 +44,14 @@ class TodoGroupComponent extends React.Component {
     /**
      * @param {String} todoCid
      * @param {String} newTodoTitle
+     * @param {String} newDeadline
      *
      * @private
      */
-    _onTodoEdit(todoCid, newTodoTitle) {
+    _onTodoEdit(todoCid, newTodoTitle, newDeadline) {
 
         // add our group cid to the callback, to apply context
-        this.props.onTodoEdit(todoCid, newTodoTitle, this.props.cid);
+        this.props.onTodoEdit(todoCid, newTodoTitle, newDeadline, this.props.cid);
     }
 
     /**

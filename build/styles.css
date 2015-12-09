@@ -54,9 +54,6 @@ html,
 
 
 .add-todo-component {
-    position: absolute;
-    bottom: 0;
-    left: 0;
     width: 100%;
     box-sizing: border-box;
     padding: 10px 10px 0;
@@ -68,9 +65,9 @@ html,
 
 
 .todo-list-component-list {
-    margin: 0;
     list-style: none;
     padding: 0 10px;
+    margin: 0 0 30px;
 }
 
 

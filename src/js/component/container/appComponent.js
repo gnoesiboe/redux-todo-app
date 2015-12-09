@@ -3,11 +3,62 @@ import * as reactRedux from 'react-redux';
 import * as actionFactory from '../../actions/actionFactory';
 import TodoGroupListComponent from './../presentation/TodoGroupListComponent';
 import * as stateNamespace from './../../state/stateNamespace';
+import mousetrap from 'mousetrap';
+import { ActionCreators } from 'redux-undo'
 
 /**
  * @author Gijs Nieuwenhuis <gijs.nieuwenhuis@freshheads.com>
  */
 class AppComponent extends React.Component {
+
+    /**
+     * @param {Object} props
+     */
+    constructor(props) {
+        super(props);
+
+        this._onUndoKeybindingPressedCallback = this._onUndoKeybindingPressed.bind(this);
+        this._onRedoKeybindingPressedCallback = this._onRedoKeybindingPressed.bind(this);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    componentDidMount() {
+        mousetrap.bind('meta+z', this._onUndoKeybindingPressedCallback);
+        mousetrap.bind('meta+shift+z', this._onRedoKeybindingPressedCallback);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    componentWillUnmount() {
+        mousetrap.unbind('meta+z', this._onUndoKeybindingPressedCallback);
+        mousetrap.unbind('meta+shift+z', this._onRedoKeybindingPressedCallback);
+    }
+
+    /**
+     * @private
+     */
+    _onRedoKeybindingPressed() {
+        if (!this.props.redoPossible) {
+            console.log('kan niet');
+            return;
+        }
+
+        this.props.dispatch(ActionCreators.redo());
+    }
+
+    /**
+     * @private
+     */
+    _onUndoKeybindingPressed() {
+        if (!this.props.undoPossible) {
+            return;
+        }
+
+        this.props.dispatch(ActionCreators.undo());
+    }
 
     /**
      * @param {String} title
@@ -120,7 +171,9 @@ class AppComponent extends React.Component {
  */
 var mapCompleteStateToAppComponentProps = function (completeState) {
     return {
-        [stateNamespace.TODO_GROUPS]: completeState.todoGroups.present
+        undoPossible: completeState[stateNamespace.TODO_GROUPS].past.length > 0,
+        redoPossible: completeState[stateNamespace.TODO_GROUPS].future.length > 0,
+        todoGroups: completeState[stateNamespace.TODO_GROUPS].present
     };
 };
 

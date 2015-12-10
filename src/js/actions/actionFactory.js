@@ -111,3 +111,15 @@ export function createMoveTodoGroupForwardAction(cid) {
         cid: cid
     };
 }
+
+/**
+ * @param {String} cid
+ *
+ * @returns {Object}
+ */
+export function createMoveTodoGroupBackwardsAction(cid) {
+    return {
+        type: actionTypes.MOVE_TODO_GROUP_BACKWARDS,
+        cid: cid
+    };
+}

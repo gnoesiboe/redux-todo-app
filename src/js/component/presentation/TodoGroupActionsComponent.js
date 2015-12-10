@@ -26,9 +26,24 @@ class TodoGroupActionsComponent extends React.Component {
      * @private
      */
     _onMoveForwardClick(event) {
+
+        // prevent browser from following link href
         event.preventDefault();
 
         this.props.onTodoGroupMoveForward(this.props.cid);
+    }
+
+    /**
+     * @param {Object} event
+     *
+     * @private
+     */
+    _onMoveBackwardsClick(event) {
+
+        // prevent browser from following link href
+        event.preventDefault();
+
+        this.props.onTodoGroupMoveBackwards(this.props.cid);
     }
 
     /**
@@ -39,7 +54,7 @@ class TodoGroupActionsComponent extends React.Component {
             <div className="todo-group-actions-component">
                 <div className="row">
                     <div className="col-xs-3">
-                        <a href="#">
+                        <a href="#" onClick={this._onMoveBackwardsClick.bind(this)}>
                             <i className="glyphicon glyphicon-menu-left" />
                         </a>
                     </div>
@@ -62,7 +77,8 @@ class TodoGroupActionsComponent extends React.Component {
 TodoGroupActionsComponent.propTypes = {
     cid: React.PropTypes.string.isRequired,
     onTodoGroupDelete: React.PropTypes.func.isRequired,
-    onTodoGroupMoveForward: React.PropTypes.func.isRequired
+    onTodoGroupMoveForward: React.PropTypes.func.isRequired,
+    onTodoGroupMoveBackwards: React.PropTypes.func.isRequired
 };
 
 export default TodoGroupActionsComponent;

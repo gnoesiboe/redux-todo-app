@@ -165,6 +165,17 @@ class AppComponent extends React.Component {
     }
 
     /**
+     * @param {String} cid
+     *
+     * @private
+     */
+    _onTodoGroupMoveBackwards(cid) {
+        this.props.dispatch(
+            actionFactory.createMoveTodoGroupBackwardsAction(cid)
+        );
+    }
+
+    /**
      * @returns {XML}
      */
     render() {
@@ -178,6 +189,7 @@ class AppComponent extends React.Component {
                                         onTodoGroupTitleEdit={this._onTodoGroupTitleEdit.bind(this)}
                                         onTodoGroupDelete={this._onTodoGroupDelete.bind(this)}
                                         onTodoGroupMoveForward={this._onTodoGroupMoveForward.bind(this)}
+                                        onTodoGroupMoveBackwards={this._onTodoGroupMoveBackwards.bind(this)}
                                         onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
             </div>
         );

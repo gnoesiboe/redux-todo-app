@@ -48,6 +48,7 @@ html,
     .todo-group-component,
     .add-todo-group-component {
         width: 25%;
+        overflow-y: auto;
     }
 }
 

@@ -99,3 +99,15 @@ export function createDeleteTodoGroupAction(cid) {
         cid: cid
     };
 }
+
+/**
+ * @param {String} cid
+ *
+ * @returns {Object}
+ */
+export function createMoveTodoGroupForwardAction(cid) {
+    return {
+        type: actionTypes.MOVE_TODO_GROUP_FORWARD,
+        cid: cid
+    };
+}

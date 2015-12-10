@@ -154,6 +154,17 @@ class AppComponent extends React.Component {
     }
 
     /**
+     * @param {String} cid
+     *
+     * @private
+     */
+    _onTodoGroupMoveForward(cid) {
+        this.props.dispatch(
+            actionFactory.createMoveTodoGroupForwardAction(cid)
+        );
+    }
+
+    /**
      * @returns {XML}
      */
     render() {
@@ -166,6 +177,7 @@ class AppComponent extends React.Component {
                                         onTodoEdit={this._onTodoEdit.bind(this)}
                                         onTodoGroupTitleEdit={this._onTodoGroupTitleEdit.bind(this)}
                                         onTodoGroupDelete={this._onTodoGroupDelete.bind(this)}
+                                        onTodoGroupMoveForward={this._onTodoGroupMoveForward.bind(this)}
                                         onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
             </div>
         );

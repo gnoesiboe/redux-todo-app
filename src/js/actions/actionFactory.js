@@ -123,3 +123,31 @@ export function createMoveTodoGroupBackwardsAction(cid) {
         cid: cid
     };
 }
+
+/**
+ * @param {String} cid
+ * @param {String} groupCid
+ *
+ * @returns {Object}
+ */
+export function createMoveTodoUpAction(cid, groupCid) {
+    return {
+        type: actionTypes.MOVE_TODO_UP,
+        cid: cid,
+        groupCid: groupCid
+    };
+}
+
+/**
+ * @param {String} cid
+ * @param {String} groupCid
+ *
+ * @returns {Object}
+ */
+export function createMoveTodoDownAction(cid, groupCid) {
+    return {
+        type: actionTypes.MOVE_TODO_DOWN,
+        cid: cid,
+        groupCid: groupCid
+    };
+}

@@ -176,6 +176,30 @@ class AppComponent extends React.Component {
     }
 
     /**
+     * @param {String} cid
+     * @param {String} groupCid
+     *
+     * @private
+     */
+    _onTodoMoveUp(cid, groupCid) {
+        this.props.dispatch(
+            actionFactory.createMoveTodoUpAction(cid, groupCid)
+        );
+    }
+
+    /**
+     * @param {String} cid
+     * @param {String} groupCid
+     *
+     * @private
+     */
+    _onTodoMoveDown(cid, groupCid) {
+        this.props.dispatch(
+            actionFactory.createMoveTodoDownAction(cid, groupCid)
+        );
+    }
+
+    /**
      * @returns {XML}
      */
     render() {
@@ -190,6 +214,8 @@ class AppComponent extends React.Component {
                                         onTodoGroupDelete={this._onTodoGroupDelete.bind(this)}
                                         onTodoGroupMoveForward={this._onTodoGroupMoveForward.bind(this)}
                                         onTodoGroupMoveBackwards={this._onTodoGroupMoveBackwards.bind(this)}
+                                        onTodoMoveUp={this._onTodoMoveUp.bind(this)}
+                                        onTodoMoveDown={this._onTodoMoveDown.bind(this)}
                                         onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
             </div>
         );

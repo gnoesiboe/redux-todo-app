@@ -82,6 +82,28 @@ class TodoComponent extends React.Component {
     }
 
     /**
+     * @param {Object} event
+     *
+     * @private
+     */
+    _onTodoMoveUpClick(event) {
+        event.preventDefault();
+
+        this.props.onTodoMoveUp(this.props.cid);
+    }
+
+    /**
+     * @param {Object} event
+     *
+     * @private
+     */
+    _onTodoMoveDownClick(event) {
+        event.preventDefault();
+
+        this.props.onTodoMoveDown(this.props.cid);
+    }
+
+    /**
      * @returns {XML}
      *
      * @private
@@ -113,6 +135,17 @@ class TodoComponent extends React.Component {
                         <li>
                             <a href="#" onClick={this._onTodoDeleteClick.bind(this)} className="todo-component-action">
                                 remove
+                            </a>
+                        </li>
+                        <li className="todo-component-action-seperator">|</li>
+                        <li>
+                            <a href="#" className="todo-component-action" onClick={this._onTodoMoveUpClick.bind(this)}>
+                                <i className="glyphicon glyphicon-triangle-top" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" className="todo-component-action" onClick={this._onTodoMoveDownClick.bind(this)}>
+                                <i className="glyphicon glyphicon-triangle-bottom" />
                             </a>
                         </li>
                     </ul>
@@ -209,7 +242,9 @@ TodoComponent.propTypes = {
     deadline: React.PropTypes.string,
     onTodoCompletedStatusChange: React.PropTypes.func.isRequired,
     onTodoDelete: React.PropTypes.func.isRequired,
-    onTodoEdit: React.PropTypes.func.isRequired
+    onTodoEdit: React.PropTypes.func.isRequired,
+    onTodoMoveUp: React.PropTypes.func.isRequired,
+    onTodoMoveDown: React.PropTypes.func.isRequired
 };
 
 export default TodoComponent;

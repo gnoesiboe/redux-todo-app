@@ -64,6 +64,24 @@ class TodoGroupComponent extends React.Component {
     }
 
     /**
+     * @param {String} todoCid
+     *
+     * @private
+     */
+    _onTodoMoveUp(todoCid) {
+        this.props.onTodoMoveUp(todoCid, this.props.cid);
+    }
+
+    /**
+     * @param {String} todoCid
+     *
+     * @private
+     */
+    _onTodoMoveDown(todoCid) {
+        this.props.onTodoMoveDown(todoCid, this.props.cid);
+    }
+
+    /**
      * @returns {XML}
      */
     render() {
@@ -75,6 +93,8 @@ class TodoGroupComponent extends React.Component {
                                    groupCid={this.props.cid}
                                    onTodoDelete={this._onTodoDelete.bind(this)}
                                    onTodoEdit={this._onTodoEdit.bind(this)}
+                                   onTodoMoveUp={this._onTodoMoveUp.bind(this)}
+                                   onTodoMoveDown={this._onTodoMoveDown.bind(this)}
                                    onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
                 <AddTodoComponent onAddTodo={this._onAddTodo.bind(this)}>
                     <TodoGroupActionsComponent cid={this.props.cid}
@@ -98,7 +118,9 @@ TodoGroupComponent.propTypes = {
     onTodoGroupTitleEdit: React.PropTypes.func.isRequired,
     onTodoGroupDelete: React.PropTypes.func.isRequired,
     onTodoGroupMoveForward: React.PropTypes.func.isRequired,
-    onTodoGroupMoveBackwards: React.PropTypes.func.isRequired
+    onTodoGroupMoveBackwards: React.PropTypes.func.isRequired,
+    onTodoMoveUp: React.PropTypes.func.isRequired,
+    onTodoMoveDown: React.PropTypes.func.isRequired
 };
 
 export default TodoGroupComponent;

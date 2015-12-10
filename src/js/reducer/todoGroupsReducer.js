@@ -2,6 +2,7 @@ import * as actionTypes from './../actions/actionTypes';
 import { List } from 'immutable';
 import { createTodoGroup } from './../model/todoGroupFactory';
 import { createTodo } from './../model/todoFactory';
+import * as listHelper from './../utility/listHelper';
 
 /**
  * @type {List}
@@ -145,6 +146,28 @@ var _handleDeleteTodoGroupAction = function (currentState, action) {
 };
 
 /**
+ * @param {List} currentState
+ * @param {Object} action
+ *
+ * @returns {List}
+ *
+ * @private
+ */
+var _handlemoveTodoGroupForwardAction = function (currentState, action) {
+    var [foundGroup, foundGroupAtIndex ] = _locateGroupInState(action.cid, currentState);
+
+    if (foundGroup === null || foundGroupAtIndex === null) {
+        return currentState;
+    }
+
+    var newGroupIndex = foundGroupAtIndex + 1 <= currentState.count() - 1
+        ? foundGroupAtIndex + 1
+        : 0;
+
+    return listHelper.moveItem(currentState, foundGroupAtIndex, newGroupIndex);
+};
+
+/**
  * @param {Object} currentState
  * @param {Object} action
  *
@@ -242,6 +265,9 @@ export default function todoGroupsReducer(currentState = _defaultState, action) 
 
         case actionTypes.DELETE_TODO_GROUP:
             return _handleDeleteTodoGroupAction(currentState, action);
+
+        case actionTypes.MOVE_TODO_GROUP_FORWARD:
+            return _handlemoveTodoGroupForwardAction(currentState, action);
 
         default:
             return currentState;

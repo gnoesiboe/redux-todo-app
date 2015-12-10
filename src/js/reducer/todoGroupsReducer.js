@@ -168,6 +168,28 @@ var _handlemoveTodoGroupForwardAction = function (currentState, action) {
 };
 
 /**
+ * @param {List} currentState
+ * @param {Object} action
+ *
+ * @returns {List}
+ *
+ * @private
+ */
+var _handlemoveTodoGroupBackwardsAction = function (currentState, action) {
+    var [foundGroup, foundGroupAtIndex ] = _locateGroupInState(action.cid, currentState);
+
+    if (foundGroup === null || foundGroupAtIndex === null) {
+        return currentState;
+    }
+
+    var newGroupIndex = foundGroupAtIndex - 1 >= 0
+        ? foundGroupAtIndex - 1
+        : currentState.count() - 1;
+
+    return listHelper.moveItem(currentState, foundGroupAtIndex, newGroupIndex);
+};
+
+/**
  * @param {Object} currentState
  * @param {Object} action
  *
@@ -268,6 +290,9 @@ export default function todoGroupsReducer(currentState = _defaultState, action) 
 
         case actionTypes.MOVE_TODO_GROUP_FORWARD:
             return _handlemoveTodoGroupForwardAction(currentState, action);
+
+        case actionTypes.MOVE_TODO_GROUP_BACKWARDS:
+            return _handlemoveTodoGroupBackwardsAction(currentState, action);
 
         default:
             return currentState;

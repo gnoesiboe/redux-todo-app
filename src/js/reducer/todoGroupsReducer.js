@@ -153,7 +153,71 @@ var _handleDeleteTodoGroupAction = function (currentState, action) {
  *
  * @private
  */
-var _handlemoveTodoGroupForwardAction = function (currentState, action) {
+var _handleMoveTodoUpAction = function (currentState, action) {
+    var [ foundGroup, foundGroupAtIndex ] = _locateGroupInState(action.groupCid, currentState);
+
+    if (foundGroup === null || foundGroupAtIndex === null) {
+        return currentState;
+    }
+
+    var groupTodos = foundGroup.get('todos'),
+        [ foundTodo, foundTodoAtIndex ] = _locateTodoInListState(action.cid, groupTodos);
+
+    if (foundTodo === null || foundTodoAtIndex === null) {
+        return currentState;
+    }
+
+    var newTodoIndex = foundTodoAtIndex -1 >= 0
+        ? foundTodoAtIndex - 1
+        : groupTodos.count() - 1;
+
+    var newGroupTodos = listHelper.moveItem(groupTodos, foundTodoAtIndex, newTodoIndex),
+        newGroup = foundGroup.set('todos', newGroupTodos);
+
+    return currentState.set(foundGroupAtIndex, newGroup);
+};
+
+/**
+ * @param {List} currentState
+ * @param {Object} action
+ *
+ * @returns {List}
+ *
+ * @private
+ */
+var _handleMoveTodoDownAction = function (currentState, action) {
+    var [ foundGroup, foundGroupAtIndex ] = _locateGroupInState(action.groupCid, currentState);
+
+    if (foundGroup === null || foundGroupAtIndex === null) {
+        return currentState;
+    }
+
+    var groupTodos = foundGroup.get('todos'),
+        [ foundTodo, foundTodoAtIndex ] = _locateTodoInListState(action.cid, groupTodos);
+
+    if (foundTodo === null || foundTodoAtIndex === null) {
+        return currentState;
+    }
+
+    var newTodoIndex = foundTodoAtIndex + 1 <= groupTodos.count() - 1
+        ? foundTodoAtIndex + 1
+        : 0;
+
+    var newGroupTodos = listHelper.moveItem(groupTodos, foundTodoAtIndex, newTodoIndex),
+        newGroup = foundGroup.set('todos', newGroupTodos);
+
+    return currentState.set(foundGroupAtIndex, newGroup);
+};
+
+/**
+ * @param {List} currentState
+ * @param {Object} action
+ *
+ * @returns {List}
+ *
+ * @private
+ */
+var _handleMoveTodoGroupForwardAction = function (currentState, action) {
     var [foundGroup, foundGroupAtIndex ] = _locateGroupInState(action.cid, currentState);
 
     if (foundGroup === null || foundGroupAtIndex === null) {
@@ -175,7 +239,7 @@ var _handlemoveTodoGroupForwardAction = function (currentState, action) {
  *
  * @private
  */
-var _handlemoveTodoGroupBackwardsAction = function (currentState, action) {
+var _handleMoveTodoGroupBackwardsAction = function (currentState, action) {
     var [foundGroup, foundGroupAtIndex ] = _locateGroupInState(action.cid, currentState);
 
     if (foundGroup === null || foundGroupAtIndex === null) {
@@ -190,10 +254,10 @@ var _handlemoveTodoGroupBackwardsAction = function (currentState, action) {
 };
 
 /**
- * @param {Object} currentState
+ * @param {List} currentState
  * @param {Object} action
  *
- * @return {Object}
+ * @return {List}
  *
  * @private
  */
@@ -289,10 +353,16 @@ export default function todoGroupsReducer(currentState = _defaultState, action) 
             return _handleDeleteTodoGroupAction(currentState, action);
 
         case actionTypes.MOVE_TODO_GROUP_FORWARD:
-            return _handlemoveTodoGroupForwardAction(currentState, action);
+            return _handleMoveTodoGroupForwardAction(currentState, action);
 
         case actionTypes.MOVE_TODO_GROUP_BACKWARDS:
-            return _handlemoveTodoGroupBackwardsAction(currentState, action);
+            return _handleMoveTodoGroupBackwardsAction(currentState, action);
+
+        case actionTypes.MOVE_TODO_UP:
+            return _handleMoveTodoUpAction(currentState, action);
+
+        case actionTypes.MOVE_TODO_DOWN:
+            return _handleMoveTodoDownAction(currentState, action);
 
         default:
             return currentState;

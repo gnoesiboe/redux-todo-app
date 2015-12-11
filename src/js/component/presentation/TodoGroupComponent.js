@@ -98,6 +98,7 @@ class TodoGroupComponent extends React.Component {
                                    onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
                 <AddTodoComponent onAddTodo={this._onAddTodo.bind(this)}>
                     <TodoGroupActionsComponent cid={this.props.cid}
+                                               isStarred={!!this.props.isStarred}
                                                onTodoGroupDelete={this.props.onTodoGroupDelete}
                                                onTodoGroupMoveBackwards={this.props.onTodoGroupMoveBackwards}
                                                allowMoveBackwards={this.props.allowMoveBackwards}
@@ -112,6 +113,7 @@ class TodoGroupComponent extends React.Component {
 
 TodoGroupComponent.propTypes = {
     cid: React.PropTypes.string.isRequired,
+    isStarred: React.PropTypes.bool.isRequired,
     title: React.PropTypes.string.isRequired,
     todos: React.PropTypes.object.isRequired,
     onTodoCompletedStatusChange: React.PropTypes.func.isRequired,

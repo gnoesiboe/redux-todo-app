@@ -18,6 +18,7 @@ class TodoGroupListComponent extends React.Component {
                 return (
                     <TodoGroupComponent key={todoGroup.get('cid')}
                                         cid={todoGroup.get('cid')}
+                                        isStarred={todoGroup.get('isStarred')}
                                         title={todoGroup.get('title')}
                                         onTodoCompletedStatusChange={this.props.onTodoCompletedStatusChange}
                                         onAddTodo={this.props.onAddTodo}

@@ -257,6 +257,26 @@ var _handleMoveTodoGroupBackwardsAction = function (currentState, action) {
  * @param {List} currentState
  * @param {Object} action
  *
+ * @returns {List}
+ *
+ * @private
+ */
+var _handleUpdateGroupStarredStatus = function (currentState, action) {
+    var [foundGroup, foundGroupAtIndex ] = _locateGroupInState(action.cid, currentState);
+
+    if (foundGroup === null || foundGroupAtIndex === null) {
+        return currentState;
+    }
+
+    var newGroup = foundGroup.set('isStarred', action.newStatus);
+
+    return currentState.set(foundGroupAtIndex, newGroup);
+};
+
+/**
+ * @param {List} currentState
+ * @param {Object} action
+ *
  * @return {List}
  *
  * @private
@@ -363,6 +383,9 @@ export default function todoGroupsReducer(currentState = _defaultState, action) 
 
         case actionTypes.MOVE_TODO_DOWN:
             return _handleMoveTodoDownAction(currentState, action);
+
+        case actionTypes.UPDATE_GROUP_STARRED_STATUS:
+            return _handleUpdateGroupStarredStatus(currentState, action);
 
         default:
             return currentState;

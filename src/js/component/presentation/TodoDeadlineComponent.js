@@ -7,11 +7,11 @@ import moment from 'moment';
 class TodoDeadlineComponent extends React.Component {
 
     /**
-     * @returns {XML}
+     * @returns {XML|null}
      */
     render() {
         if (!this.props.value) {
-            return <span>-</span>;
+            return null;
         }
 
         var date = moment(this.props.value);
@@ -36,10 +36,11 @@ class TodoDeadlineComponent extends React.Component {
         } else {
             className = date.isBefore(startOfToday) ? 'alert-danger' : 'alert-info';
         }
-        
+
         return (
-            <span className={className}>
-                {deadline}
+            <span>
+                <span className={className}>{deadline}</span>
+                <span className="text-muted">&nbsp;&mdash;&nbsp;</span>
             </span>
         );
     }

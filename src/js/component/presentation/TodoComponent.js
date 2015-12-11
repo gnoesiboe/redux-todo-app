@@ -108,47 +108,56 @@ class TodoComponent extends React.Component {
      *
      * @private
      */
+    _renderViewActions() {
+        return (
+            <ul className="list-inline todo-component-actions">
+                <li>
+                    <a href="#" className="todo-component-action" onClick={this._onTodoEditClick.bind(this)}>
+                        <i className="glyphicon glyphicon-pencil" />
+                    </a>
+                </li>
+                <li className="todo-component-action-seperator">|</li>
+                <li>
+                    <a href="#" onClick={this._onTodoDeleteClick.bind(this)} className="todo-component-action">
+                        <i className="glyphicon glyphicon-remove" />
+                    </a>
+                </li>
+                <li className="todo-component-action-seperator">|</li>
+                <li>
+                    <a href="#" className="todo-component-action" onClick={this._onTodoMoveUpClick.bind(this)}>
+                        <i className="glyphicon glyphicon-triangle-top" />
+                    </a>
+                </li>
+                <li>
+                    <a href="#" className="todo-component-action" onClick={this._onTodoMoveDownClick.bind(this)}>
+                        <i className="glyphicon glyphicon-triangle-bottom" />
+                    </a>
+                </li>
+            </ul>
+        );
+    }
+
+    /**
+     * @returns {XML}
+     *
+     * @private
+     */
     _renderViewMode() {
         var className = 'todo-component' + (this.props.isCompleted ? ' todo-component--is-completed' : '');
 
         return (
             <div className={className}>
                 <div className="checkbox">
+                    {this._renderViewActions()}
+
                     <label>
                         <input type="checkbox"
                                onChange={this._onIsCompletedChange.bind(this)}
-                               checked={this.props.isCompleted} /> {this.props.title}
+                               checked={this.props.isCompleted} />
+                        <TodoDeadlineComponent value={this.props.deadline}
+                                               isCompleted={this.props.isCompleted} />
+                        {this.props.title}
                     </label>
-
-                    <ul className="list-inline todo-component-actions">
-                        <li className="todo-component-action">
-                            <TodoDeadlineComponent value={this.props.deadline}
-                                                   isCompleted={this.props.isCompleted} />
-                        </li>
-                        <li className="todo-component-action-seperator">|</li>
-                        <li>
-                            <a href="#" className="todo-component-action" onClick={this._onTodoEditClick.bind(this)}>
-                                edit
-                            </a>
-                        </li>
-                        <li className="todo-component-action-seperator">|</li>
-                        <li>
-                            <a href="#" onClick={this._onTodoDeleteClick.bind(this)} className="todo-component-action">
-                                remove
-                            </a>
-                        </li>
-                        <li className="todo-component-action-seperator">|</li>
-                        <li>
-                            <a href="#" className="todo-component-action" onClick={this._onTodoMoveUpClick.bind(this)}>
-                                <i className="glyphicon glyphicon-triangle-top" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" className="todo-component-action" onClick={this._onTodoMoveDownClick.bind(this)}>
-                                <i className="glyphicon glyphicon-triangle-bottom" />
-                            </a>
-                        </li>
-                    </ul>
                 </div>
             </div>
         );

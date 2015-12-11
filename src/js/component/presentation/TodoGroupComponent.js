@@ -100,6 +100,8 @@ class TodoGroupComponent extends React.Component {
                     <TodoGroupActionsComponent cid={this.props.cid}
                                                onTodoGroupDelete={this.props.onTodoGroupDelete}
                                                onTodoGroupMoveBackwards={this.props.onTodoGroupMoveBackwards}
+                                               allowMoveBackwards={this.props.allowMoveBackwards}
+                                               allowMoveForward={this.props.allowMoveForward}
                                                onTodoGroupMoveForward={this.props.onTodoGroupMoveForward}/>
                 </AddTodoComponent>
             </div>
@@ -120,7 +122,9 @@ TodoGroupComponent.propTypes = {
     onTodoGroupMoveForward: React.PropTypes.func.isRequired,
     onTodoGroupMoveBackwards: React.PropTypes.func.isRequired,
     onTodoMoveUp: React.PropTypes.func.isRequired,
-    onTodoMoveDown: React.PropTypes.func.isRequired
+    onTodoMoveDown: React.PropTypes.func.isRequired,
+    allowMoveBackwards: React.PropTypes.bool.isRequired,
+    allowMoveForward: React.PropTypes.bool.isRequired
 };
 
 export default TodoGroupComponent;

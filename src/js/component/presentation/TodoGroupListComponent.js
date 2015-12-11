@@ -14,7 +14,7 @@ class TodoGroupListComponent extends React.Component {
      */
     _renderTodoGroupComponents() {
         return this.props.todoGroups.map(
-            function (todoGroup) {
+            function (todoGroup, index) {
                 return (
                     <TodoGroupComponent key={todoGroup.get('cid')}
                                         cid={todoGroup.get('cid')}
@@ -29,7 +29,10 @@ class TodoGroupListComponent extends React.Component {
                                         onTodoMoveUp={this.props.onTodoMoveUp}
                                         onTodoMoveDown={this.props.onTodoMoveDown}
                                         onTodoGroupMoveBackwards={this.props.onTodoGroupMoveBackwards}
-                                        onTodoGroupMoveForward={this.props.onTodoGroupMoveForward}/>
+                                        onTodoGroupMoveForward={this.props.onTodoGroupMoveForward}
+                                        allowMoveBackwards={index !== 0}
+                                        allowMoveForward={index !== (this.props.todoGroups.count() - 1)}
+                    />
                 )
             }.bind(this)
         );

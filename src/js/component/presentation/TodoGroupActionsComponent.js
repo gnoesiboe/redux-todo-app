@@ -47,6 +47,40 @@ class TodoGroupActionsComponent extends React.Component {
     }
 
     /**
+     * @returns {XML|null}
+     *
+     * @private
+     */
+    _renderMoveBackwards() {
+        if (this.props.allowMoveBackwards) {
+            return (
+                <a href="#" onClick={this._onMoveBackwardsClick.bind(this)}>
+                    <i className="glyphicon glyphicon-menu-left" />
+                </a>
+            );
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @returns {XML|null}
+     *
+     * @private
+     */
+    _renderMoveForwards() {
+        if (this.props.allowMoveForward) {
+            return (
+                <a href="#" onClick={this._onMoveForwardClick.bind(this)}>
+                    <i className="glyphicon glyphicon-menu-right" />
+                </a>
+            );
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * @returns {XML}
      */
     render() {
@@ -54,9 +88,7 @@ class TodoGroupActionsComponent extends React.Component {
             <div className="todo-group-actions-component">
                 <div className="row">
                     <div className="col-xs-3">
-                        <a href="#" onClick={this._onMoveBackwardsClick.bind(this)}>
-                            <i className="glyphicon glyphicon-menu-left" />
-                        </a>
+                        {this._renderMoveBackwards()}
                     </div>
                     <div className="col-xs-6 text-center">
                         <a href="#" onClick={this._onRemoveClick.bind(this)}>
@@ -64,9 +96,7 @@ class TodoGroupActionsComponent extends React.Component {
                         </a>
                     </div>
                     <div className="col-xs-3 text-right">
-                        <a href="#" onClick={this._onMoveForwardClick.bind(this)}>
-                            <i className="glyphicon glyphicon-menu-right" />
-                        </a>
+                        {this._renderMoveForwards()}
                     </div>
                 </div>
             </div>
@@ -78,7 +108,9 @@ TodoGroupActionsComponent.propTypes = {
     cid: React.PropTypes.string.isRequired,
     onTodoGroupDelete: React.PropTypes.func.isRequired,
     onTodoGroupMoveForward: React.PropTypes.func.isRequired,
-    onTodoGroupMoveBackwards: React.PropTypes.func.isRequired
+    onTodoGroupMoveBackwards: React.PropTypes.func.isRequired,
+    allowMoveBackwards: React.PropTypes.bool.isRequired,
+    allowMoveForward: React.PropTypes.bool.isRequired
 };
 
 export default TodoGroupActionsComponent;

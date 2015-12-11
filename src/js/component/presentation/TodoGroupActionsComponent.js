@@ -81,6 +81,19 @@ class TodoGroupActionsComponent extends React.Component {
     }
 
     /**
+     * @param {Object} event
+     *
+     * @private
+     */
+    _onStarToggleClick(event) {
+
+        // prevent browser from following link
+        event.preventDefault();
+
+        this.props.onGroupStarredStatusChange(this.props.cid, !this.props.isStarred);
+    }
+
+    /**
      * @returns {XML}
      *
      * @private
@@ -91,7 +104,7 @@ class TodoGroupActionsComponent extends React.Component {
             : 'glyphicon glyphicon-star-empty';
 
         return (
-            <a href="#">
+            <a href="#" onClick={this._onStarToggleClick.bind(this)}>
                 <i className={className} />
             </a>
         );
@@ -142,7 +155,8 @@ TodoGroupActionsComponent.propTypes = {
     onTodoGroupMoveBackwards: React.PropTypes.func.isRequired,
     allowMoveBackwards: React.PropTypes.bool.isRequired,
     allowMoveForward: React.PropTypes.bool.isRequired,
-    isStarred: React.PropTypes.bool
+    isStarred: React.PropTypes.bool,
+    onGroupStarredStatusChange: React.PropTypes.func.isRequired
 };
 
 export default TodoGroupActionsComponent;

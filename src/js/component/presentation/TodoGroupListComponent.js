@@ -31,6 +31,7 @@ class TodoGroupListComponent extends React.Component {
                                         onTodoGroupMoveBackwards={this.props.onTodoGroupMoveBackwards}
                                         onTodoGroupMoveForward={this.props.onTodoGroupMoveForward}
                                         allowMoveBackwards={index !== 0}
+                                        onGroupStarredStatusChange={this.props.onGroupStarredStatusChange}
                                         allowMoveForward={index !== (this.props.todoGroups.count() - 1)}
                     />
                 )
@@ -63,7 +64,8 @@ TodoGroupListComponent.propTypes = {
     onTodoGroupMoveBackwards: React.PropTypes.func.isRequired,
     onTodoGroupMoveForward: React.PropTypes.func.isRequired,
     onTodoMoveUp: React.PropTypes.func.isRequired,
-    onTodoMoveDown: React.PropTypes.func.isRequired
+    onTodoMoveDown: React.PropTypes.func.isRequired,
+    onGroupStarredStatusChange: React.PropTypes.func.isRequired
 };
 
 export default TodoGroupListComponent;

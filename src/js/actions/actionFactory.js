@@ -151,3 +151,17 @@ export function createMoveTodoDownAction(cid, groupCid) {
         groupCid: groupCid
     };
 }
+
+/**
+ * @param {String} cid
+ * @param {String} newStatus
+ *
+ * @return {Object}
+ */
+export function createUpdateGroupStarredStatusAction(cid, newStatus) {
+    return {
+        type: actionTypes.UPDATE_GROUP_STARRED_STATUS,
+        cid: cid,
+        newStatus: newStatus
+    };
+}

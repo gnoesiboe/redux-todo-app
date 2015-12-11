@@ -200,6 +200,18 @@ class AppComponent extends React.Component {
     }
 
     /**
+     * @param {String} cid
+     * @param {Boolean} newStatus
+     *
+     * @private
+     */
+    _onGroupStarredStatusChange(cid, newStatus) {
+        this.props.dispatch(
+            actionFactory.createUpdateGroupStarredStatusAction(cid, newStatus)
+        );
+    }
+
+    /**
      * @returns {XML}
      */
     render() {
@@ -216,6 +228,7 @@ class AppComponent extends React.Component {
                                         onTodoGroupMoveBackwards={this._onTodoGroupMoveBackwards.bind(this)}
                                         onTodoMoveUp={this._onTodoMoveUp.bind(this)}
                                         onTodoMoveDown={this._onTodoMoveDown.bind(this)}
+                                        onGroupStarredStatusChange={this._onGroupStarredStatusChange.bind(this)}
                                         onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
             </div>
         );

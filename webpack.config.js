@@ -1,3 +1,5 @@
+var webpack = require('webpack');
+
 module.exports = {
     context: __dirname + "/src",
     entry: {
@@ -24,5 +26,12 @@ module.exports = {
                 loader: "file?name=[name].[ext]"
             }
         ]
-    }
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            jQuery: 'jquery',
+            'window.$': 'jquery',
+            'window.jQuery': 'jquery'
+        })
+    ]
 };

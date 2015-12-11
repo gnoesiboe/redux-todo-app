@@ -10,7 +10,6 @@ html,
 
 .todo-group-component,
 .add-todo-group-component {
-    height: 50%;
     width: 25%;
     display: inline-block;
     vertical-align: top;

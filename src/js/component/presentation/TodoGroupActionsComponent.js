@@ -82,6 +82,23 @@ class TodoGroupActionsComponent extends React.Component {
 
     /**
      * @returns {XML}
+     *
+     * @private
+     */
+    _renderStarred() {
+        var className = this.props.isStarred
+            ? 'glyphicon glyphicon-star'
+            : 'glyphicon glyphicon-star-empty';
+
+        return (
+            <a href="#">
+                <i className={className} />
+            </a>
+        );
+    }
+
+    /**
+     * @returns {XML}
      */
     render() {
         return (
@@ -91,9 +108,19 @@ class TodoGroupActionsComponent extends React.Component {
                         {this._renderMoveBackwards()}
                     </div>
                     <div className="col-xs-6 text-center">
-                        <a href="#" onClick={this._onRemoveClick.bind(this)}>
-                            remove
-                        </a>
+                        <ul className="list-inline">
+                            <li>
+                                <a href="#" onClick={this._onRemoveClick.bind(this)}>
+                                    remove
+                                </a>
+                            </li>
+                            <li>
+                                <span className="text-muted">|</span>
+                            </li>
+                            <li>
+                                {this._renderStarred()}
+                            </li>
+                        </ul>
                     </div>
                     <div className="col-xs-3 text-right">
                         {this._renderMoveForwards()}
@@ -104,13 +131,18 @@ class TodoGroupActionsComponent extends React.Component {
     }
 }
 
+TodoGroupActionsComponent.defaultProps = {
+    isStarred: false
+};
+
 TodoGroupActionsComponent.propTypes = {
     cid: React.PropTypes.string.isRequired,
     onTodoGroupDelete: React.PropTypes.func.isRequired,
     onTodoGroupMoveForward: React.PropTypes.func.isRequired,
     onTodoGroupMoveBackwards: React.PropTypes.func.isRequired,
     allowMoveBackwards: React.PropTypes.bool.isRequired,
-    allowMoveForward: React.PropTypes.bool.isRequired
+    allowMoveForward: React.PropTypes.bool.isRequired,
+    isStarred: React.PropTypes.bool
 };
 
 export default TodoGroupActionsComponent;

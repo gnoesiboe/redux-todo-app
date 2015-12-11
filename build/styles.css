@@ -52,16 +52,30 @@ html,
     }
 }
 
+
+/* -------------------------------------------------------*/
+
+.todo-group-component {
+    background: #f6f6f6;
+}
+    .todo-group-component--is-starred {
+        background: #fff;
+    }
+
+
 /* -------------------------------------------------------*/
 
 
 .todo-group-title-component-title {
-    background: #faf8bf;
     margin: 0 0 20px;
     padding: 10px 30px 10px 20px;
     font-size: 18px;
     position: relative;
 }
+
+    .todo-group-component--is-starred .todo-group-title-component-title {
+        background: #faf8bf;
+    }
 
     .todo-group-title-component-title .todo-group-title-component-edit-link {
         display: none;

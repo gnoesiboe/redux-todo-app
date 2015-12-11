@@ -85,8 +85,10 @@ class TodoGroupComponent extends React.Component {
      * @returns {XML}
      */
     render() {
+        var className = 'todo-group-component' + (this.props.isStarred ? ' todo-group-component--is-starred' : '');
+
         return (
-            <div className="todo-group-component">
+            <div className={className}>
                 <TodoGroupTitleComponent title={this.props.title}
                                          onTodoGroupTitleEdit={this._onTodoGroupTitleEdit.bind(this)} />
                 <TodoListComponent todos={this.props.todos}

@@ -11,6 +11,7 @@ export function createTodoGroup(title) {
     return Map({
         cid: generateId(),
         title: title,
-        todos: List()
+        todos: List(),
+        isStarred: false
     });
 }

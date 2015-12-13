@@ -165,3 +165,21 @@ export function createUpdateGroupStarredStatusAction(cid, newStatus) {
         newStatus: newStatus
     };
 }
+
+/**
+ * @param {String} fromGroupCid
+ * @param {String} toGroupCid
+ * @param {Number} fromIndex
+ * @param {Number} toIndex
+ *
+ * @returns {Object}
+ */
+export function createTodoSortUpdateAction(fromGroupCid, toGroupCid, fromIndex, toIndex) {
+    return {
+        type: actionTypes.TODO_SORT_UPDATE,
+        fromGroupCid: fromGroupCid,
+        toGroupCid: toGroupCid,
+        fromIndex: fromIndex,
+        toIndex: toIndex
+    };
+}

@@ -212,6 +212,20 @@ class AppComponent extends React.Component {
     }
 
     /**
+     * @param {String} fromGroupCid
+     * @param {String} toGroupCid
+     * @param {Number} fromIndex
+     * @param {Number} toIndex
+     *
+     * @private
+     */
+    _onTodoSortUpdate(fromGroupCid, toGroupCid, fromIndex, toIndex) {
+        this.props.dispatch(
+            actionFactory.createTodoSortUpdateAction(fromGroupCid, toGroupCid, fromIndex, toIndex)
+        );
+    }
+
+    /**
      * @returns {XML}
      */
     render() {
@@ -228,6 +242,7 @@ class AppComponent extends React.Component {
                                         onTodoGroupMoveBackwards={this._onTodoGroupMoveBackwards.bind(this)}
                                         onTodoMoveUp={this._onTodoMoveUp.bind(this)}
                                         onTodoMoveDown={this._onTodoMoveDown.bind(this)}
+                                        onTodoSortUpdate={this._onTodoSortUpdate.bind(this)}
                                         onGroupStarredStatusChange={this._onGroupStarredStatusChange.bind(this)}
                                         onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
             </div>

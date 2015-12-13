@@ -99,6 +99,9 @@ html,
     box-sizing: border-box;
     padding: 10px 10px 0;
     background: #efefef;
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
 }
 
 

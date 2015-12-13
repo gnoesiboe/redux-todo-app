@@ -4,7 +4,8 @@ import * as actionFactory from '../../actions/actionFactory';
 import TodoGroupListComponent from './../presentation/TodoGroupListComponent';
 import * as stateNamespace from './../../state/stateNamespace';
 import mousetrap from 'mousetrap';
-import { ActionCreators } from 'redux-undo'
+import { ActionCreators } from 'redux-undo';
+import { resizeToContent } from './../../utility/rowResizer';
 
 /**
  * @author Gijs Nieuwenhuis <gijs.nieuwenhuis@freshheads.com>
@@ -51,6 +52,8 @@ class AppComponent extends React.Component {
         }
 
         this.props.dispatch(ActionCreators.redo());
+
+        resizeToContent();
     }
 
     /**
@@ -66,6 +69,8 @@ class AppComponent extends React.Component {
         }
 
         this.props.dispatch(ActionCreators.undo());
+
+        resizeToContent();
     }
 
     /**
@@ -77,6 +82,8 @@ class AppComponent extends React.Component {
         this.props.dispatch(
             actionFactory.createAddGroupAction(title)
         );
+
+        resizeToContent();
     }
 
     /**
@@ -90,6 +97,8 @@ class AppComponent extends React.Component {
         this.props.dispatch(
             actionFactory.createChangeTodoIsCompletedStatusAction(cid, newIsCompleted, groupCid)
         );
+
+        resizeToContent();
     }
 
     /**
@@ -100,8 +109,12 @@ class AppComponent extends React.Component {
      */
     _onAddTodo(title, groupCid) {
         this.props.dispatch(
-            actionFactory.createAddTodoAction(title, groupCid)
+            actionFactory.createAddTodoAction(title, groupCid), function () {
+                console.log('hier');
+            }
         );
+
+        resizeToContent();
     }
 
     /**
@@ -114,6 +127,8 @@ class AppComponent extends React.Component {
         this.props.dispatch(
             actionFactory.createDeleteTodoAction(cid, groupCid)
         );
+
+        resizeToContent();
     }
 
     /**
@@ -128,6 +143,8 @@ class AppComponent extends React.Component {
         this.props.dispatch(
             actionFactory.createEditTodoAction(cid, newTitle, newDeadline, groupCid)
         );
+
+        resizeToContent();
     }
 
     /**
@@ -140,6 +157,8 @@ class AppComponent extends React.Component {
         this.props.dispatch(
             actionFactory.createChangeTodoGroupTitleAction(cid, newTitle)
         );
+
+        resizeToContent();
     }
 
     /**
@@ -151,6 +170,8 @@ class AppComponent extends React.Component {
         this.props.dispatch(
             actionFactory.createDeleteTodoGroupAction(cid)
         );
+
+        resizeToContent();
     }
 
     /**
@@ -162,6 +183,8 @@ class AppComponent extends React.Component {
         this.props.dispatch(
             actionFactory.createMoveTodoGroupForwardAction(cid)
         );
+
+        resizeToContent();
     }
 
     /**
@@ -173,6 +196,8 @@ class AppComponent extends React.Component {
         this.props.dispatch(
             actionFactory.createMoveTodoGroupBackwardsAction(cid)
         );
+
+        resizeToContent();
     }
 
     /**
@@ -185,6 +210,8 @@ class AppComponent extends React.Component {
         this.props.dispatch(
             actionFactory.createMoveTodoUpAction(cid, groupCid)
         );
+
+        resizeToContent();
     }
 
     /**
@@ -197,6 +224,8 @@ class AppComponent extends React.Component {
         this.props.dispatch(
             actionFactory.createMoveTodoDownAction(cid, groupCid)
         );
+
+        resizeToContent();
     }
 
     /**
@@ -209,6 +238,8 @@ class AppComponent extends React.Component {
         this.props.dispatch(
             actionFactory.createUpdateGroupStarredStatusAction(cid, newStatus)
         );
+
+        resizeToContent();
     }
 
     /**
@@ -223,6 +254,8 @@ class AppComponent extends React.Component {
         this.props.dispatch(
             actionFactory.createTodoSortUpdateAction(fromGroupCid, toGroupCid, fromIndex, toIndex)
         );
+
+        resizeToContent();
     }
 
     /**

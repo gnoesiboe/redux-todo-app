@@ -28,14 +28,30 @@ class SortableListComponent extends React.Component {
      * @private
      */
     _createSorter() {
-        var _onUpdateListener = this._onListUpdate.bind(this);
-
         return Sortable.create(this.refs.sortableList, {
             group: this.props.sortGroup,
             draggable: this.props.draggableClassName,
-            onAdd: _onUpdateListener,
-            onUpdate: _onUpdateListener
-        })
+            onAdd: this._onAddedToList.bind(this),
+            onUpdate: this._onListUpdate.bind(this),
+            animation: 100
+        });
+    }
+
+    /**
+     * @param {Object} event
+     *
+     * @private
+     */
+    _onAddedToList(event) {
+        var itemEl = event.item;
+
+        // as react throws errors when you move dom elements not using react (which is the case here), we undo
+        // the effects and afterwards let react re-render to put the elements back where they were put. Somewhat
+        // of a workaround but it seems to be the only way to get it to work.
+        event.to.removeChild(itemEl);
+        event.from.appendChild(itemEl);
+
+        this._onListUpdate(event);
     }
 
     /**
@@ -58,6 +74,7 @@ class SortableListComponent extends React.Component {
      */
     componentWillUnmount() {
         this._sorter.destroy();
+        this._sorter = null;
     }
 
     /**

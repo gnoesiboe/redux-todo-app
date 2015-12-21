@@ -185,6 +185,57 @@ var _handleMoveTodoUpAction = function (currentState, action) {
  *
  * @private
  */
+var _handleTodoSortUpdate = function (currentState, action) {
+    var [ fromGroup, fromGroupIndex ] = _locateGroupInState(action.fromGroupCid, currentState);
+
+    if (fromGroup === null || fromGroupIndex === null) {
+        return currentState;
+    }
+
+    if (action.fromGroupCid === action.toGroupCid) {
+
+        var newFromGroupTodos = listHelper.moveItem(fromGroup.get('todos'), action.fromIndex, action.toIndex),
+            newFromGroup = fromGroup.set('todos', newFromGroupTodos);
+
+        return currentState.set(fromGroupIndex, newFromGroup)
+    } else {
+
+        // remove from first group
+        var fromGroupTodos = fromGroup.get('todos'),
+            todo = fromGroupTodos.get(action.fromIndex);
+
+        if (!todo) {
+            return currentState;
+        }
+
+        newFromGroupTodos = fromGroupTodos.splice(action.fromIndex, 1);
+        newFromGroup = fromGroup.set('todos', newFromGroupTodos);
+
+        var newState = currentState.set(fromGroupIndex, newFromGroup);
+
+        // add to new group
+        var [ toGroup, toGroupIndex ] = _locateGroupInState(action.toGroupCid, currentState);
+
+        if (toGroup === null || toGroupIndex === null) {
+            return currentState;
+        }
+
+        var toGroupTodos = toGroup.get('todos'),
+            newToGroupTodos = listHelper.addItem(toGroupTodos, todo, action.toIndex),
+            newToGroup = toGroup.set('todos', newToGroupTodos);
+
+        return newState.set(toGroupIndex, newToGroup);
+    }
+};
+
+/**
+ * @param {List} currentState
+ * @param {Object} action
+ *
+ * @returns {List}
+ *
+ * @private
+ */
 var _handleMoveTodoDownAction = function (currentState, action) {
     var [ foundGroup, foundGroupAtIndex ] = _locateGroupInState(action.groupCid, currentState);
 
@@ -301,17 +352,17 @@ var _handleAddTodoAction = function (currentState, action) {
 
 /**
  * @param {String} cid
- * @param {List} state
+ * @param {List} todoGroupListState
  *
  * @returns {Array|null}
  *
  * @private
  */
-var _locateGroupInState = function (cid, state) {
+var _locateGroupInState = function (cid, todoGroupListState) {
     var foundGroup = null,
         foundGroupAtIndex = null;
 
-    state.map(function (group, index) {
+    todoGroupListState.map(function (group, index) {
         if (group.get('cid') === cid) {
             foundGroup = group;
             foundGroupAtIndex = index;
@@ -323,17 +374,17 @@ var _locateGroupInState = function (cid, state) {
 
 /**
  * @param {String} cid
- * @param {List} state
+ * @param {List} todoListState
  *
  * @returns {Array}
  *
  * @private
  */
-var _locateTodoInListState = function (cid, state) {
+var _locateTodoInListState = function (cid, todoListState) {
     var foundTodo = null,
         foundTodoAtIndex = null;
 
-    state.map(function (todo, index) {
+    todoListState.map(function (todo, index) {
         if (todo.get('cid') === cid) {
             foundTodo = todo;
             foundTodoAtIndex = index;
@@ -386,6 +437,9 @@ export default function todoGroupsReducer(currentState = _defaultState, action) 
 
         case actionTypes.UPDATE_GROUP_STARRED_STATUS:
             return _handleUpdateGroupStarredStatus(currentState, action);
+
+        case actionTypes.TODO_SORT_UPDATE:
+            return _handleTodoSortUpdate(currentState, action);
 
         default:
             return currentState;

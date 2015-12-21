@@ -47,7 +47,6 @@ class AppComponent extends React.Component {
         event.preventDefault();
 
         if (!this.props.redoPossible) {
-            console.log('kan niet');
             return;
         }
 
@@ -109,9 +108,7 @@ class AppComponent extends React.Component {
      */
     _onAddTodo(title, groupCid) {
         this.props.dispatch(
-            actionFactory.createAddTodoAction(title, groupCid), function () {
-                console.log('hier');
-            }
+            actionFactory.createAddTodoAction(title, groupCid)
         );
 
         resizeToContent();

@@ -13,8 +13,11 @@ class TodoListComponent extends React.Component {
      * @private
      */
     _renderTodos() {
-        return this.props.todos.map(function (todo) {
-            let key = this.props.groupCid + '_' + todo.get('cid');
+        return this.props.todos.map(function (todo, index) {
+
+            // As, when todo's are re-ordered, the keys are named differently (their index changes), react will
+            // re-render them. This forces a re-render.
+            let key = `${index}_${this.props.groupCid}_${todo.get('cid')}`;
 
             return (
                 <li key={key}

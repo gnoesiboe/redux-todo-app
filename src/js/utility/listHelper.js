@@ -18,3 +18,14 @@ export function moveItem(list, fromIndex, toIndex) {
     // re-add item to the list at another position
     return newList.splice(toIndex, 0, item);
 }
+
+/**
+ * @param {List} list
+ * @param {*} item
+ * @param {Number} atIndex
+ *
+ * @returns {List}
+ */
+export function addItem(list, item, atIndex) {
+    return list.splice(atIndex, 0, item);
+}

@@ -110,8 +110,8 @@ html,
 
 .todo-list-component-list {
     list-style: none;
-    padding: 0 10px;
-    margin: 0 0 30px;
+    padding: 0 10px 10px; /* padding on bottom to be able to drag todos into it when the list is emtpy */
+    margin: 0 0 20px;
 }
 
 

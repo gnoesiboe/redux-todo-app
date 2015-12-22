@@ -20,6 +20,7 @@ class AppComponent extends React.Component {
 
         this._onUndoKeybindingPressedCallback = this._onUndoKeybindingPressed.bind(this);
         this._onRedoKeybindingPressedCallback = this._onRedoKeybindingPressed.bind(this);
+        this._onSelectNextGroupCallback = this._onSelectNextGroupPressed.bind(this);
     }
 
     /**
@@ -28,6 +29,7 @@ class AppComponent extends React.Component {
     componentDidMount() {
         mousetrap.bind('meta+z', this._onUndoKeybindingPressedCallback);
         mousetrap.bind('meta+shift+z', this._onRedoKeybindingPressedCallback);
+        mousetrap.bind('right', this._onSelectNextGroupCallback);
     }
 
     /**
@@ -36,9 +38,21 @@ class AppComponent extends React.Component {
     componentWillUnmount() {
         mousetrap.unbind('meta+z', this._onUndoKeybindingPressedCallback);
         mousetrap.unbind('meta+shift+z', this._onRedoKeybindingPressedCallback);
+        mousetrap.unbind('right', this._onSelectNextGroupCallback);
     }
 
     /**
+     * @private
+     */
+    _onSelectNextGroupPressed() {
+        this.props.dispatch(
+            actionFactory.createSelectNextTodoGroupAction()
+        );
+    }
+
+    /**
+     * @param {Object} event
+     *
      * @private
      */
     _onRedoKeybindingPressed(event) {

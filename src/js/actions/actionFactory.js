@@ -183,3 +183,12 @@ export function createTodoSortUpdateAction(fromGroupCid, toGroupCid, fromIndex, 
         toIndex: toIndex
     };
 }
+
+/**
+ * @returns {Object}
+ */
+export function createSelectNextTodoGroupAction() {
+    return {
+        type: actionTypes.SELECT_NEXT_TODO_GROUP
+    };
+}

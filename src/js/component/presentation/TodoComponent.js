@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TodoDeadlineComponent from './TodoDeadlineComponent';
+import { markdown } from 'markdown';
 
 const MODE_EDIT = 'MODE_EDIT';
 const MODE_VIEW = 'MODE_VIEW';
@@ -130,7 +131,8 @@ class TodoComponent extends React.Component {
 
                         <TodoDeadlineComponent value={this.props.deadline}
                                                isCompleted={this.props.isCompleted} />
-                        {this.props.title}
+                        <span className="todo-component-title"
+                              dangerouslySetInnerHTML={{ __html: markdown.toHTML(this.props.title) }} />
                     </label>
                 </div>
             </div>

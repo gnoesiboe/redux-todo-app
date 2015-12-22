@@ -225,3 +225,13 @@ html,
 .todo-component--is-completed .todo-component-action {
     color: #ddd;
 }
+
+
+/* -------------------------------------------------------*/
+
+
+.todo-component-title p {
+
+    /* markdown functionality adds 'p' tags, but title should be inline */
+    display: inline;
+}

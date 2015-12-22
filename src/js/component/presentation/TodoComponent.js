@@ -49,10 +49,16 @@ class TodoComponent extends React.Component {
     }
 
     /**
+     * @param {Object} event
+     *
      * @private
      */
-    _onIsCompletedChange() {
+    _onIsCompletedChange(event) {
         this.props.onTodoCompletedStatusChange(this.props.cid, !this.props.isCompleted);
+
+        // blur checkbox to immediately allow client to use undo if wanted. Default behaviour of browser is
+        // focus on checkbox field, which does not allow the key bindings
+        event.target.blur();
     }
 
     /**
@@ -121,6 +127,7 @@ class TodoComponent extends React.Component {
                         <input type="checkbox"
                                onChange={this._onIsCompletedChange.bind(this)}
                                checked={this.props.isCompleted} />
+
                         <TodoDeadlineComponent value={this.props.deadline}
                                                isCompleted={this.props.isCompleted} />
                         {this.props.title}

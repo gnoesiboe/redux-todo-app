@@ -85,7 +85,9 @@ class TodoGroupComponent extends React.Component {
      * @returns {XML}
      */
     render() {
-        var className = 'todo-group-component' + (this.props.isStarred ? ' todo-group-component--is-starred' : '');
+        var className = 'todo-group-component' +
+            (this.props.isStarred ? ' todo-group-component--is-starred' : '') +
+            (this.props.isCurrent ? ' todo-group-component--is-current' : '');
 
         return (
             <div className={className} data-match-height="js-container-block">
@@ -117,9 +119,15 @@ class TodoGroupComponent extends React.Component {
     }
 }
 
+TodoGroupComponent.defaultProps = {
+    isCurrent: false,
+    isStarred: false
+};
+
 TodoGroupComponent.propTypes = {
     cid: React.PropTypes.string.isRequired,
-    isStarred: React.PropTypes.bool.isRequired,
+    isStarred: React.PropTypes.bool,
+    isCurrent: React.PropTypes.bool,
     title: React.PropTypes.string.isRequired,
     todos: React.PropTypes.object.isRequired,
     onTodoCompletedStatusChange: React.PropTypes.func.isRequired,

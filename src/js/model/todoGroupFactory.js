@@ -12,6 +12,7 @@ export function createTodoGroup(title) {
         cid: generateId(),
         title: title,
         todos: List(),
-        isStarred: false
+        isStarred: false,
+        isCurrent: false
     });
 }

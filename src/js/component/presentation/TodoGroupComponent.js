@@ -95,8 +95,6 @@ class TodoGroupComponent extends React.Component {
                                    groupCid={this.props.cid}
                                    onTodoDelete={this._onTodoDelete.bind(this)}
                                    onTodoEdit={this._onTodoEdit.bind(this)}
-                                   onTodoMoveUp={this._onTodoMoveUp.bind(this)}
-                                   onTodoMoveDown={this._onTodoMoveDown.bind(this)}
                                    onTodoSortUpdate={this.props.onTodoSortUpdate}
                                    onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
                 <AddTodoComponent onAddTodo={this._onAddTodo.bind(this)}>
@@ -127,8 +125,6 @@ TodoGroupComponent.propTypes = {
     onTodoGroupDelete: React.PropTypes.func.isRequired,
     onTodoGroupMoveForward: React.PropTypes.func.isRequired,
     onTodoGroupMoveBackwards: React.PropTypes.func.isRequired,
-    onTodoMoveUp: React.PropTypes.func.isRequired,
-    onTodoMoveDown: React.PropTypes.func.isRequired,
     onGroupStarredStatusChange: React.PropTypes.func.isRequired,
     allowMoveBackwards: React.PropTypes.bool.isRequired,
     allowMoveForward: React.PropTypes.bool.isRequired,

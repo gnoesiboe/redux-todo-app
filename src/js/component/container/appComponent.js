@@ -199,34 +199,6 @@ class AppComponent extends React.Component {
 
     /**
      * @param {String} cid
-     * @param {String} groupCid
-     *
-     * @private
-     */
-    _onTodoMoveUp(cid, groupCid) {
-        this.props.dispatch(
-            actionFactory.createMoveTodoUpAction(cid, groupCid)
-        );
-
-        resizeToContent();
-    }
-
-    /**
-     * @param {String} cid
-     * @param {String} groupCid
-     *
-     * @private
-     */
-    _onTodoMoveDown(cid, groupCid) {
-        this.props.dispatch(
-            actionFactory.createMoveTodoDownAction(cid, groupCid)
-        );
-
-        resizeToContent();
-    }
-
-    /**
-     * @param {String} cid
      * @param {Boolean} newStatus
      *
      * @private
@@ -270,8 +242,6 @@ class AppComponent extends React.Component {
                                         onTodoGroupDelete={this._onTodoGroupDelete.bind(this)}
                                         onTodoGroupMoveForward={this._onTodoGroupMoveForward.bind(this)}
                                         onTodoGroupMoveBackwards={this._onTodoGroupMoveBackwards.bind(this)}
-                                        onTodoMoveUp={this._onTodoMoveUp.bind(this)}
-                                        onTodoMoveDown={this._onTodoMoveDown.bind(this)}
                                         onTodoSortUpdate={this._onTodoSortUpdate.bind(this)}
                                         onGroupStarredStatusChange={this._onGroupStarredStatusChange.bind(this)}
                                         onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />

@@ -144,8 +144,12 @@ html,
     font-size: 10px;
     right: 0;
     top: 0;
-    background: #fff;
+    background: #f6f6f6;
     height: 100%;
+}
+
+.todo-group-component--is-starred .todo-component-actions {
+    background: #fff;
 }
 
     .todo-component-action-seperator {

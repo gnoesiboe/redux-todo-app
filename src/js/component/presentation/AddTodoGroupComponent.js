@@ -71,7 +71,9 @@ class AddTodoGroupComponent extends React.Component {
      */
     _renderCreateMode() {
         return (
-            <div className="add-todo-group-component">
+            <div className="add-todo-group-component"
+                 data-match-height="js-container-block">
+
                 <form action="" className="form" onSubmit={this._onFormSubmit.bind(this)}>
                     <div className="form-group">
                         <input type="text"
@@ -110,7 +112,9 @@ class AddTodoGroupComponent extends React.Component {
      */
     _renderViewMode() {
         return (
-            <div className="add-todo-group-component">
+            <div className="add-todo-group-component"
+                 data-match-height="js-container-block">
+                
                 <a href="#" className="add-todo-group-component-add-link" onClick={this._onAddLinkClick.bind(this)}>+</a>
             </div>
         )

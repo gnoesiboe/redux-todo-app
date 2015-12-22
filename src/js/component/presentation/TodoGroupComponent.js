@@ -88,7 +88,7 @@ class TodoGroupComponent extends React.Component {
         var className = 'todo-group-component' + (this.props.isStarred ? ' todo-group-component--is-starred' : '');
 
         return (
-            <div className={className} data-match-height="todo-group-component">
+            <div className={className} data-match-height="js-container-block">
                 <div className="todo-group-component-body">
                     <TodoGroupTitleComponent title={this.props.title}
                                              onTodoGroupTitleEdit={this._onTodoGroupTitleEdit.bind(this)} />

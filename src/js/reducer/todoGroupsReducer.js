@@ -179,6 +179,70 @@ var _handleMoveTodoUpAction = function (currentState, action) {
 
 /**
  * @param {List} currentState
+ *
+ * @returns {List}
+ *
+ * @private
+ */
+var _handleSelectNextTodoGroupAction = function (currentState) {
+    var [currentTodoGroup, currentTodoGroupIndex ] = _locateCurrentGroupInTodoGroupList(currentState)
+
+    if (currentTodoGroup === null || currentTodoGroupIndex === null) {
+        return _selectFirstTodoGroup(currentState);
+    }
+
+    var nextTodoGroupIndex = currentState.has(currentTodoGroupIndex + 1) ? currentTodoGroupIndex + 1 : 0,
+        nextTodoGroup = currentState.get(nextTodoGroupIndex);
+
+    // deselect current todo group
+    var newerState = currentState.set(currentTodoGroupIndex, currentTodoGroup.set('isCurrent', false));
+
+    // select next todo group
+    return newerState.set(nextTodoGroupIndex, nextTodoGroup.set('isCurrent', true));
+};
+
+/**
+ * @param {List} currentState
+ *
+ * @returns {List}
+ *
+ * @private
+ */
+var _selectFirstTodoGroup = function (currentState) {
+    var foundTodoGroup = currentState.get(0);
+
+    if (!foundTodoGroup) {
+        return currentState;
+    }
+
+    var newFoundTodoGroup = foundTodoGroup.set('isCurrent', true);
+
+    return currentState.set(0, newFoundTodoGroup);
+};
+
+/**
+ * @param {List} todoGroupList
+ *
+ * @returns {Array}
+ *
+ * @private
+ */
+var _locateCurrentGroupInTodoGroupList = function (todoGroupList) {
+    var foundGroup = null,
+        foundGroupAtIndex = null;
+
+    todoGroupList.map(function (group, index) {
+        if (group.get('isCurrent', false) === true) {
+            foundGroup = group;
+            foundGroupAtIndex = index;
+        }
+    });
+
+    return [foundGroup, foundGroupAtIndex];
+};
+
+/**
+ * @param {List} currentState
  * @param {Object} action
  *
  * @returns {List}
@@ -440,6 +504,9 @@ export default function todoGroupsReducer(currentState = _defaultState, action) 
 
         case actionTypes.TODO_SORT_UPDATE:
             return _handleTodoSortUpdate(currentState, action);
+
+        case actionTypes.SELECT_NEXT_TODO_GROUP:
+            return _handleSelectNextTodoGroupAction(currentState);
 
         default:
             return currentState;

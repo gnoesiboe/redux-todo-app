@@ -89,24 +89,29 @@ class TodoGroupComponent extends React.Component {
 
         return (
             <div className={className} data-match-height="todo-group-component">
-                <TodoGroupTitleComponent title={this.props.title}
-                                         onTodoGroupTitleEdit={this._onTodoGroupTitleEdit.bind(this)} />
-                <TodoListComponent todos={this.props.todos}
-                                   groupCid={this.props.cid}
-                                   onTodoDelete={this._onTodoDelete.bind(this)}
-                                   onTodoEdit={this._onTodoEdit.bind(this)}
-                                   onTodoSortUpdate={this.props.onTodoSortUpdate}
-                                   onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
-                <AddTodoComponent onAddTodo={this._onAddTodo.bind(this)}>
-                    <TodoGroupActionsComponent cid={this.props.cid}
-                                               isStarred={!!this.props.isStarred}
-                                               onTodoGroupDelete={this.props.onTodoGroupDelete}
-                                               onTodoGroupMoveBackwards={this.props.onTodoGroupMoveBackwards}
-                                               allowMoveBackwards={this.props.allowMoveBackwards}
-                                               allowMoveForward={this.props.allowMoveForward}
-                                               onGroupStarredStatusChange={this.props.onGroupStarredStatusChange}
-                                               onTodoGroupMoveForward={this.props.onTodoGroupMoveForward}/>
-                </AddTodoComponent>
+                <div className="todo-group-component-body">
+                    <TodoGroupTitleComponent title={this.props.title}
+                                             onTodoGroupTitleEdit={this._onTodoGroupTitleEdit.bind(this)} />
+
+                    <TodoListComponent todos={this.props.todos}
+                                       groupCid={this.props.cid}
+                                       onTodoDelete={this._onTodoDelete.bind(this)}
+                                       onTodoEdit={this._onTodoEdit.bind(this)}
+                                       onTodoSortUpdate={this.props.onTodoSortUpdate}
+                                       onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
+                </div>
+                <div className="todo-group-component-footer">
+                    <AddTodoComponent onAddTodo={this._onAddTodo.bind(this)}>
+                        <TodoGroupActionsComponent cid={this.props.cid}
+                                                   isStarred={!!this.props.isStarred}
+                                                   onTodoGroupDelete={this.props.onTodoGroupDelete}
+                                                   onTodoGroupMoveBackwards={this.props.onTodoGroupMoveBackwards}
+                                                   allowMoveBackwards={this.props.allowMoveBackwards}
+                                                   allowMoveForward={this.props.allowMoveForward}
+                                                   onGroupStarredStatusChange={this.props.onGroupStarredStatusChange}
+                                                   onTodoGroupMoveForward={this.props.onTodoGroupMoveForward}/>
+                    </AddTodoComponent>
+                </div>
             </div>
         );
     }

@@ -208,6 +208,30 @@ var _handleSelectNextTodoGroupAction = function (currentState) {
  *
  * @private
  */
+var _handleSelectPreviousTodoGroupAction = function (currentState) {
+    var [currentTodoGroup, currentTodoGroupIndex ] = _locateCurrentGroupInTodoGroupList(currentState)
+
+    if (currentTodoGroup === null || currentTodoGroupIndex === null) {
+        return _selectFirstTodoGroup(currentState);
+    }
+
+    var previousTodoGroupIndex = currentState.has(currentTodoGroupIndex - 1) ? currentTodoGroupIndex - 1 : currentState.count() - 1,
+        previousTodoGroup = currentState.get(previousTodoGroupIndex);
+
+    // deselect current todo group
+    var newerState = currentState.set(currentTodoGroupIndex, currentTodoGroup.set('isCurrent', false));
+
+    // select next todo group
+    return newerState.set(previousTodoGroupIndex, previousTodoGroup.set('isCurrent', true));
+};
+
+/**
+ * @param {List} currentState
+ *
+ * @returns {List}
+ *
+ * @private
+ */
 var _selectFirstTodoGroup = function (currentState) {
     var foundTodoGroup = currentState.get(0);
 
@@ -507,6 +531,9 @@ export default function todoGroupsReducer(currentState = _defaultState, action) 
 
         case actionTypes.SELECT_NEXT_TODO_GROUP:
             return _handleSelectNextTodoGroupAction(currentState);
+
+        case actionTypes.SELECT_PREVIOUS_TODO_GROUP:
+            return _handleSelectPreviousTodoGroupAction(currentState);
 
         default:
             return currentState;

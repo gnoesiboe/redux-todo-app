@@ -201,3 +201,12 @@ export function createSelectPreviousTodoGroupAction() {
         type: actionTypes.SELECT_PREVIOUS_TODO_GROUP
     };
 }
+
+/**
+ * @returns {Object}
+ */
+export function createSelectNextTodoAction() {
+    return {
+        type: actionTypes.SELECT_NEXT_TODO
+    };
+}

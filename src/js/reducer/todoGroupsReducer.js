@@ -53,7 +53,7 @@ var _handleChangeTodoIsCompletedStatus = function (currentState, action) {
 };
 
 /**
- * @param {Object} currentState
+ * @param {List} currentState
  * @param {Object} action
  *
  * @private
@@ -185,20 +185,26 @@ var _handleMoveTodoUpAction = function (currentState, action) {
  * @private
  */
 var _handleSelectNextTodoGroupAction = function (currentState) {
-    var [currentTodoGroup, currentTodoGroupIndex ] = _locateCurrentGroupInTodoGroupList(currentState)
+    var [currentTodoGroup, currentTodoGroupIndex ] = _locateCurrentGroupInTodoGroupList(currentState);
 
     if (currentTodoGroup === null || currentTodoGroupIndex === null) {
-        return _selectFirstTodoGroup(currentState);
+        return _applyInitialSelection(currentState);
     }
 
     var nextTodoGroupIndex = currentState.has(currentTodoGroupIndex + 1) ? currentTodoGroupIndex + 1 : 0,
         nextTodoGroup = currentState.get(nextTodoGroupIndex);
 
     // deselect current todo group
-    var newerState = currentState.set(currentTodoGroupIndex, currentTodoGroup.set('isCurrent', false));
+    var newerState = currentState.set(
+        currentTodoGroupIndex,
+        _applyDeselectionOfAllTodosWithinTodoGroup(currentTodoGroup).set('isCurrent', false)
+    );
 
     // select next todo group
-    return newerState.set(nextTodoGroupIndex, nextTodoGroup.set('isCurrent', true));
+    return newerState.set(
+        nextTodoGroupIndex,
+        _applySelectionOfFirstTodoWithinTodoGroup(nextTodoGroup).set('isCurrent', true)
+    );
 };
 
 /**
@@ -209,20 +215,58 @@ var _handleSelectNextTodoGroupAction = function (currentState) {
  * @private
  */
 var _handleSelectPreviousTodoGroupAction = function (currentState) {
-    var [currentTodoGroup, currentTodoGroupIndex ] = _locateCurrentGroupInTodoGroupList(currentState)
+    var [currentTodoGroup, currentTodoGroupIndex ] = _locateCurrentGroupInTodoGroupList(currentState);
 
     if (currentTodoGroup === null || currentTodoGroupIndex === null) {
-        return _selectFirstTodoGroup(currentState);
+        return _applyInitialSelection(currentState);
     }
 
     var previousTodoGroupIndex = currentState.has(currentTodoGroupIndex - 1) ? currentTodoGroupIndex - 1 : currentState.count() - 1,
         previousTodoGroup = currentState.get(previousTodoGroupIndex);
 
     // deselect current todo group
-    var newerState = currentState.set(currentTodoGroupIndex, currentTodoGroup.set('isCurrent', false));
+    var newerState = currentState.set(
+        currentTodoGroupIndex,
+        _applyDeselectionOfAllTodosWithinTodoGroup(currentTodoGroup).set('isCurrent', false)
+    );
 
     // select next todo group
-    return newerState.set(previousTodoGroupIndex, previousTodoGroup.set('isCurrent', true));
+    return newerState.set(
+        previousTodoGroupIndex,
+        _applySelectionOfFirstTodoWithinTodoGroup(previousTodoGroup).set('isCurrent', true)
+    );
+};
+
+/**
+ * @param {List} todoGroupState
+ *
+ * @returns {List}
+ *
+ * @private
+ */
+var _applySelectionOfFirstTodoWithinTodoGroup = function (todoGroupState) {
+    var todoGroupTodos = todoGroupState.get('todos');
+
+    if (todoGroupTodos.count() === 0) {
+        return todoGroupState;
+    }
+
+    var newTodoGroupTodos = todoGroupTodos.set(0, todoGroupTodos.get(0).set('isCurrent', true));
+
+    return todoGroupState.set('todos', newTodoGroupTodos);
+};
+
+/**
+ * @param {List} todoGroupState
+ *
+ * @returns {List}
+ *
+ * @private
+ */
+var _applyDeselectionOfAllTodosWithinTodoGroup = function (todoGroupState) {
+    var todoGroupTodos = todoGroupState.get('todos');
+
+    return todoGroupState.set('todos', todoGroupTodos.map(todo => todo.set('isCurrent', false)));
 };
 
 /**
@@ -232,8 +276,65 @@ var _handleSelectPreviousTodoGroupAction = function (currentState) {
  *
  * @private
  */
-var _selectFirstTodoGroup = function (currentState) {
-    var foundTodoGroup = currentState.get(0);
+var _applyInitialSelection = function (currentState) {
+    var newerState = _selectTodoGroupWithIndex(currentState, 0),
+        newerSelectedTodoGroup = newerState.get(0, null);
+
+    if (newerSelectedTodoGroup === null) {
+        return currentState;
+    }
+
+    var newSelectedTodoGroup = _selectTodoWithIndexInTodoGroup(newerSelectedTodoGroup, 0);
+
+    return currentState.set(0, newSelectedTodoGroup);
+};
+
+/**
+ * @param {Map} existingTodoGroupState
+ * @param {Number} index
+ *
+ * @returns {Map|null}
+ *
+ * @private
+ */
+var _selectTodoWithIndexInTodoGroup = function (existingTodoGroupState, index) {
+    var todoGroupTodos = existingTodoGroupState.get('todos'),
+        foundTodo = todoGroupTodos.has(index) ? todoGroupTodos.get(index) : null;
+
+    if (foundTodo === null) {
+        // no todo found to select
+
+        return existingTodoGroupState;
+    }
+
+    var newTodoGroupTodos = todoGroupTodos.set(index, foundTodo.set('isCurrent', true));
+
+    return existingTodoGroupState.set('todos', newTodoGroupTodos);
+};
+
+/**
+ * @param {List} currentState
+ *
+ * @returns {List}
+ *
+ * @private
+ */
+var _handleSelectNextTodoAction = function (currentState) {
+    //@todo implement
+
+    return currentState;
+};
+
+/**
+ * @param {List} currentState
+ * @param {Number} index
+ *
+ * @returns {List}
+ *
+ * @private
+ */
+var _selectTodoGroupWithIndex = function (currentState, index) {
+    var foundTodoGroup = currentState.get(index);
 
     if (!foundTodoGroup) {
         return currentState;
@@ -534,6 +635,9 @@ export default function todoGroupsReducer(currentState = _defaultState, action) 
 
         case actionTypes.SELECT_PREVIOUS_TODO_GROUP:
             return _handleSelectPreviousTodoGroupAction(currentState);
+
+        case actionTypes.SELECT_NEXT_TODO:
+            return _handleSelectNextTodoAction(currentState);
 
         default:
             return currentState;

@@ -62,9 +62,15 @@ class AppComponent extends React.Component {
     }
 
     /**
+     * @param {Object} event
+     *
      * @private
      */
-    _onSelectNextTodoBindingPressed() {
+    _onSelectNextTodoBindingPressed(event) {
+
+        // prevent browser from scolling down
+        event.preventDefault();
+
         this.props.dispatch(
             actionFactory.createSelectNextTodoAction()
         );

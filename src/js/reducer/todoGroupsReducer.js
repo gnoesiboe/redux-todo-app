@@ -320,9 +320,35 @@ var _selectTodoWithIndexInTodoGroup = function (existingTodoGroupState, index) {
  * @private
  */
 var _handleSelectNextTodoAction = function (currentState) {
-    //@todo implement
+    var [currentGroup, currentGroupIndex] = _locateCurrentGroupInState(currentState);
 
-    return currentState;
+    if (currentGroup === null || currentGroupIndex === null) {
+        return _applyInitialSelection(currentState);
+    }
+
+    var currentGroupTodos = currentGroup.get('todos'),
+        [currentTodo, currentTodoIndex] = _locateCurrentTodoInListState(currentGroupTodos);
+
+    if (currentTodo === null || currentTodoIndex === null) {
+        return currentState.set(
+            currentGroupIndex,
+            _applySelectionOfFirstTodoWithinTodoGroup(currentGroup)
+        );
+    }
+
+    var nextCurrentTodoIndex = currentGroupTodos.has(currentTodoIndex + 1)
+        ? currentTodoIndex + 1
+        : 0;
+
+    // deselect current todo
+    var newCurrentTodo = currentGroupTodos.get(currentTodoIndex).set('isCurrent', false),
+        newerGroupTodos = currentGroupTodos.set(currentTodoIndex, newCurrentTodo);
+
+    // select the new todo
+    var nextCurrentTodo = newerGroupTodos.get(nextCurrentTodoIndex).set('isCurrent', true),
+        nextGroupTodos = newerGroupTodos.set(nextCurrentTodoIndex, nextCurrentTodo);
+
+    return currentState.set(currentGroupIndex, currentGroup.set('todos', nextGroupTodos));
 };
 
 /**
@@ -540,6 +566,27 @@ var _handleAddTodoAction = function (currentState, action) {
 };
 
 /**
+ * @param {List} todoGroupListState
+ *
+ * @returns {Array}
+ *
+ * @private
+ */
+var _locateCurrentGroupInState = function (todoGroupListState) {
+    var foundGroup = null,
+        foundGroupAtIndex = null;
+
+    todoGroupListState.map(function (group, index) {
+        if (group.get('isCurrent', false) === true) {
+            foundGroup = group;
+            foundGroupAtIndex = index;
+        }
+    });
+
+    return [foundGroup, foundGroupAtIndex];
+};
+
+/**
  * @param {String} cid
  * @param {List} todoGroupListState
  *
@@ -559,6 +606,27 @@ var _locateGroupInState = function (cid, todoGroupListState) {
     });
 
     return [foundGroup, foundGroupAtIndex];
+};
+
+/**
+ * @param {List} todoListState
+ *
+ * @return {Array}
+ *
+ * @private
+ */
+var _locateCurrentTodoInListState = function (todoListState) {
+    var foundTodo = null,
+        foundTodoAtIndex = null;
+
+    todoListState.map(function (todo, index) {
+        if (todo.get('isCurrent', false) === true) {
+            foundTodo = todo;
+            foundTodoAtIndex = index;
+        }
+    });
+
+    return [ foundTodo, foundTodoAtIndex ];
 };
 
 /**

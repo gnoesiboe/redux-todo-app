@@ -28,6 +28,20 @@ class AppComponent extends React.Component {
      * @inheritDoc
      */
     componentDidMount() {
+        this._registerKeyboardBindings();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    componentWillUnmount() {
+        this._unregisterKeyboardBindings();
+    }
+
+    /**
+     * @private
+     */
+    _registerKeyboardBindings() {
         mousetrap.bind('meta+z', this._onUndoKeybindingPressedCallback);
         mousetrap.bind('meta+shift+z', this._onRedoKeybindingPressedCallback);
         mousetrap.bind('right', this._onSelectNextGroupCallback);
@@ -35,9 +49,9 @@ class AppComponent extends React.Component {
     }
 
     /**
-     * @inheritDoc
+     * @private
      */
-    componentWillUnmount() {
+    _unregisterKeyboardBindings() {
         mousetrap.unbind('meta+z', this._onUndoKeybindingPressedCallback);
         mousetrap.unbind('meta+shift+z', this._onRedoKeybindingPressedCallback);
         mousetrap.unbind('right', this._onSelectNextGroupCallback);

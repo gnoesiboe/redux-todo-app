@@ -62,7 +62,7 @@ html,
     }
 
     .todo-group-component--is-current {
-        border: 1px solid #000;
+        border-top: 10px solid #999;
     }
 
 

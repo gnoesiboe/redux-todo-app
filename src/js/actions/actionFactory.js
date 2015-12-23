@@ -192,3 +192,12 @@ export function createSelectNextTodoGroupAction() {
         type: actionTypes.SELECT_NEXT_TODO_GROUP
     };
 }
+
+/**
+ * @returns {Object}
+ */
+export function createSelectPreviousTodoGroupAction() {
+    return {
+        type: actionTypes.SELECT_PREVIOUS_TODO_GROUP
+    };
+}

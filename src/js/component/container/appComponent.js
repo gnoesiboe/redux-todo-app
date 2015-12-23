@@ -21,6 +21,7 @@ class AppComponent extends React.Component {
         this._onUndoKeybindingPressedCallback = this._onUndoKeybindingPressed.bind(this);
         this._onRedoKeybindingPressedCallback = this._onRedoKeybindingPressed.bind(this);
         this._onSelectNextGroupCallback = this._onSelectNextGroupPressed.bind(this);
+        this._onSelectPreviousGroupCallback = this._onSelectPreviousGroupPressed.bind(this);
     }
 
     /**
@@ -30,6 +31,7 @@ class AppComponent extends React.Component {
         mousetrap.bind('meta+z', this._onUndoKeybindingPressedCallback);
         mousetrap.bind('meta+shift+z', this._onRedoKeybindingPressedCallback);
         mousetrap.bind('right', this._onSelectNextGroupCallback);
+        mousetrap.bind('left', this._onSelectPreviousGroupCallback);
     }
 
     /**
@@ -39,6 +41,7 @@ class AppComponent extends React.Component {
         mousetrap.unbind('meta+z', this._onUndoKeybindingPressedCallback);
         mousetrap.unbind('meta+shift+z', this._onRedoKeybindingPressedCallback);
         mousetrap.unbind('right', this._onSelectNextGroupCallback);
+        mousetrap.unbind('left', this._onSelectPreviousGroupCallback);
     }
 
     /**
@@ -47,6 +50,15 @@ class AppComponent extends React.Component {
     _onSelectNextGroupPressed() {
         this.props.dispatch(
             actionFactory.createSelectNextTodoGroupAction()
+        );
+    }
+
+    /**
+     * @private
+     */
+    _onSelectPreviousGroupPressed() {
+        this.props.dispatch(
+            actionFactory.createSelectPreviousTodoGroupAction()
         );
     }
 

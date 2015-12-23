@@ -217,18 +217,22 @@ html,
     position: relative;
 }
 
-.todo-component .todo-component-actions {
-    display: none;
-}
+    .todo-component .todo-component-actions {
+        display: none;
+    }
 
-.todo-component:hover .todo-component-actions {
-    display: block;
-}
+    .todo-component:hover .todo-component-actions {
+        display: block;
+    }
 
-.todo-component--is-completed label,
-.todo-component--is-completed .todo-component-action {
-    color: #ddd;
-}
+    .todo-component--is-completed label,
+    .todo-component--is-completed .todo-component-action {
+        color: #ddd;
+    }
+
+    .todo-component--is-current {
+        border-right: 10px solid #999;
+    }
 
 
 /* -------------------------------------------------------*/

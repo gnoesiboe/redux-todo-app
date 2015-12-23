@@ -20,15 +20,15 @@ class TodoListComponent extends React.Component {
             let key = `${index}_${this.props.groupCid}_${todo.get('cid')}`;
 
             return (
-                <li key={key}
-                    className="js-todo-list-component-list-item">
+                <li key={key} className="js-todo-list-component-list-item">
                     <TodoComponent cid={todo.get('cid')}
                                    title={todo.get('title')}
                                    deadline={todo.get('deadline')}
                                    onTodoDelete={this.props.onTodoDelete}
                                    onTodoEdit={this.props.onTodoEdit}
                                    onTodoCompletedStatusChange={this.props.onTodoCompletedStatusChange}
-                                   isCompleted={todo.get('isCompleted')} />
+                                   isCompleted={todo.get('isCompleted')}
+                                   isCurrent={todo.get('isCurrent')} />
                 </li>
             );
         }.bind(this));

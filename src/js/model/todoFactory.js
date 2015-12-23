@@ -3,14 +3,14 @@ import { Map } from 'immutable';
 
 /**
  * @param {String} title
- * @param {Boolean=} isCompleted
  *
  * @returns {Map}
  */
-export function createTodo(title, isCompleted = false) {
+export function createTodo(title) {
     return Map({
         cid: generateId(),
         title: title,
-        isCompleted: isCompleted
+        isCompleted: false,
+        isCurrent: false
     });
 }

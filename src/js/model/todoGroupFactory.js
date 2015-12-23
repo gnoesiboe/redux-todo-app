@@ -1,6 +1,5 @@
 import { Map, List } from 'immutable';
 import { generateId } from './../utility/idGenerator';
-import { createTodo } from './todoFactory';
 
 /**
  * @param {String} title

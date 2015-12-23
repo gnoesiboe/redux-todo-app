@@ -117,7 +117,9 @@ class TodoComponent extends React.Component {
      * @private
      */
     _renderViewMode() {
-        var className = 'todo-component' + (this.props.isCompleted ? ' todo-component--is-completed' : '');
+        var className = 'todo-component' +
+            (this.props.isCompleted ? ' todo-component--is-completed' : '') +
+            (this.props.isCurrent ? ' todo-component--is-current' : '');
 
         return (
             <div className={className}>
@@ -220,9 +222,15 @@ class TodoComponent extends React.Component {
     }
 }
 
+TodoComponent.defaultProps = {
+    isCompleted: false,
+    isCurrent: false
+};
+
 TodoComponent.propTypes = {
     cid: React.PropTypes.string.isRequired,
-    isCompleted: React.PropTypes.bool.isRequired,
+    isCompleted: React.PropTypes.bool,
+    isCurrent: React.PropTypes.bool,
     title: React.PropTypes.string.isRequired,
     deadline: React.PropTypes.string,
     onTodoCompletedStatusChange: React.PropTypes.func.isRequired,

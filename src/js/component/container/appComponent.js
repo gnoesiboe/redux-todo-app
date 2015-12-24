@@ -18,6 +18,13 @@ class AppComponent extends React.Component {
     constructor(props) {
         super(props);
 
+        this._createKeyboardEventCallbacksPointingToThis();
+    }
+
+    /**
+     * @private
+     */
+    _createKeyboardEventCallbacksPointingToThis() {
         this._onUndoKeybindingPressedCallback = this._onUndoKeybindingPressed.bind(this);
         this._onRedoKeybindingPressedCallback = this._onRedoKeybindingPressed.bind(this);
         this._onSelectNextGroupCallback = this._onSelectNextGroupPressed.bind(this);
@@ -26,6 +33,7 @@ class AppComponent extends React.Component {
         this._onSelectPreviousTodoCallback = this._onSelectPreviousTodoBindingPressed.bind(this);
         this._onEditCurrentTodoKeybindingPressedCallback = this._onEditCurrentTodoKeybindingPressed.bind(this);
         this._onToggleTodoIsCompletedStatusKeybindingPressedCallback = this._onToggleTodoIsCompletedStatusKeybindingPressed.bind(this)
+        this._onDeleteCurrentTodoKeybindingPressedCallback = this._onDeleteCurrentTodoKeybindingPressed.bind(this);
     }
 
     /**
@@ -62,6 +70,7 @@ class AppComponent extends React.Component {
         // actions to current item
         mousetrap.bind('e', this._onEditCurrentTodoKeybindingPressedCallback);
         mousetrap.bind('space', this._onToggleTodoIsCompletedStatusKeybindingPressedCallback);
+        mousetrap.bind('x', this._onDeleteCurrentTodoKeybindingPressedCallback);
     }
 
     /**
@@ -83,7 +92,25 @@ class AppComponent extends React.Component {
 
         // actions to current item
         mousetrap.unbind('e', this._onEditCurrentTodoKeybindingPressedCallback);
-        mousetrap.bind('unspace', this._onToggleTodoIsCompletedStatusKeybindingPressedCallback);
+        mousetrap.unbind('space', this._onToggleTodoIsCompletedStatusKeybindingPressedCallback);
+        mousetrap.unbind('x', this._onDeleteCurrentTodoKeybindingPressedCallback);
+    }
+
+    /**
+     * @param {Object} event
+     *
+     * @private
+     */
+    _onDeleteCurrentTodoKeybindingPressed(event) {
+
+        // prevent browser from typing in first form field of edit form
+        event.preventDefault();
+
+        if (confirm('Are you sure?!')) {
+            this.props.dispatch(
+                actionFactory.createDeleteCurrentTodoAction()
+            );
+        }
     }
 
     /**

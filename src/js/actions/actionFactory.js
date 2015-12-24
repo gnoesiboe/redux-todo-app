@@ -252,3 +252,12 @@ export function createSwitchToTodoEditModeAction(cid, groupCid) {
         groupCid: groupCid
     };
 }
+
+/**
+ * @returns {Object}
+ */
+export function createDeleteCurrentTodoAction() {
+    return {
+        type: actionTypes.DELETE_CURRENT_TODO
+    };
+}

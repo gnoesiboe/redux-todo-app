@@ -337,6 +337,20 @@ class AppComponent extends React.Component {
     }
 
     /**
+     * @param {String} cid
+     * @param {String} groupCid
+     *
+     * @private
+     */
+    _onSwitchTodoDisplayMode(cid, groupCid) {
+        this.props.dispatch(
+            actionFactory.createSwitchToTodoEditModeAction(cid, groupCid)
+        );
+
+        resizeToContent();
+    }
+
+    /**
      * @returns {XML}
      */
     render() {
@@ -352,6 +366,7 @@ class AppComponent extends React.Component {
                                         onTodoGroupMoveForward={this._onTodoGroupMoveForward.bind(this)}
                                         onTodoGroupMoveBackwards={this._onTodoGroupMoveBackwards.bind(this)}
                                         onTodoSortUpdate={this._onTodoSortUpdate.bind(this)}
+                                        onSwitchTodoDisplayMode={this._onSwitchTodoDisplayMode.bind(this)}
                                         onGroupStarredStatusChange={this._onGroupStarredStatusChange.bind(this)}
                                         onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
             </div>

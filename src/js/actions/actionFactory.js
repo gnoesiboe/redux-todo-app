@@ -228,3 +228,17 @@ export function createEditCurrentTodoAction() {
         type: actionTypes.EDIT_CURRENT_TODO
     }
 }
+
+/**
+ * @param {String} cid
+ * @param {String} groupCid
+ *
+ * @returns {Object}
+ */
+export function createSwitchToTodoEditModeAction(cid, groupCid) {
+    return {
+        type: actionTypes.SWITCH_TO_TODO_EDIT_MODE,
+        cid: cid,
+        groupCid: groupCid
+    };
+}

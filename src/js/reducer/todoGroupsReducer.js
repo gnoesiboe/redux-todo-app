@@ -123,6 +123,9 @@ var _handleEditTodoAction = function (currentTodoGroupCollection, action) {
     todo.set('title', action.newTitle);
     todo.set('deadline', action.newDeadline);
 
+    // after editing turn of editing mode
+    todo.set('isBeingEdited', false);
+
     return newTodoGroupCollection;
 };
 
@@ -439,6 +442,35 @@ var _handleSelectPreviousTodoAction = function (currentTodoGroupCollection) {
 };
 
 /**
+ *
+ * @param {TodoGroupCollection} currentTodoGroupCollection
+ * @param {Object} action
+ *
+ * @returns {TodoGroupCollection}
+ *
+ * @private
+ */
+var _handleSwitchToTodoEditModeAction = function (currentTodoGroupCollection, action) {
+    var newTodoGroupCollection = currentTodoGroupCollection.clone();
+
+    console.log(action);
+
+    var todoGroup = newTodoGroupCollection.getOneWithCid(action.groupCid);
+    if (!todoGroup) {
+        return currentTodoGroupCollection;
+    }
+
+    var todo = todoGroup.get('todos').getOneWithCid(action.cid);
+    if (!todo) {
+        return currentTodoGroupCollection;
+    }
+
+    todo.set('isBeingEdited', true);
+
+    return newTodoGroupCollection;
+};
+
+/**
  * @param {TodoGroupCollection} currentTodoGroupCollection
  * @param {TodoGroupCollection} newTodoGroupCollection
  *
@@ -538,6 +570,9 @@ export default function todoGroupsReducer(currentState = _defaultState, action) 
 
         case actionTypes.SELECT_PREVIOUS_TODO:
             return _handleSelectPreviousTodoAction(currentState);
+
+        case actionTypes.SWITCH_TO_TODO_EDIT_MODE:
+            return _handleSwitchToTodoEditModeAction(currentState, action);
 
         default:
             return currentState;

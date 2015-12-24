@@ -16,7 +16,8 @@ class Todo extends Model {
             title: title,
             deadline: null,
             isCompleted: false,
-            isCurrent: false
+            isCurrent: false,
+            isBeingEdited: false
         });
     }
 
@@ -29,6 +30,7 @@ class Todo extends Model {
         out.set('isCompleted', !!this.get('isCompleted', false));
         out.set('isCurrent', !!this.get('isCurrent', false));
         out.set('deadline', this.get('deadline'));
+        out.set('isBeingEdited', !!this.get('isBeingEdited'));
 
         return out;
     }
@@ -61,7 +63,8 @@ class Todo extends Model {
 
         out.set('isCompleted', nativeInput.isCompleted);
         out.set('isCurrent', nativeInput.isCurrent);
-        out.set('deadline', nativeInput.deadline)
+        out.set('deadline', nativeInput.deadline);
+        out.set('isBeingEdited', nativeInput.isBeingEdited);
 
         return out;
     }

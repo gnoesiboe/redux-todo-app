@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoComponent from './TodoComponent';
+import EditTodoComponent from './EditTodoComponent';
 import SortableListComponent from './SortableListComponent';
 
 /**
@@ -16,22 +17,45 @@ class TodoListComponent extends React.Component {
         return this.props.todos.map(function (todo, index) {
 
             // As, when todo's are re-ordered, the keys are named differently (their index changes), react will
-            // re-render them. This forces a re-render.
+            // re-render them accordingly. If the index is not part of the key, this list will contain the same
+            // items but in another order, so react won't re-render (and thus not show the change) :(
             let key = `${index}_${this.props.groupCid}_${todo.get('cid')}`;
 
             return (
                 <li key={key} className="js-todo-list-component-list-item">
-                    <TodoComponent cid={todo.get('cid')}
-                                   title={todo.get('title')}
-                                   deadline={todo.get('deadline')}
-                                   onTodoDelete={this.props.onTodoDelete}
-                                   onTodoEdit={this.props.onTodoEdit}
-                                   onTodoCompletedStatusChange={this.props.onTodoCompletedStatusChange}
-                                   isCompleted={todo.get('isCompleted')}
-                                   isCurrent={todo.get('isCurrent')} />
+                    {this._defineTodoDisplayComponent(todo)}
                 </li>
             );
         }.bind(this));
+    }
+
+    /**
+     * @param {Todo} todo
+     *
+     * @returns {XML}
+     *
+     * @private
+     */
+    _defineTodoDisplayComponent(todo) {
+        if (todo.get('isBeingEdited', false)) {
+            return (
+                <EditTodoComponent cid={todo.get('cid')}
+                                   title={todo.get('title')}
+                                   deadline={todo.get('deadline')}
+                                   onTodoEdit={this.props.onTodoEdit} />
+            );
+        } else {
+            return (
+                <TodoComponent cid={todo.get('cid')}
+                               title={todo.get('title')}
+                               deadline={todo.get('deadline')}
+                               onTodoDelete={this.props.onTodoDelete}
+                               onSwitchTodoDisplayMode={this.props.onSwitchTodoDisplayMode}
+                               onTodoCompletedStatusChange={this.props.onTodoCompletedStatusChange}
+                               isCompleted={todo.get('isCompleted')}
+                               isCurrent={todo.get('isCurrent')} />
+            );
+        }
     }
 
     /**
@@ -71,6 +95,7 @@ TodoListComponent.propTypes = {
     todos: React.PropTypes.object.isRequired,
     onTodoDelete: React.PropTypes.func.isRequired,
     onTodoEdit: React.PropTypes.func.isRequired,
+    onSwitchTodoDisplayMode: React.PropTypes.func.isRequired,
     onTodoSortUpdate: React.PropTypes.func.isRequired
 };
 

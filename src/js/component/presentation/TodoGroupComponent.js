@@ -82,6 +82,15 @@ class TodoGroupComponent extends React.Component {
     }
 
     /**
+     * @param {String} todoCid
+     *
+     * @private
+     */
+    _onSwitchTodoDisplayMode(todoCid) {
+        this.props.onSwitchTodoDisplayMode(todoCid, this.props.cid);
+    }
+
+    /**
      * @returns {XML}
      */
     render() {
@@ -99,6 +108,7 @@ class TodoGroupComponent extends React.Component {
                                        groupCid={this.props.cid}
                                        onTodoDelete={this._onTodoDelete.bind(this)}
                                        onTodoEdit={this._onTodoEdit.bind(this)}
+                                       onSwitchTodoDisplayMode={this._onSwitchTodoDisplayMode.bind(this)}
                                        onTodoSortUpdate={this.props.onTodoSortUpdate}
                                        onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
                 </div>
@@ -141,7 +151,8 @@ TodoGroupComponent.propTypes = {
     onGroupStarredStatusChange: React.PropTypes.func.isRequired,
     allowMoveBackwards: React.PropTypes.bool.isRequired,
     allowMoveForward: React.PropTypes.bool.isRequired,
-    onTodoSortUpdate: React.PropTypes.func.isRequired
+    onTodoSortUpdate: React.PropTypes.func.isRequired,
+    onSwitchTodoDisplayMode: React.PropTypes.func.isRequired
 };
 
 export default TodoGroupComponent;

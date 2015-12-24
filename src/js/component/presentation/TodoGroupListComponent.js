@@ -26,6 +26,7 @@ class TodoGroupListComponent extends React.Component {
                                     onTodoDelete={this.props.onTodoDelete}
                                     onTodoGroupTitleEdit={this.props.onTodoGroupTitleEdit}
                                     onTodoGroupDelete={this.props.onTodoGroupDelete}
+                                    onSwitchTodoDisplayMode={this.props.onSwitchTodoDisplayMode}
                                     todos={todoGroup.get('todos')}
                                     onTodoGroupMoveBackwards={this.props.onTodoGroupMoveBackwards}
                                     onTodoGroupMoveForward={this.props.onTodoGroupMoveForward}
@@ -62,7 +63,8 @@ TodoGroupListComponent.propTypes = {
     onTodoGroupMoveBackwards: React.PropTypes.func.isRequired,
     onTodoGroupMoveForward: React.PropTypes.func.isRequired,
     onGroupStarredStatusChange: React.PropTypes.func.isRequired,
-    onTodoSortUpdate: React.PropTypes.func.isRequired
+    onTodoSortUpdate: React.PropTypes.func.isRequired,
+    onSwitchTodoDisplayMode: React.PropTypes.func.isRequired,
 };
 
 export default TodoGroupListComponent;

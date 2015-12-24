@@ -2,6 +2,7 @@ import * as actionTypes from './../actions/actionTypes';
 import { createTodoGroup } from './../model/todoGroupFactory';
 import { createTodo } from './../model/todoFactory';
 import TodoGroupCollection from './../collection/todoGroupCollection';
+import deepFreeze from 'deep-freeze-strict';
 
 /**
  * @type {TodoGroupCollection}
@@ -599,6 +600,9 @@ var _selectFirstTodoInGroup = function (todoGroup) {
  * @returns {TodoGroupCollection}
  */
 export default function todoGroupsReducer(currentState = _defaultState, action) {
+    deepFreeze(currentState);
+    deepFreeze(action);
+
     switch (action.type) {
         case actionTypes.ADD_GROUP:
             return _handleAddGroupAction(currentState, action);

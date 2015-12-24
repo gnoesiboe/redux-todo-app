@@ -13,31 +13,28 @@ class TodoGroupListComponent extends React.Component {
      * @private
      */
     _renderTodoGroupComponents() {
-        return this.props.todoGroups.map(
-            function (todoGroup, index) {
-                return (
-                    <TodoGroupComponent key={todoGroup.get('cid')}
-                                        cid={todoGroup.get('cid')}
-                                        isStarred={todoGroup.get('isStarred')}
-                                        isCurrent={todoGroup.get('isCurrent')}
-                                        title={todoGroup.get('title')}
-                                        onTodoCompletedStatusChange={this.props.onTodoCompletedStatusChange}
-                                        onAddTodo={this.props.onAddTodo}
-                                        onTodoEdit={this.props.onTodoEdit}
-                                        onTodoDelete={this.props.onTodoDelete}
-                                        onTodoGroupTitleEdit={this.props.onTodoGroupTitleEdit}
-                                        onTodoGroupDelete={this.props.onTodoGroupDelete}
-                                        todos={todoGroup.get('todos')}
-                                        onTodoGroupMoveBackwards={this.props.onTodoGroupMoveBackwards}
-                                        onTodoGroupMoveForward={this.props.onTodoGroupMoveForward}
-                                        allowMoveBackwards={index !== 0}
-                                        onTodoSortUpdate={this.props.onTodoSortUpdate}
-                                        onGroupStarredStatusChange={this.props.onGroupStarredStatusChange}
-                                        allowMoveForward={index !== (this.props.todoGroups.count() - 1)}
-                    />
-                )
-            }.bind(this)
-        );
+        return this.props.todoGroups.map(function (todoGroup, index) {
+            return (
+                <TodoGroupComponent key={todoGroup.get('cid')}
+                                    cid={todoGroup.get('cid')}
+                                    isStarred={todoGroup.get('isStarred')}
+                                    isCurrent={todoGroup.get('isCurrent')}
+                                    title={todoGroup.get('title')}
+                                    onTodoCompletedStatusChange={this.props.onTodoCompletedStatusChange}
+                                    onAddTodo={this.props.onAddTodo}
+                                    onTodoEdit={this.props.onTodoEdit}
+                                    onTodoDelete={this.props.onTodoDelete}
+                                    onTodoGroupTitleEdit={this.props.onTodoGroupTitleEdit}
+                                    onTodoGroupDelete={this.props.onTodoGroupDelete}
+                                    todos={todoGroup.get('todos')}
+                                    onTodoGroupMoveBackwards={this.props.onTodoGroupMoveBackwards}
+                                    onTodoGroupMoveForward={this.props.onTodoGroupMoveForward}
+                                    allowMoveBackwards={index !== 0}
+                                    onTodoSortUpdate={this.props.onTodoSortUpdate}
+                                    onGroupStarredStatusChange={this.props.onGroupStarredStatusChange}
+                                    allowMoveForward={index !== (this.props.todoGroups.count() - 1)} />
+            );
+        }.bind(this));
     }
 
     /**

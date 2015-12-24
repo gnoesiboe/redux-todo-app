@@ -1,51 +1,26 @@
 import store from 'store';
-import Immutable from 'immutable';
 import * as stateNamespaces from './../state/stateNamespace';
-
-/** @var string */
-const NAMESPACE = 'state';
+import { createTodoGroupCollectionFromStorageInput } from './../model/todoGroupFactory';
 
 /**
- * Takes store state, makes it mutable again (makes it a plain javascript object) and
- * stores it in local storage.
- *
  * @param {List} state
  */
 export function persist(state) {
-    store.set(NAMESPACE, state);
+    Object.keys(stateNamespaces).map(function (key) {
+        var stateValue = state[stateNamespaces[key]].present,
+            dataToStore = typeof stateValue.toNative !== 'undefined' ? stateValue.toNative() : stateValue;
+
+        store.set(stateNamespaces[key], dataToStore);
+    });
 }
 
 /**
- * Get store state from local storage and makes it Immutable again + apply
- * undoable functionality.
- *
  * @return {Object|null}
  */
 export function getPersistedState() {
-    var fromStorage = store.get(NAMESPACE, null);
-
-    if (fromStorage === null) {
-        return null;
-    }
-
-    var out = {},
-        undoableStates = ['future', 'history', 'past', 'present'];
-
-    for (let key in stateNamespaces) {
-        if (stateNamespaces.hasOwnProperty(key)) {
-            let stateNamespace = stateNamespaces[key];
-
-            for (let i = 0, l = undoableStates.length; i < l; i++) {
-                let undableState = undoableStates[i];
-
-                out[stateNamespace] = {};
-
-                out[stateNamespace][undableState] = Immutable.fromJS(
-                    fromStorage[stateNamespace][undableState]
-                );
-            }
+    return {
+        [stateNamespaces.TODO_GROUPS]: {
+            present: createTodoGroupCollectionFromStorageInput(store.get(stateNamespaces.TODO_GROUPS, []))
         }
-    }
-
-    return out;
+    };
 }

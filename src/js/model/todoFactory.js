@@ -1,16 +1,14 @@
 import { generateId } from './../utility/idGenerator';
-import { Map } from 'immutable';
+import Todo from './todo';
 
 /**
  * @param {String} title
  *
- * @returns {Map}
+ * @returns {Todo}
  */
 export function createTodo(title) {
-    return Map({
-        cid: generateId(),
-        title: title,
-        isCompleted: false,
-        isCurrent: false
-    });
+    return new Todo(
+        generateId(),
+        title
+    );
 }

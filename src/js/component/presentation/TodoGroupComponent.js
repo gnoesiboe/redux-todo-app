@@ -105,7 +105,7 @@ class TodoGroupComponent extends React.Component {
                 <div className="todo-group-component-footer">
                     <AddTodoComponent onAddTodo={this._onAddTodo.bind(this)}>
                         <TodoGroupActionsComponent cid={this.props.cid}
-                                                   isStarred={!!this.props.isStarred}
+                                                   isStarred={this.props.isStarred}
                                                    onTodoGroupDelete={this.props.onTodoGroupDelete}
                                                    onTodoGroupMoveBackwards={this.props.onTodoGroupMoveBackwards}
                                                    allowMoveBackwards={this.props.allowMoveBackwards}

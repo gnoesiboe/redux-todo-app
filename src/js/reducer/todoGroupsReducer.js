@@ -80,6 +80,31 @@ var _handleChangeTodoIsCompletedStatus = function (currentTodoGroupCollection, a
 
 /**
  * @param {TodoGroupCollection} currentTodoGroupCollection
+ *
+ * @returns {TodoGroupCollection}
+ *
+ * @private
+ */
+var _handleToggleCurrentTodoIsCompletedStatus = function (currentTodoGroupCollection) {
+    var newTodoGroupCollection = currentTodoGroupCollection.clone();
+
+    var currentTodoGroup = newTodoGroupCollection.getCurrent();
+    if (!currentTodoGroup) {
+        return currentTodoGroupCollection;
+    }
+
+    var currentTodo = currentTodoGroup.get('todos').getCurrent();
+    if (!currentTodo) {
+        return currentTodoGroupCollection;
+    }
+
+    currentTodo.toggleIsCompleted();
+
+    return newTodoGroupCollection;
+};
+
+/**
+ * @param {TodoGroupCollection} currentTodoGroupCollection
  * @param {Object} action
  *
  * @returns {TodoGroupCollection}
@@ -555,6 +580,9 @@ export default function todoGroupsReducer(currentState = _defaultState, action) 
 
         case actionTypes.CHANGE_TODO_IS_COMPLETED_STATUS:
             return _handleChangeTodoIsCompletedStatus(currentState, action);
+
+        case actionTypes.TOGGLE_CURRENT_TODO_IS_COMPLETED_STATUS:
+            return _handleToggleCurrentTodoIsCompletedStatus(currentState);
 
         case actionTypes.ADD_TODO:
             return _handleAddTodoAction(currentState, action);

@@ -43,6 +43,15 @@ class Todo extends Model {
     }
 
     /**
+     * @returns {Todo}
+     */
+    toggleIsCompleted() {
+        this.set('isCompleted', !this.get('isCompleted', false));
+
+        return this;
+    }
+
+    /**
      * @param {Object} nativeInput
      *
      * @return {Todo}

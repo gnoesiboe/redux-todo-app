@@ -113,7 +113,9 @@ class TodoGroupComponent extends React.Component {
                                        onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
                 </div>
                 <div className="todo-group-component-footer">
-                    <AddTodoComponent onAddTodo={this._onAddTodo.bind(this)}>
+                    <AddTodoComponent onAddTodo={this._onAddTodo.bind(this)}
+                                      allowAddWithKeybinding={this.props.isCurrent}>
+
                         <TodoGroupActionsComponent cid={this.props.cid}
                                                    isStarred={this.props.isStarred}
                                                    onTodoGroupDelete={this.props.onTodoGroupDelete}

@@ -4,7 +4,9 @@ import * as stateNamespace from './state/stateNamespace';
 import undoable from 'redux-undo';
 
 const reducers = redux.combineReducers({
-    [stateNamespace.TODO_GROUPS]: undoable(todoGroupsReducer)
+    [stateNamespace.TODO_GROUPS]: undoable(todoGroupsReducer, {
+        limit: 10
+    })
 });
 
 export default reducers;

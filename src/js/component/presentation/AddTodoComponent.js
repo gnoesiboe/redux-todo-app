@@ -1,5 +1,6 @@
 import React from 'react';
 import mousetrap from 'mousetrap';
+import mousetrapGlobal from 'mousetrap/plugins/global-bind/mousetrap-global-bind';
 import ReactDOM from 'react-dom';
 
 /**
@@ -16,6 +17,7 @@ class AddTodoComponent extends React.Component {
         this.state = this._getResetState();
 
         this._onAddKeybindingPressedCallback = this._onAddKeybindingPressed.bind(this);
+        this._onEscapeKeybindingPressedCallback = this._onEscapeKeybindingPressed.bind(this);
     }
 
     /**
@@ -49,18 +51,27 @@ class AddTodoComponent extends React.Component {
      * @private
      */
     _registerAddKeybindingEventIfNeeded() {
-        console.log('register');
-
         mousetrap.bind('a', this._onAddKeybindingPressedCallback);
+        mousetrap.bindGlobal('esc', this._onEscapeKeybindingPressedCallback);
     }
 
     /**
      * @private
      */
     _unregisterAddKeybindingEventIfNeeded() {
-        console.log('unregister');
-
         mousetrap.unbind('a', this._onAddKeybindingPressedCallback);
+        mousetrap.unbind('esc', this._onEscapeKeybindingPressedCallback);
+    }
+
+    /**
+     * @param {Object} event
+     *
+     * @private
+     */
+    _onEscapeKeybindingPressed(event) {
+        event.preventDefault();
+
+        this._blurTitleField();
     }
 
     /**
@@ -81,6 +92,13 @@ class AddTodoComponent extends React.Component {
      */
     _focusTitleField() {
         ReactDOM.findDOMNode(this.refs.title).focus();
+    }
+
+    /**
+     * @private
+     */
+    _blurTitleField() {
+        ReactDOM.findDOMNode(this.refs.title).blur();
     }
 
     /**

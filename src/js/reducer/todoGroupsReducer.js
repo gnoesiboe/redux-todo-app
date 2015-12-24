@@ -453,8 +453,6 @@ var _handleSelectPreviousTodoAction = function (currentTodoGroupCollection) {
 var _handleSwitchToTodoEditModeAction = function (currentTodoGroupCollection, action) {
     var newTodoGroupCollection = currentTodoGroupCollection.clone();
 
-    console.log(action);
-
     var todoGroup = newTodoGroupCollection.getOneWithCid(action.groupCid);
     if (!todoGroup) {
         return currentTodoGroupCollection;
@@ -466,6 +464,32 @@ var _handleSwitchToTodoEditModeAction = function (currentTodoGroupCollection, ac
     }
 
     todo.set('isBeingEdited', true);
+
+    return newTodoGroupCollection;
+};
+
+/**
+ * @param {TodoGroupCollection} currentTodoGroupCollection
+ * @param {Object} action
+ *
+ * @return {TodoGroupCollection}
+ *
+ * @private
+ */
+var _handleEditCurrentTodoAction = function (currentTodoGroupCollection, action) {
+    var newTodoGroupCollection = currentTodoGroupCollection.clone();
+
+    var currentTodoGroup = newTodoGroupCollection.getCurrent();
+    if (!currentTodoGroup) {
+        return currentTodoGroupCollection;
+    }
+
+    var currentTodo = currentTodoGroup.get('todos').getCurrent();
+    if (!currentTodo) {
+        return currentTodoGroupCollection;
+    }
+
+    currentTodo.set('isBeingEdited', true);
 
     return newTodoGroupCollection;
 };
@@ -573,6 +597,9 @@ export default function todoGroupsReducer(currentState = _defaultState, action) 
 
         case actionTypes.SWITCH_TO_TODO_EDIT_MODE:
             return _handleSwitchToTodoEditModeAction(currentState, action);
+
+        case actionTypes.EDIT_CURRENT_TODO:
+            return _handleEditCurrentTodoAction(currentState);
 
         default:
             return currentState;

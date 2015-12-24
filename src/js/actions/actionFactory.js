@@ -219,3 +219,12 @@ export function createSelectPreviousTodoAction() {
         type: actionTypes.SELECT_PREVIOUS_TODO
     };
 }
+
+/**
+ * @returns {Object}
+ */
+export function createEditCurrentTodoAction() {
+    return {
+        type: actionTypes.EDIT_CURRENT_TODO
+    }
+}

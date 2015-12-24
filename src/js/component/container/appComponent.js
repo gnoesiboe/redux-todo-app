@@ -22,8 +22,9 @@ class AppComponent extends React.Component {
         this._onRedoKeybindingPressedCallback = this._onRedoKeybindingPressed.bind(this);
         this._onSelectNextGroupCallback = this._onSelectNextGroupPressed.bind(this);
         this._onSelectPreviousGroupCallback = this._onSelectPreviousGroupPressed.bind(this);
-        this._onSelectNextTodoCallback = this._onSelectNextTodoBindingPressed.bind(this)
-        this._onSelectPreviousTodoCallback = this._onSelectPreviousTodoBindingPressed.bind(this)
+        this._onSelectNextTodoCallback = this._onSelectNextTodoBindingPressed.bind(this);
+        this._onSelectPreviousTodoCallback = this._onSelectPreviousTodoBindingPressed.bind(this);
+        this._onEditCurrentTodoKeybindingPressed = this._onEditCurrentTodoKeybindingPressed.bind(this);
     }
 
     /**
@@ -44,24 +45,56 @@ class AppComponent extends React.Component {
      * @private
      */
     _registerKeyboardBindings() {
+
+        // undo-redo
         mousetrap.bind('meta+z', this._onUndoKeybindingPressedCallback);
         mousetrap.bind('meta+shift+z', this._onRedoKeybindingPressedCallback);
+
+        // group navigation
         mousetrap.bind('right', this._onSelectNextGroupCallback);
         mousetrap.bind('left', this._onSelectPreviousGroupCallback);
+
+        // todo navigation
         mousetrap.bind('down', this._onSelectNextTodoCallback);
         mousetrap.bind('up', this._onSelectPreviousTodoCallback);
+
+        // actions to current item
+        mousetrap.bind('e', this._onEditCurrentTodoKeybindingPressed);
     }
 
     /**
      * @private
      */
     _unregisterKeyboardBindings() {
+
+        // undo-redo
         mousetrap.unbind('meta+z', this._onUndoKeybindingPressedCallback);
         mousetrap.unbind('meta+shift+z', this._onRedoKeybindingPressedCallback);
+
+        // group navigation
         mousetrap.unbind('right', this._onSelectNextGroupCallback);
         mousetrap.unbind('left', this._onSelectPreviousGroupCallback);
+
+        // todo navigation
         mousetrap.unbind('down', this._onSelectNextTodoCallback);
         mousetrap.unbind('up', this._onSelectPreviousTodoCallback);
+
+        // actions to current item
+        mousetrap.unbind('e', this._onEditCurrentTodoKeybindingPressed);
+    }
+
+    /**
+     * @param {Object} event
+     *
+     * @private
+     */
+    _onEditCurrentTodoKeybindingPressed(event) {
+        // prevent browser from typing in first form field of edit form
+        event.preventDefault();
+
+        this.props.dispatch(
+            actionFactory.createEditCurrentTodoAction()
+        );
     }
 
     /**

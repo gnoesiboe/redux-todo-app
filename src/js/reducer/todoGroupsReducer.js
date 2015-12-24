@@ -1,7 +1,6 @@
 import * as actionTypes from './../actions/actionTypes';
 import { createTodoGroup } from './../model/todoGroupFactory';
 import { createTodo } from './../model/todoFactory';
-import _ from 'lodash';
 import TodoGroupCollection from './../collection/todoGroupCollection';
 
 /**
@@ -413,7 +412,7 @@ var _handleSelectNextTodoAction = function (currentTodoGroupCollection) {
         // deselect current todo
         currentTodo.set('isCurrent', false);
 
-        var newCurrentTodo = todos.getFirstLocatedAfter(currentTodoIndex)
+        var newCurrentTodo = todos.getFirstLocatedAfter(currentTodoIndex);
 
         if (!newCurrentTodo) {
             return newTodoGroupCollection;
@@ -453,7 +452,7 @@ var _handleSelectPreviousTodoAction = function (currentTodoGroupCollection) {
         // deselect current todo
         currentTodo.set('isCurrent', false);
 
-        var newCurrentTodo = todos.getFirstLocatedBefore(currentTodoIndex)
+        var newCurrentTodo = todos.getFirstLocatedBefore(currentTodoIndex);
 
         if (!newCurrentTodo) {
             return newTodoGroupCollection;
@@ -495,13 +494,12 @@ var _handleSwitchToTodoEditModeAction = function (currentTodoGroupCollection, ac
 
 /**
  * @param {TodoGroupCollection} currentTodoGroupCollection
- * @param {Object} action
  *
  * @return {TodoGroupCollection}
  *
  * @private
  */
-var _handleEditCurrentTodoAction = function (currentTodoGroupCollection, action) {
+var _handleEditCurrentTodoAction = function (currentTodoGroupCollection) {
     var newTodoGroupCollection = currentTodoGroupCollection.clone();
 
     var currentTodoGroup = newTodoGroupCollection.getCurrent();

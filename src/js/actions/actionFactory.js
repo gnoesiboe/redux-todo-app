@@ -210,3 +210,12 @@ export function createSelectNextTodoAction() {
         type: actionTypes.SELECT_NEXT_TODO
     };
 }
+
+/**
+ * @returns {Object}
+ */
+export function createSelectPreviousTodoAction() {
+    return {
+        type: actionTypes.SELECT_PREVIOUS_TODO
+    };
+}

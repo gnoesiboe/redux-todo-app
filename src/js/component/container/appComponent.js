@@ -23,6 +23,7 @@ class AppComponent extends React.Component {
         this._onSelectNextGroupCallback = this._onSelectNextGroupPressed.bind(this);
         this._onSelectPreviousGroupCallback = this._onSelectPreviousGroupPressed.bind(this);
         this._onSelectNextTodoCallback = this._onSelectNextTodoBindingPressed.bind(this)
+        this._onSelectPreviousTodoCallback = this._onSelectPreviousTodoBindingPressed.bind(this)
     }
 
     /**
@@ -48,6 +49,7 @@ class AppComponent extends React.Component {
         mousetrap.bind('right', this._onSelectNextGroupCallback);
         mousetrap.bind('left', this._onSelectPreviousGroupCallback);
         mousetrap.bind('down', this._onSelectNextTodoCallback);
+        mousetrap.bind('up', this._onSelectPreviousTodoCallback);
     }
 
     /**
@@ -59,6 +61,22 @@ class AppComponent extends React.Component {
         mousetrap.unbind('right', this._onSelectNextGroupCallback);
         mousetrap.unbind('left', this._onSelectPreviousGroupCallback);
         mousetrap.unbind('down', this._onSelectNextTodoCallback);
+        mousetrap.unbind('up', this._onSelectPreviousTodoCallback);
+    }
+
+    /**
+     * @param {Object} event
+     *
+     * @private
+     */
+    _onSelectPreviousTodoBindingPressed(event) {
+
+        // prevent browser from scrolling up
+        event.preventDefault();
+
+        this.props.dispatch(
+            actionFactory.createSelectPreviousTodoAction()
+        );
     }
 
     /**

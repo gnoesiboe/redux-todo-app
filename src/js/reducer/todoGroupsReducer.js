@@ -600,6 +600,8 @@ var _selectFirstTodoInGroup = function (todoGroup) {
  * @returns {TodoGroupCollection}
  */
 export default function todoGroupsReducer(currentState = _defaultState, action) {
+
+    // ensure that current state and action are not mutated
     deepFreeze(currentState);
     deepFreeze(action);
 

@@ -24,7 +24,8 @@ class AppComponent extends React.Component {
         this._onSelectPreviousGroupCallback = this._onSelectPreviousGroupPressed.bind(this);
         this._onSelectNextTodoCallback = this._onSelectNextTodoBindingPressed.bind(this);
         this._onSelectPreviousTodoCallback = this._onSelectPreviousTodoBindingPressed.bind(this);
-        this._onEditCurrentTodoKeybindingPressed = this._onEditCurrentTodoKeybindingPressed.bind(this);
+        this._onEditCurrentTodoKeybindingPressedCallback = this._onEditCurrentTodoKeybindingPressed.bind(this);
+        this._onToggleTodoIsCompletedStatusKeybindingPressedCallback = this._onToggleTodoIsCompletedStatusKeybindingPressed.bind(this)
     }
 
     /**
@@ -59,7 +60,8 @@ class AppComponent extends React.Component {
         mousetrap.bind('up', this._onSelectPreviousTodoCallback);
 
         // actions to current item
-        mousetrap.bind('e', this._onEditCurrentTodoKeybindingPressed);
+        mousetrap.bind('e', this._onEditCurrentTodoKeybindingPressedCallback);
+        mousetrap.bind('space', this._onToggleTodoIsCompletedStatusKeybindingPressedCallback);
     }
 
     /**
@@ -80,7 +82,23 @@ class AppComponent extends React.Component {
         mousetrap.unbind('up', this._onSelectPreviousTodoCallback);
 
         // actions to current item
-        mousetrap.unbind('e', this._onEditCurrentTodoKeybindingPressed);
+        mousetrap.unbind('e', this._onEditCurrentTodoKeybindingPressedCallback);
+        mousetrap.bind('unspace', this._onToggleTodoIsCompletedStatusKeybindingPressedCallback);
+    }
+
+    /**
+     * @param {Object} event
+     *
+     * @private
+     */
+    _onToggleTodoIsCompletedStatusKeybindingPressed(event) {
+
+        // prevent browser from typing in first form field of edit form
+        event.preventDefault();
+
+        this.props.dispatch(
+            actionFactory.createToggleCurrentTodoIsCompletedStatusAction()
+        );
     }
 
     /**
@@ -89,6 +107,7 @@ class AppComponent extends React.Component {
      * @private
      */
     _onEditCurrentTodoKeybindingPressed(event) {
+
         // prevent browser from typing in first form field of edit form
         event.preventDefault();
 

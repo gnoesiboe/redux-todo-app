@@ -29,6 +29,16 @@ export function createChangeTodoIsCompletedStatusAction(cid, newIsCompleted, gro
 }
 
 /**
+ *
+ * @returns {{type}}
+ */
+export function createToggleCurrentTodoIsCompletedStatusAction() {
+    return {
+        type: actionTypes.TOGGLE_CURRENT_TODO_IS_COMPLETED_STATUS
+    };
+}
+
+/**
  * @param {String} title
  * @param {String} groupCid
  *

@@ -400,6 +400,46 @@ var _handleSelectNextTodoAction = function (currentTodoGroupCollection) {
 
 /**
  * @param {TodoGroupCollection} currentTodoGroupCollection
+ *
+ * @returns {TodoGroupCollection}
+ *
+ * @private
+ */
+var _handleSelectPreviousTodoAction = function (currentTodoGroupCollection) {
+    var newTodoGroupCollection = currentTodoGroupCollection.clone();
+
+    var currentTodoGroup = newTodoGroupCollection.getCurrent(),
+        currentTodoGroupIndex = newTodoGroupCollection.locateCurrent();
+
+    if (currentTodoGroup === null || currentTodoGroupIndex === null) {
+        return _handleSelectionOfFirstTodoGroup(currentTodoGroupCollection, newTodoGroupCollection);
+    }
+
+    var todos = currentTodoGroup.get('todos'),
+        currentTodo = todos.getCurrent(),
+        currentTodoIndex = todos.locateCurrent();
+
+    if (currentTodo === null || currentTodoIndex === null) {
+        _selectFirstTodoInGroup(currentTodoGroup);
+    } else {
+        // deselect current todo
+        currentTodo.set('isCurrent', false);
+
+        var newCurrentTodo = todos.getFirstLocatedBefore(currentTodoIndex)
+
+        if (!newCurrentTodo) {
+            return newTodoGroupCollection;
+        }
+
+        // select new todo
+        newCurrentTodo.set('isCurrent', true);
+    }
+
+    return newTodoGroupCollection;
+};
+
+/**
+ * @param {TodoGroupCollection} currentTodoGroupCollection
  * @param {TodoGroupCollection} newTodoGroupCollection
  *
  * @returns {TodoGroupCollection}
@@ -495,6 +535,9 @@ export default function todoGroupsReducer(currentState = _defaultState, action) 
 
         case actionTypes.SELECT_NEXT_TODO:
             return _handleSelectNextTodoAction(currentState);
+
+        case actionTypes.SELECT_PREVIOUS_TODO:
+            return _handleSelectPreviousTodoAction(currentState);
 
         default:
             return currentState;

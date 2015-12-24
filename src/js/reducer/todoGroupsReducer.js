@@ -125,6 +125,33 @@ var _handleDeleteTodoAction = function (currentTodoGroupCollection, action) {
 
 /**
  * @param {TodoGroupCollection} currentTodoGroupCollection
+ *
+ * @returns {TodoGroupCollection}
+ *
+ * @private
+ */
+var _handleDeleteCurrentTodoAction = function (currentTodoGroupCollection) {
+    var newTodoGroupCollection = currentTodoGroupCollection.clone();
+
+    var currentTodoGroup = newTodoGroupCollection.getCurrent();
+    if (!currentTodoGroup) {
+        return currentTodoGroupCollection;
+    }
+
+    var todos = currentTodoGroup.get('todos'),
+        currentTodoIndex = todos.locateCurrent();
+
+    if (currentTodoIndex === null) {
+        return currentTodoGroupCollection;
+    }
+
+    todos.remove(currentTodoIndex);
+
+    return newTodoGroupCollection;
+};
+
+/**
+ * @param {TodoGroupCollection} currentTodoGroupCollection
  * @param {Object} action
  *
  * @returns {TodoGroupCollection}
@@ -587,6 +614,9 @@ export default function todoGroupsReducer(currentState = _defaultState, action) 
 
         case actionTypes.DELETE_TODO:
             return _handleDeleteTodoAction(currentState, action);
+
+        case actionTypes.DELETE_CURRENT_TODO:
+            return _handleDeleteCurrentTodoAction(currentState);
 
         case actionTypes.EDIT_TODO:
             return _handleEditTodoAction(currentState, action);

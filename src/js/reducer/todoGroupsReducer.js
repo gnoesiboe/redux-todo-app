@@ -42,7 +42,7 @@ var _handleAddTodoAction = function (currentTodoGroupCollection, action) {
 
     var todoGroup = newTodoGroupCollection.getOneWithCid(action.groupCid);
     if (!todoGroup) {
-        return currentTodoGroupCollection
+        throw new Error('Todo group to place todo in, not found');
     }
 
     todoGroup.addTodo(
@@ -65,12 +65,12 @@ var _handleChangeTodoIsCompletedStatus = function (currentTodoGroupCollection, a
 
     var todoGroup = newTodoGroupCollection.getOneWithCid(action.groupCid);
     if (!todoGroup) {
-        return currentTodoGroupCollection
+        throw new Error('Could not find todo group');
     }
 
     var todo = todoGroup.get('todos').getOneWithCid(action.cid);
     if (!todo) {
-        return currentTodoGroupCollection;
+        throw new Error('Could not find todo in supplied todo group');
     }
 
     todo.set('isCompleted', action.newIsCompleted);
@@ -90,12 +90,12 @@ var _handleToggleCurrentTodoIsCompletedStatus = function (currentTodoGroupCollec
 
     var currentTodoGroup = newTodoGroupCollection.getCurrent();
     if (!currentTodoGroup) {
-        return currentTodoGroupCollection;
+        throw new Error('No currently selected todo group');
     }
 
     var currentTodo = currentTodoGroup.get('todos').getCurrent();
     if (!currentTodo) {
-        return currentTodoGroupCollection;
+        throw new Error('No currently selected todo found in current todo group');
     }
 
     currentTodo.toggleIsCompleted();
@@ -116,10 +116,15 @@ var _handleDeleteTodoAction = function (currentTodoGroupCollection, action) {
 
     var todoGroup = newTodoGroupCollection.getOneWithCid(action.groupCid);
     if (!todoGroup) {
-        return currentTodoGroupCollection
+        throw new Error('Todo group not found to delete todo from');
     }
 
-    todoGroup.get('todos').removeOneWithCid(action.cid);
+    var todoGroupTodos = todoGroup.get('todos');
+    if (!todoGroupTodos.hasOneWithCid(action.cid)) {
+        throw new Error('Todo not found in todo group');
+    }
+
+    todoGroupTodos.removeOneWithCid(action.cid);
 
     return newTodoGroupCollection;
 };
@@ -136,14 +141,14 @@ var _handleDeleteCurrentTodoAction = function (currentTodoGroupCollection) {
 
     var currentTodoGroup = newTodoGroupCollection.getCurrent();
     if (!currentTodoGroup) {
-        return currentTodoGroupCollection;
+        throw new Error('No current todo group found');
     }
 
     var todos = currentTodoGroup.get('todos'),
         currentTodoIndex = todos.locateCurrent();
 
     if (currentTodoIndex === null) {
-        return currentTodoGroupCollection;
+        throw new Error('No current todo found in current todo group');
     }
 
     todos.remove(currentTodoIndex);
@@ -164,12 +169,12 @@ var _handleEditTodoAction = function (currentTodoGroupCollection, action) {
 
     var todoGroup = newTodoGroupCollection.getOneWithCid(action.groupCid);
     if (!todoGroup) {
-        return currentTodoGroupCollection
+        throw new Error('Could not find todo group');
     }
 
     var todo = todoGroup.get('todos').getOneWithCid(action.cid);
     if (!todo) {
-        return currentTodoGroupCollection;
+        throw new Error('Could not find todo in todo group');
     }
 
     todo.set('title', action.newTitle);
@@ -194,7 +199,7 @@ var _handleEditTodoGroupTitleAction = function (currentTodoGroupCollection, acti
 
     var todoGroup = newTodoGroupCollection.getOneWithCid(action.cid);
     if (!todoGroup) {
-        return currentTodoGroupCollection
+        throw new Error('Todo group not found');
     }
 
     todoGroup.set('title', action.newTitle);
@@ -213,6 +218,10 @@ var _handleEditTodoGroupTitleAction = function (currentTodoGroupCollection, acti
 var _handleDeleteTodoGroupAction = function (currentTodoGroupCollection, action) {
     var newTodoGroupCollection = currentTodoGroupCollection.clone();
 
+    if (!newTodoGroupCollection.hasOneWithCid(action.cid)) {
+        throw new Error('Todo group not found');
+    }
+
     newTodoGroupCollection.removeOneWithCid(action.cid);
 
     return newTodoGroupCollection;
@@ -229,6 +238,10 @@ var _handleDeleteTodoGroupAction = function (currentTodoGroupCollection, action)
 var _handleMoveTodoGroupForwardAction = function (currentTodoGroupCollection, action) {
     var newTodoGroupCollection = currentTodoGroupCollection.clone();
 
+    if (!newTodoGroupCollection.hasOneWithCid(action.cid)) {
+        throw new Error('Todo group not found');
+    }
+
     newTodoGroupCollection.moveForwardWithCid(action.cid);
 
     return newTodoGroupCollection;
@@ -244,6 +257,10 @@ var _handleMoveTodoGroupForwardAction = function (currentTodoGroupCollection, ac
  */
 var _handleMoveTodoGroupBackwardsAction = function (currentTodoGroupCollection, action) {
     var newTodoGroupCollection = currentTodoGroupCollection.clone();
+
+    if (!newTodoGroupCollection.hasOneWithCid(action.cid)) {
+        throw new Error('Todo group not found');
+    }
 
     newTodoGroupCollection.moveBackwardsWithCid(action.cid);
 
@@ -263,7 +280,7 @@ var _handleUpdateGroupStarredStatus = function (currentTodoGroupCollection, acti
 
     var todoGroup = newTodoGroupCollection.getOneWithCid(action.cid);
     if (!todoGroup) {
-        return currentTodoGroupCollection
+        throw new Error('Todo group not found');
     }
 
     todoGroup.set('isStarred', action.newStatus);
@@ -301,12 +318,12 @@ var _handleTodoSortUpdateWithDifferentTodoGroups = function (currentTodoGroupCol
     // remove from current todo group
     var fromTodoGroup = newTodoGroupCollection.getOneWithCid(action.fromGroupCid);
     if (!fromTodoGroup) {
-        return currentTodoGroupCollection
+        throw new Error('Previous todo group not found');
     }
 
     var todo = fromTodoGroup.get('todos').get(action.fromIndex);
     if (!todo) {
-        return currentTodoGroupCollection;
+        throw new Error('Todo not found in previous todo group');
     }
 
     fromTodoGroup.get('todos').remove(action.fromIndex);
@@ -314,7 +331,7 @@ var _handleTodoSortUpdateWithDifferentTodoGroups = function (currentTodoGroupCol
     // add to new other todo group
     var toTodoGroup = newTodoGroupCollection.getOneWithCid(action.toGroupCid);
     if (!toTodoGroup) {
-        return currentTodoGroupCollection;
+        throw new Error('Target todo group not found');
     }
 
     toTodoGroup.get('todos').add(todo, action.toIndex);
@@ -339,7 +356,7 @@ var _handleTodoSortUpdateWithinSameList = function (currentTodoGroupCollection, 
 
     var todoGroup = newTodoGroupCollection.getOneWithCid(action.fromGroupCid);
     if (!todoGroup) {
-        return currentTodoGroupCollection
+        throw new Error('Todo group not found');
     }
 
     todoGroup.get('todos').moveItem(action.fromIndex, action.toIndex);
@@ -371,7 +388,7 @@ var _handleSelectNextTodoGroupAction = function (currentTodoGroupCollection) {
     // select new todo group
     var newCurrentTodoGroup = newTodoGroupCollection.getFirstLocatedAfter(currentTodoGroupIndex);
     if (!newCurrentTodoGroup) {
-        return currentTodoGroupCollection;
+        throw new Error('New current todo group not found');
     }
 
     newCurrentTodoGroup.set('isCurrent', true);
@@ -404,7 +421,7 @@ var _handleSelectPreviousTodoGroupAction = function (currentTodoGroupCollection)
     // select new todo group
     var newCurrentTodoGroup = newTodoGroupCollection.getFirstLocatedBefore(currentTodoGroupIndex);
     if (!newCurrentTodoGroup) {
-        return currentTodoGroupCollection;
+        throw new Error('New current todo group not found');
     }
 
     newCurrentTodoGroup.set('isCurrent', true);
@@ -441,9 +458,8 @@ var _handleSelectNextTodoAction = function (currentTodoGroupCollection) {
         currentTodo.set('isCurrent', false);
 
         var newCurrentTodo = todos.getFirstLocatedAfter(currentTodoIndex);
-
         if (!newCurrentTodo) {
-            return newTodoGroupCollection;
+            throw new Error('Could not define new current todo');
         }
 
         // select new todo
@@ -481,9 +497,8 @@ var _handleSelectPreviousTodoAction = function (currentTodoGroupCollection) {
         currentTodo.set('isCurrent', false);
 
         var newCurrentTodo = todos.getFirstLocatedBefore(currentTodoIndex);
-
         if (!newCurrentTodo) {
-            return newTodoGroupCollection;
+            throw new Error('Could not define new current todo');
         }
 
         // select new todo
@@ -507,12 +522,12 @@ var _handleSwitchToTodoEditModeAction = function (currentTodoGroupCollection, ac
 
     var todoGroup = newTodoGroupCollection.getOneWithCid(action.groupCid);
     if (!todoGroup) {
-        return currentTodoGroupCollection;
+        throw new Error('Todo group not found');
     }
 
     var todo = todoGroup.get('todos').getOneWithCid(action.cid);
     if (!todo) {
-        return currentTodoGroupCollection;
+        throw new Error('Todo not found in todo group');
     }
 
     todo.set('isBeingEdited', true);
@@ -532,12 +547,12 @@ var _handleEditCurrentTodoAction = function (currentTodoGroupCollection) {
 
     var currentTodoGroup = newTodoGroupCollection.getCurrent();
     if (!currentTodoGroup) {
-        return currentTodoGroupCollection;
+        throw new Error('No current todo group found');
     }
 
     var currentTodo = currentTodoGroup.get('todos').getCurrent();
     if (!currentTodo) {
-        return currentTodoGroupCollection;
+        throw new Error('No current todo found in current todo group');
     }
 
     currentTodo.set('isBeingEdited', true);

@@ -9,8 +9,8 @@ var loggerMiddelware = createLogger();
 
 var buildFactoryWithMiddelware = redux.applyMiddleware(
     persistStateMiddleware,
-    loggerMiddelware,
-    thunkMiddelware
+    thunkMiddelware,
+    loggerMiddelware
 )(redux.createStore);
 
 var persistedState = localStorageRepository.getPersistedState(),

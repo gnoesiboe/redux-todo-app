@@ -24,6 +24,15 @@ class TodoCollection extends Collection {
     /**
      * @param {String} cid
      *
+     * @returns {boolean}
+     */
+    hasOneWithCid(cid) {
+        return !!this.getOneWithCid(cid);
+    }
+
+    /**
+     * @param {String} cid
+     *
      * @returns {Number}
      */
     locateOneWithCid(cid) {

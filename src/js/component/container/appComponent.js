@@ -6,6 +6,7 @@ import * as stateNamespace from './../../state/stateNamespace';
 import mousetrap from 'mousetrap';
 import { ActionCreators } from 'redux-undo';
 import { resizeToContent } from './../../utility/rowResizer';
+import { notifySuccess, notifyError } from './../../utility/notifier';
 
 /**
  * @author Gijs Nieuwenhuis <gijs.nieuwenhuis@freshheads.com>
@@ -109,7 +110,13 @@ class AppComponent extends React.Component {
         if (confirm('Are you sure?!')) {
             this.props.dispatch(
                 actionFactory.createDeleteCurrentTodoAction()
-            );
+            )
+                .then(function () {
+                    resizeToContent();
+                })
+                .catch(function (error) {
+                    notifyError(error.message);
+                });
         }
     }
 
@@ -125,7 +132,10 @@ class AppComponent extends React.Component {
 
         this.props.dispatch(
             actionFactory.createToggleCurrentTodoIsCompletedStatusAction()
-        );
+        )
+            .catch(function (error) {
+                notifyError(error.message);
+            });
     }
 
     /**
@@ -140,7 +150,10 @@ class AppComponent extends React.Component {
 
         this.props.dispatch(
             actionFactory.createEditCurrentTodoAction()
-        );
+        )
+            .catch (function (error) {
+                notifyError(error.message);
+            });
     }
 
     /**
@@ -155,7 +168,10 @@ class AppComponent extends React.Component {
 
         this.props.dispatch(
             actionFactory.createSelectPreviousTodoAction()
-        );
+        )
+            .catch (function (error) {
+                notifyError(error.message);
+            });
     }
 
     /**
@@ -170,25 +186,42 @@ class AppComponent extends React.Component {
 
         this.props.dispatch(
             actionFactory.createSelectNextTodoAction()
-        );
+        )
+            .catch (function (error) {
+                notifyError(error.message);
+            });
     }
 
     /**
+     * @param {Object} event
+     *
      * @private
      */
-    _onSelectNextGroupPressed() {
+    _onSelectNextGroupPressed(event) {
+        event.preventDefault();
+
         this.props.dispatch(
             actionFactory.createSelectNextTodoGroupAction()
-        );
+        )
+            .catch (function (error) {
+                notifyError(error.message);
+            });
     }
 
     /**
+     * @param {Object} event
+     *
      * @private
      */
-    _onSelectPreviousGroupPressed() {
+    _onSelectPreviousGroupPressed(event) {
+        event.preventDefault();
+
         this.props.dispatch(
             actionFactory.createSelectPreviousTodoGroupAction()
-        );
+        )
+            .catch (function (error) {
+                notifyError(error);
+            });
     }
 
     /**
@@ -235,9 +268,10 @@ class AppComponent extends React.Component {
     _onAddTodoGroup(title) {
         this.props.dispatch(
             actionFactory.createAddGroupAction(title)
-        );
-
-        resizeToContent();
+        )
+            .then (function () {
+                resizeToContent();
+            });
     }
 
     /**
@@ -250,9 +284,13 @@ class AppComponent extends React.Component {
     _onTodoCompletedStatusChange(cid, newIsCompleted, groupCid) {
         this.props.dispatch(
             actionFactory.createChangeTodoIsCompletedStatusAction(cid, newIsCompleted, groupCid)
-        );
-
-        resizeToContent();
+        )
+            .then (function () {
+                resizeToContent();
+            })
+            .catch(function (error) {
+                notifyError(error.message);
+            });
     }
 
     /**
@@ -264,9 +302,16 @@ class AppComponent extends React.Component {
     _onAddTodo(title, groupCid) {
         this.props.dispatch(
             actionFactory.createAddTodoAction(title, groupCid)
-        );
-
-        resizeToContent();
+        )
+            .then (function (action) {
+                notifySuccess(`Todo ${action.title} added`);
+            })
+            .then (function () {
+                resizeToContent();
+            })
+            .catch (function (error) {
+                notifyError(error.message);
+            });
     }
 
     /**
@@ -278,9 +323,13 @@ class AppComponent extends React.Component {
     _onTodoDelete(cid, groupCid) {
         this.props.dispatch(
             actionFactory.createDeleteTodoAction(cid, groupCid)
-        );
-
-        resizeToContent();
+        )
+            .then (function () {
+                resizeToContent();
+            })
+            .catch (function (error) {
+                notifyError(error.message);
+            });
     }
 
     /**
@@ -294,9 +343,16 @@ class AppComponent extends React.Component {
     _onTodoEdit(cid, newTitle, newDeadline, groupCid) {
         this.props.dispatch(
             actionFactory.createEditTodoAction(cid, newTitle, newDeadline, groupCid)
-        );
-
-        resizeToContent();
+        )
+            .then (function () {
+                notifySuccess('todo was updated');
+            })
+            .then (function () {
+                resizeToContent();
+            })
+            .catch (function (error) {
+                notifyError(error.message);
+            });
     }
 
     /**
@@ -307,10 +363,17 @@ class AppComponent extends React.Component {
      */
     _onTodoGroupTitleEdit(cid, newTitle) {
         this.props.dispatch(
-            actionFactory.createChangeTodoGroupTitleAction(cid, newTitle)
-        );
-
-        resizeToContent();
+            actionFactory.createEditTodoGroupTitleAction(cid, newTitle)
+        )
+            .then (function () {
+                notifySuccess('Todo group title updated');
+            })
+            .then (function () {
+                resizeToContent();
+            })
+            .catch (function (error) {
+                notifyError(error.message);
+            });
     }
 
     /**
@@ -321,9 +384,13 @@ class AppComponent extends React.Component {
     _onTodoGroupDelete(cid) {
         this.props.dispatch(
             actionFactory.createDeleteTodoGroupAction(cid)
-        );
-
-        resizeToContent();
+        )
+            .then (function () {
+                resizeToContent();
+            })
+            .catch (function (error) {
+                notifyError(error.message);
+            });
     }
 
     /**
@@ -334,9 +401,13 @@ class AppComponent extends React.Component {
     _onTodoGroupMoveForward(cid) {
         this.props.dispatch(
             actionFactory.createMoveTodoGroupForwardAction(cid)
-        );
-
-        resizeToContent();
+        )
+            .then (function () {
+                resizeToContent();
+            })
+            .catch (function (error) {
+                notifyError(error.message);
+            });
     }
 
     /**
@@ -347,9 +418,13 @@ class AppComponent extends React.Component {
     _onTodoGroupMoveBackwards(cid) {
         this.props.dispatch(
             actionFactory.createMoveTodoGroupBackwardsAction(cid)
-        );
-
-        resizeToContent();
+        )
+            .then (function () {
+                resizeToContent();
+            })
+            .catch (function (error) {
+                notifyError(error.message);
+            });
     }
 
     /**
@@ -361,9 +436,13 @@ class AppComponent extends React.Component {
     _onGroupStarredStatusChange(cid, newStatus) {
         this.props.dispatch(
             actionFactory.createUpdateGroupStarredStatusAction(cid, newStatus)
-        );
-
-        resizeToContent();
+        )
+            .then (function () {
+                resizeToContent();
+            })
+            .catch (function (error) {
+                notifyError(error.message);
+            });
     }
 
     /**
@@ -377,9 +456,13 @@ class AppComponent extends React.Component {
     _onTodoSortUpdate(fromGroupCid, toGroupCid, fromIndex, toIndex) {
         this.props.dispatch(
             actionFactory.createTodoSortUpdateAction(fromGroupCid, toGroupCid, fromIndex, toIndex)
-        );
-
-        resizeToContent();
+        )
+            .then (function () {
+                resizeToContent();
+            })
+            .catch (function (error) {
+                notifyError(error.message);
+            });
     }
 
     /**
@@ -391,9 +474,13 @@ class AppComponent extends React.Component {
     _onSwitchTodoDisplayMode(cid, groupCid) {
         this.props.dispatch(
             actionFactory.createSwitchToTodoEditModeAction(cid, groupCid)
-        );
-
-        resizeToContent();
+        )
+            .then (function () {
+                resizeToContent();
+            })
+            .catch (function (error) {
+                notifyError(error.message);
+            });
     }
 
     /**

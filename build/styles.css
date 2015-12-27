@@ -51,6 +51,14 @@ html,
     }
 }
 
+.text-tag {
+    color: green;
+}
+
+.text-assignment {
+    color: blue;
+}
+
 
 /* -------------------------------------------------------*/
 

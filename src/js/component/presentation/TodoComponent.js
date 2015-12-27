@@ -1,6 +1,6 @@
 import React from 'react';
 import TodoDeadlineComponent from './TodoDeadlineComponent';
-import { markdown } from 'markdown';
+import TodoTitleComponent from './TodoTitleComponent';
 
 /**
  * @author Gijs Nieuwenhuis <gijs.nieuwenhuis@freshheads.com>
@@ -87,8 +87,8 @@ class TodoComponent extends React.Component {
 
                         <TodoDeadlineComponent value={this.props.deadline}
                                                isCompleted={this.props.isCompleted} />
-                        <span className="todo-component-title"
-                              dangerouslySetInnerHTML={{ __html: markdown.toHTML(this.props.title) }} />
+
+                        <TodoTitleComponent title={this.props.title} />
                     </label>
                 </div>
             </div>

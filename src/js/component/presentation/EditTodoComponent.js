@@ -76,13 +76,12 @@ class EditTodoComponent extends React.Component {
                 <form className="form" className="todo-component-form" onSubmit={this._onFormSubmit.bind(this)}>
                     <div className="form-group">
                         <label className="control-label">Title</label>
-                        <input type="text"
-                               className="form-control"
-                               placeholder="Title.."
-                               onChange={this._onFieldChange.bind(this)}
-                               name="title"
-                               ref="title"
-                               value={this.state.title} />
+                        <textarea className="form-control"
+                                  placeholder="Title.."
+                                  onChange={this._onFieldChange.bind(this)}
+                                  name="title"
+                                  ref="title"
+                                  value={this.state.title} />
                     </div>
                     <div className="form-group">
                         <label className="control-label">Deadline</label>

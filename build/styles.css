@@ -1,5 +1,5 @@
 body {
-    background: #fff;
+    background: #f8f8f8;
 }
 
 body,
@@ -12,11 +12,7 @@ html,
 }
 
 .todo-group-list-component {
-    width: 96%;
-    margin: 2%;
-    border-left: 1px solid #ddd;
-    border-top: 1px solid #ddd;
-    background: #f8f8f8;
+    width: 100%;
 }
 
 .todo-group-component,
@@ -25,7 +21,6 @@ html,
     display: inline-block;
     vertical-align: top;
     box-sizing: border-box;
-    padding: 20px 20px 0;
     overflow-y: scroll;
     position: relative;
 }
@@ -40,21 +35,21 @@ html,
 @media screen and (min-width: 768px) {
     .todo-group-component,
     .add-todo-group-component {
-
+        width: 50%;
     }
 }
 
 @media screen and (min-width: 992px) {
     .todo-group-component,
     .add-todo-group-component {
-        width: 50%;
+        width: 33.33%;
     }
 }
 
 @media screen and (min-width: 1200px) {
     .todo-group-component,
     .add-todo-group-component {
-        width: 33.33%;
+        width: 25%;
         overflow-y: auto;
     }
 }
@@ -72,41 +67,17 @@ html,
 
 .todo-group-component {
     position: relative;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
 }
-
-    .todo-group-component--is-current {
-        background: #e7e7e7;
-    }
-
-
-.todo-group-title-component {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background: #393939;
-}
-
-    .todo-group-component--is-current .todo-group-title-component {
-        background: #282828;
-    }
-
 
 /* -------------------------------------------------------*/
 
 
 .todo-group-title-component-title {
-    padding: 5px 20px 10px;
-    color: #fff;
-    font-size: 18px;
+    padding: 5px 20px 5px 0;
+    color: #333;
+    font-size: 22px;
     position: relative;
 }
-
-    .todo-group-component--is-starred .todo-group-title-component-title {
-        color: #FFC16F;
-    }
 
     .todo-group-title-component-title .todo-group-title-component-edit-link {
         display: none;
@@ -124,7 +95,7 @@ html,
     }
 
     .todo-group-title-component-edit-link:hover {
-        color: #fff;
+        color: #333;
     }
 
 
@@ -135,10 +106,14 @@ html,
     /* Workaround to get the todo actions sticky to the bottom of the todo-group-component */
 
     height: 100%;
-    padding-top: 180px;
-    margin-top: -100px;
+    padding-top: 100px;
+    margin: -100px 15px 15px;
 }
 
+.todo-group-component-footer {
+    margin: 15px;
+    border-bottom: 1px solid #ddd;
+}
 
 /* -------------------------------------------------------*/
 
@@ -214,8 +189,7 @@ html,
 
 .add-todo-group-component {
     text-align: center;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    margin: 30px 10px;
 }
 
     .add-todo-group-component-add-link {

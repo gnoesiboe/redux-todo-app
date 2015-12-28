@@ -102,6 +102,7 @@ class TodoGroupComponent extends React.Component {
             <div className={className} data-match-height="js-container-block">
                 <div className="todo-group-component-body">
                     <TodoGroupTitleComponent title={this.props.title}
+                                             isStarred={this.props.isStarred}
                                              onTodoGroupTitleEdit={this._onTodoGroupTitleEdit.bind(this)} />
 
                     <TodoListComponent todos={this.props.todos}

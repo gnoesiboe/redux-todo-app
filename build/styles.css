@@ -39,18 +39,10 @@ html,
     }
 }
 
-@media screen and (min-width: 992px) {
-    .todo-group-component,
-    .add-todo-group-component {
-        width: 33.33%;
-    }
-}
-
 @media screen and (min-width: 1200px) {
     .todo-group-component,
     .add-todo-group-component {
-        width: 25%;
-        overflow-y: auto;
+        width: 33.33%;
     }
 }
 
@@ -106,12 +98,13 @@ html,
     /* Workaround to get the todo actions sticky to the bottom of the todo-group-component */
 
     height: 100%;
-    padding-top: 100px;
-    margin: -100px 15px 15px;
+    padding-top: 120px;
+    margin: -120px 15px 15px;
 }
 
 .todo-group-component-footer {
-    margin: 15px;
+    margin: 0 15px 15px;
+    padding-bottom: 10px;
     border-bottom: 1px solid #ddd;
 }
 

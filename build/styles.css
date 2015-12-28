@@ -1,11 +1,22 @@
+body {
+    background: #fff;
+}
+
 body,
 html,
 .app-container,
-.app-container-wrapper,
-.todo-group-list-component {
+.app-container-wrapper {
     height: 100%;
     width: 100%;
     vertical-align: top;
+}
+
+.todo-group-list-component {
+    width: 96%;
+    margin: 2%;
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    background: #f8f8f8;
 }
 
 .todo-group-component,
@@ -14,10 +25,7 @@ html,
     display: inline-block;
     vertical-align: top;
     box-sizing: border-box;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-left: 0;
-    border-top: 0;
+    padding: 20px 20px 0;
     overflow-y: scroll;
     position: relative;
 }
@@ -32,42 +40,57 @@ html,
 @media screen and (min-width: 768px) {
     .todo-group-component,
     .add-todo-group-component {
-        width: 50%;
+
     }
 }
 
 @media screen and (min-width: 992px) {
     .todo-group-component,
     .add-todo-group-component {
-        width: 33.33%;
+        width: 50%;
     }
 }
 
 @media screen and (min-width: 1200px) {
     .todo-group-component,
     .add-todo-group-component {
-        width: 25%;
+        width: 33.33%;
         overflow-y: auto;
     }
 }
 
-.text-tag {
-    color: green;
-}
-
+.text-tag,
 .text-assignment {
-    color: blue;
+    color: #aeaeae;
 }
 
+.alert-sm {
+    padding: 1px;
+}
 
 /* -------------------------------------------------------*/
 
 .todo-group-component {
-    background: #fafafa;
+    position: relative;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
 }
 
     .todo-group-component--is-current {
-        background: #fff;
+        background: #e7e7e7;
+    }
+
+
+.todo-group-title-component {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: #393939;
+}
+
+    .todo-group-component--is-current .todo-group-title-component {
+        background: #282828;
     }
 
 
@@ -75,15 +98,14 @@ html,
 
 
 .todo-group-title-component-title {
-    margin: 0 0 20px;
-    padding: 10px 30px 10px 20px;
+    padding: 5px 20px 10px;
+    color: #fff;
     font-size: 18px;
     position: relative;
-    background: #e9e9e9;
 }
 
     .todo-group-component--is-starred .todo-group-title-component-title {
-        background: #faf8bf;
+        color: #FFC16F;
     }
 
     .todo-group-title-component-title .todo-group-title-component-edit-link {
@@ -97,7 +119,12 @@ html,
     .todo-group-title-component-edit-link {
         position: absolute;
         right: 10px;
-        top: 9px;
+        top: 5px;
+        color: #0e995c;
+    }
+
+    .todo-group-title-component-edit-link:hover {
+        color: #fff;
     }
 
 
@@ -108,16 +135,8 @@ html,
     /* Workaround to get the todo actions sticky to the bottom of the todo-group-component */
 
     height: 100%;
-    padding-top: 100px;
+    padding-top: 180px;
     margin-top: -100px;
-}
-
-
-/* -------------------------------------------------------*/
-
-
-.todo-group-component-footer {
-    background: yellow;
 }
 
 
@@ -127,11 +146,6 @@ html,
 .add-todo-component {
     width: 100%;
     box-sizing: border-box;
-    padding: 10px 10px 0;
-    background: #efefef;
-    /*position: absolute;*/
-    /*bottom: 0;*/
-    /*left: 0;*/
 }
 
 
@@ -139,10 +153,16 @@ html,
 
 
 .todo-list-component-list {
-    list-style: none;
-    padding: 0 10px 10px; /* padding on bottom to be able to drag todos into it when the list is emtpy */
-    margin: 0 0 20px;
+    padding-bottom: 30px; /* padding on bottom to be able to drag todos into it when the list is emtpy */
 }
+
+    .todo-list-component-list .list-group-item {
+        padding: 0 10px;
+    }
+
+    .todo-list-component-list-item--is-current {
+        background: #0fb47b;
+    }
 
 
 /* -------------------------------------------------------*/
@@ -154,12 +174,12 @@ html,
     font-size: 10px;
     right: 0;
     top: 0;
-    background: #f6f6f6;
+    background: #fff;
     height: 100%;
 }
 
-.todo-group-component--is-starred .todo-component-actions {
-    background: #fff;
+.todo-list-component-list-item--is-current .todo-component-actions {
+    background: #0fb47b;
 }
 
     .todo-component-action-seperator {
@@ -167,22 +187,25 @@ html,
     }
 
     .todo-component-action {
-        color: #aaa;
+        color: #0fb47b;
+    }
+
+    .todo-list-component-list-item--is-current .todo-component-action {
+        color: #fff;
     }
 
     .todo-component-action:hover {
-        color: #999;
+        color: #393939;
     }
 
 /* -------------------------------------------------------*/
 
 
-.todo-component-form,
-.todo-group-title-component-form {
-    background: #ddd;
+.todo-component-form {
+    background: #ebebeb;
     padding: 15px;
     border-radius: 3px;
-    margin-bottom: 10px;
+    margin: 15px 0;
 }
 
 
@@ -190,8 +213,9 @@ html,
 
 
 .add-todo-group-component {
-    background: #f6f6f6;
     text-align: center;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
 }
 
     .add-todo-group-component-add-link {
@@ -206,14 +230,6 @@ html,
         text-decoration: none;
         color: #999;
     }
-
-
-/* -------------------------------------------------------*/
-
-
-.todo-group-actions-component {
-    padding: 0 0 10px;
-}
 
 
 /* -------------------------------------------------------*/
@@ -233,12 +249,20 @@ html,
     }
 
     .todo-component--is-completed label,
-    .todo-component--is-completed .todo-component-action {
-        color: #ddd;
+    .todo-component--is-completed .todo-component-action,
+    .todo-component--is-completed .text-assignment,
+    .todo-component--is-completed .text-tag {
+        opacity: 0.3;
     }
 
-    .todo-component--is-current {
-        background: #f1f1f1;
+    .todo-component--is-completed label {
+        text-decoration: line-through;
+    }
+
+    .todo-list-component-list-item--is-current label,
+    .todo-list-component-list-item--is-current .text-tag,
+    .todo-list-component-list-item--is-current .text-assignment {
+        color: white;
     }
 
 

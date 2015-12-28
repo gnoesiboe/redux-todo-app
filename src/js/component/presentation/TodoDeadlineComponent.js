@@ -34,7 +34,7 @@ class TodoDeadlineComponent extends React.Component {
         if (this.props.isCompleted) {
             className = '';
         } else {
-            className = date.isBefore(startOfToday) ? 'alert-danger' : 'alert-info';
+            className = 'alert alert-sm' + (date.isBefore(startOfToday) ? ' alert-danger' : ' alert-info');
         }
 
         return (

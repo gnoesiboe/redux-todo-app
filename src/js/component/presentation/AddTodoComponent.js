@@ -166,6 +166,7 @@ class AddTodoComponent extends React.Component {
                                name="title"
                                value={this.state.title}
                                className="form-control"
+                               autoComplete="off"
                                ref="title"
                                onChange={this._onFieldChange.bind(this)}/>
                     </div>

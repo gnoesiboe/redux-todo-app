@@ -21,8 +21,10 @@ class TodoListComponent extends React.Component {
             // items but in another order, so react won't re-render (and thus not show the change) :(
             let key = `${index}_${this.props.groupCid}_${todo.get('cid')}`;
 
+            let className = 'js-todo-list-component-list-item list-group-item' + (todo.get('isCurrent') ? ' todo-list-component-list-item--is-current' : '');
+
             return (
-                <li key={key} className="js-todo-list-component-list-item">
+                <li key={key} className={className}>
                     {this._defineTodoDisplayComponent(todo)}
                 </li>
             );
@@ -76,7 +78,7 @@ class TodoListComponent extends React.Component {
     render() {
         return (
             <div className="todo-list-component">
-                <SortableListComponent className="todo-list-component-list"
+                <SortableListComponent className="todo-list-component-list list-group"
                                        draggableClassName=".js-todo-list-component-list-item"
                                        sortGroup="todo-list"
                                        onUpdate={this._onSortUpdate.bind(this)}

@@ -17,7 +17,8 @@ class Todo extends Model {
             deadline: null,
             isCompleted: false,
             isCurrent: false,
-            isBeingEdited: false
+            isBeingEdited: false,
+            isStarred: false
         });
     }
 
@@ -31,6 +32,7 @@ class Todo extends Model {
         out.set('isCurrent', !!this.get('isCurrent', false));
         out.set('deadline', this.get('deadline'));
         out.set('isBeingEdited', !!this.get('isBeingEdited'));
+        out.set('isStarred', !!this.get('isStarred'));
 
         return out;
     }
@@ -52,6 +54,15 @@ class Todo extends Model {
     }
 
     /**
+     * @returns {Todo}
+     */
+    toggleIsStarred() {
+        this.set('isStarred', !this.get('isStarred', false));
+
+        return this;
+    }
+
+    /**
      * @param {Object} nativeInput
      *
      * @return {Todo}
@@ -64,7 +75,8 @@ class Todo extends Model {
             title: null,
             deadline: null,
             isCompleted: false,
-            isCurrent: false
+            isCurrent: false,
+            isStarred: false
         }, nativeInput);
 
         // re-create todo
@@ -74,6 +86,7 @@ class Todo extends Model {
         out.set('isCurrent', nativeInput.isCurrent);
         out.set('deadline', nativeInput.deadline);
         out.set('isBeingEdited', nativeInput.isBeingEdited);
+        out.set('isStarred', nativeInput.isStarred);
 
         return out;
     }

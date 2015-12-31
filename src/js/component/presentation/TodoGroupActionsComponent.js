@@ -99,13 +99,16 @@ class TodoGroupActionsComponent extends React.Component {
      * @private
      */
     _renderStarred() {
-        var className = this.props.isStarred
+        var iconClassName = this.props.isStarred
             ? 'glyphicon glyphicon-star'
             : 'glyphicon glyphicon-star-empty';
 
         return (
-            <a href="#" onClick={this._onStarToggleClick.bind(this)}>
-                <i className={className} />
+            <a href="#"
+               className="js-tooltip"
+               title="Marks this group as more important than other groups"
+               onClick={this._onStarToggleClick.bind(this)}>
+                <i className={iconClassName} />
             </a>
         );
     }

@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "deep-freeze-strict": "^1.1.1",
+    "jquery": "^2.1.4",
     "jquery-match-height": "^0.6.0",
     "lodash": "^3.10.1",
     "markdown": "^0.5.0",

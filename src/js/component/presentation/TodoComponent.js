@@ -53,13 +53,19 @@ class TodoComponent extends React.Component {
         return (
             <ul className="list-inline todo-component-actions">
                 <li>
-                    <a href="#" className="todo-component-action" onClick={this._onSwitchToEditModeClick.bind(this)}>
+                    <a href="#"
+                       className="todo-component-action js-tooltip"
+                       title="Edit"
+                       onClick={this._onSwitchToEditModeClick.bind(this)}>
                         <i className="glyphicon glyphicon-pencil" />
                     </a>
                 </li>
                 <li className="todo-component-action-seperator">|</li>
                 <li>
-                    <a href="#" onClick={this._onTodoDeleteClick.bind(this)} className="todo-component-action">
+                    <a href="#"
+                       onClick={this._onTodoDeleteClick.bind(this)}
+                       title="Remove"
+                       className="todo-component-action js-tooltip">
                         <i className="glyphicon glyphicon-remove" />
                     </a>
                 </li>

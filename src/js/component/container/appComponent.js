@@ -33,8 +33,9 @@ class AppComponent extends React.Component {
         this._onSelectNextTodoCallback = this._onSelectNextTodoBindingPressed.bind(this);
         this._onSelectPreviousTodoCallback = this._onSelectPreviousTodoBindingPressed.bind(this);
         this._onEditCurrentTodoKeybindingPressedCallback = this._onEditCurrentTodoKeybindingPressed.bind(this);
-        this._onToggleTodoIsCompletedStatusKeybindingPressedCallback = this._onToggleTodoIsCompletedStatusKeybindingPressed.bind(this)
+        this._onToggleTodoIsCompletedStatusKeybindingPressedCallback = this._onToggleTodoIsCompletedStatusKeybindingPressed.bind(this);
         this._onDeleteCurrentTodoKeybindingPressedCallback = this._onDeleteCurrentTodoKeybindingPressed.bind(this);
+        this._onToggleCurrentTodoIsStarredStatusKeybindingPressedCallback = this._onToggleCurrentTodoIsStarredStatusKeybindingPressed.bind(this);
     }
 
     /**
@@ -72,6 +73,7 @@ class AppComponent extends React.Component {
         mousetrap.bind('e', this._onEditCurrentTodoKeybindingPressedCallback);
         mousetrap.bind('space', this._onToggleTodoIsCompletedStatusKeybindingPressedCallback);
         mousetrap.bind('x', this._onDeleteCurrentTodoKeybindingPressedCallback);
+        mousetrap.bind('s', this._onToggleCurrentTodoIsStarredStatusKeybindingPressedCallback);
     }
 
     /**
@@ -95,6 +97,26 @@ class AppComponent extends React.Component {
         mousetrap.unbind('e', this._onEditCurrentTodoKeybindingPressedCallback);
         mousetrap.unbind('space', this._onToggleTodoIsCompletedStatusKeybindingPressedCallback);
         mousetrap.unbind('x', this._onDeleteCurrentTodoKeybindingPressedCallback);
+        mousetrap.unbind('s', this._onToggleCurrentTodoIsStarredStatusKeybindingPressedCallback);
+    }
+
+    /**
+     * @param {Object} event
+     *
+     * @private
+     */
+    _onToggleCurrentTodoIsStarredStatusKeybindingPressed(event) {
+        event.preventDefault();
+
+        this.props.dispatch(
+            actionFactory.createToggleCurrentTodoIsStarredStatusAction()
+        )
+            .then(function () {
+                resizeToContent();
+            })
+            .catch(function (error) {
+                notifyError(error.message);
+            })
     }
 
     /**
@@ -220,7 +242,7 @@ class AppComponent extends React.Component {
             actionFactory.createSelectPreviousTodoGroupAction()
         )
             .catch (function (error) {
-                notifyError(error);
+                notifyError(error.message);
             });
     }
 
@@ -497,7 +519,7 @@ class AppComponent extends React.Component {
                 resizeToContent();
             })
             .catch(function (error) {
-                notifyError(error);
+                notifyError(error.message);
             });
     }
 

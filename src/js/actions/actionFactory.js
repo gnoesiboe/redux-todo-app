@@ -268,3 +268,12 @@ export function createToggleTodoIsStarredStatusAction(cid, groupCid) {
         groupCid: groupCid
     });
 }
+
+/**
+ * @returns {Function}
+ */
+export function createToggleCurrentTodoIsStarredStatusAction() {
+    return _packageInSimplePromise({
+        type: actionTypes.TOGGLE_CURRENT_TODO_IS_STARRED_STATUS
+    });
+}

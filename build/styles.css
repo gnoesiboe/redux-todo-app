@@ -132,6 +132,14 @@ html,
         background: #0fb47b;
     }
 
+    .todo-list-component-list-item {
+        border-left: 10px solid #ddd;
+    }
+
+    .todo-component--is-starred {
+        border-left: 10px solid #0f784b;
+    }
+
 
 /* -------------------------------------------------------*/
 

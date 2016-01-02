@@ -194,6 +194,32 @@ var _handleEditTodoAction = function (currentTodoGroupCollection, action) {
  *
  * @private
  */
+var _handleToggleTodoIsStarredStatusAction = function (currentTodoGroupCollection, action) {
+    var newTodoGroupCollection = currentTodoGroupCollection.clone();
+
+    var todoGroup = newTodoGroupCollection.getOneWithCid(action.groupCid);
+    if (!todoGroup) {
+        throw new Error('Could not find todo group');
+    }
+
+    var todo = todoGroup.get('todos').getOneWithCid(action.cid);
+    if (!todo) {
+        throw new Error('Could not find todo in todo group');
+    }
+
+    todo.set('isStarred', !todo.get('isStarred', false));
+
+    return newTodoGroupCollection;
+};
+
+/**
+ * @param {TodoGroupCollection} currentTodoGroupCollection
+ * @param {Object} action
+ *
+ * @returns {TodoGroupCollection}
+ *
+ * @private
+ */
 var _handleEditTodoGroupTitleAction = function (currentTodoGroupCollection, action) {
     var newTodoGroupCollection = currentTodoGroupCollection.clone();
 
@@ -677,6 +703,9 @@ export default function todoGroupsReducer(currentState = _defaultState, action) 
 
         case actionTypes.EDIT_CURRENT_TODO:
             return _handleEditCurrentTodoAction(currentState);
+
+        case actionTypes.TOGGLE_TODO_IS_STARRED_STATUS:
+            return _handleToggleTodoIsStarredStatusAction(currentState, action);
 
         default:
             return currentState;

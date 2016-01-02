@@ -51,6 +51,11 @@ html,
     color: #aeaeae;
 }
 
+.text-featured {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
 .alert-sm {
     padding: 1px;
 }

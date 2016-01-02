@@ -1,6 +1,6 @@
 import React from 'react';
 import { markdown } from 'markdown';
-import { wrapAssignments, wrapTags } from './../../utility/stringHelper';
+import { wrapAssignments, wrapTags, wrapProjects } from './../../utility/stringHelper';
 
 /**
  * @author Gijs Nieuwenhuis <gijs.nieuwenhuis@freshheads.com>
@@ -22,6 +22,9 @@ class TodoTitleComponent extends React.Component {
 
         // parse assignments
         out = wrapAssignments(out, 'text-assignment');
+
+        // parse projects
+        out = wrapProjects(out, 'text-featured');
 
         return out;
     }

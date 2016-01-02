@@ -99,6 +99,14 @@ html,
 /* -------------------------------------------------------*/
 
 
+.todo-group-title-component-form {
+    padding: 20px 0;
+}
+
+
+/* -------------------------------------------------------*/
+
+
 .todo-group-component-body {
     /* Workaround to get the todo actions sticky to the bottom of the todo-group-component */
 

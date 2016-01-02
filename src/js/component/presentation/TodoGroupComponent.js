@@ -91,6 +91,15 @@ class TodoGroupComponent extends React.Component {
     }
 
     /**
+     * @param {String} todoCid
+     *
+     * @private
+     */
+    _onToggleTodoIsStarredStatus(todoCid) {
+        this.props.onToggleTodoIsStarredStatus(todoCid, this.props.cid);
+    }
+
+    /**
      * @returns {XML}
      */
     render() {
@@ -111,6 +120,7 @@ class TodoGroupComponent extends React.Component {
                                        onTodoEdit={this._onTodoEdit.bind(this)}
                                        onSwitchTodoDisplayMode={this._onSwitchTodoDisplayMode.bind(this)}
                                        onTodoSortUpdate={this.props.onTodoSortUpdate}
+                                       onToggleTodoIsStarredStatus={this._onToggleTodoIsStarredStatus.bind(this)}
                                        onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
                 </div>
                 <div className="todo-group-component-footer">
@@ -155,7 +165,8 @@ TodoGroupComponent.propTypes = {
     allowMoveBackwards: React.PropTypes.bool.isRequired,
     allowMoveForward: React.PropTypes.bool.isRequired,
     onTodoSortUpdate: React.PropTypes.func.isRequired,
-    onSwitchTodoDisplayMode: React.PropTypes.func.isRequired
+    onSwitchTodoDisplayMode: React.PropTypes.func.isRequired,
+    onToggleTodoIsStarredStatus: React.PropTypes.func.isRequired
 };
 
 export default TodoGroupComponent;

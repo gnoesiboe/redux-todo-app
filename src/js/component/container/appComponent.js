@@ -484,6 +484,24 @@ class AppComponent extends React.Component {
     }
 
     /**
+     * @param {String} cid
+     * @param {String} groupCid
+     *
+     * @private
+     */
+    _onToggleTodoIsStarredStatus(cid, groupCid) {
+        this.props.dispatch(
+            actionFactory.createToggleTodoIsStarredStatusAction(cid, groupCid)
+        )
+            .then(function () {
+                resizeToContent();
+            })
+            .catch(function (error) {
+                notifyError(error);
+            });
+    }
+
+    /**
      * @returns {XML}
      */
     render() {
@@ -500,6 +518,7 @@ class AppComponent extends React.Component {
                                         onTodoGroupMoveBackwards={this._onTodoGroupMoveBackwards.bind(this)}
                                         onTodoSortUpdate={this._onTodoSortUpdate.bind(this)}
                                         onSwitchTodoDisplayMode={this._onSwitchTodoDisplayMode.bind(this)}
+                                        onToggleTodoIsStarredStatus={this._onToggleTodoIsStarredStatus.bind(this)}
                                         onGroupStarredStatusChange={this._onGroupStarredStatusChange.bind(this)}
                                         onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
             </div>

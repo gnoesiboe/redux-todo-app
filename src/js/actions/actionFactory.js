@@ -254,3 +254,17 @@ export function createDeleteCurrentTodoAction() {
         type: actionTypes.DELETE_CURRENT_TODO
     });
 }
+
+/**
+ * @param {String} cid
+ * @param {String} groupCid
+ *
+ * @returns {Function}
+ */
+export function createToggleTodoIsStarredStatusAction(cid, groupCid) {
+    return _packageInSimplePromise({
+        type: actionTypes.TOGGLE_TODO_IS_STARRED_STATUS,
+        cid: cid,
+        groupCid: groupCid
+    });
+}

@@ -55,7 +55,9 @@ class TodoListComponent extends React.Component {
                                onSwitchTodoDisplayMode={this.props.onSwitchTodoDisplayMode}
                                onTodoCompletedStatusChange={this.props.onTodoCompletedStatusChange}
                                isCompleted={todo.get('isCompleted')}
-                               isCurrent={todo.get('isCurrent')} />
+                               onToggleTodoIsStarredStatus={this.props.onToggleTodoIsStarredStatus}
+                               isCurrent={todo.get('isCurrent')}
+                               isStarred={todo.get('isStarred')}/>
             );
         }
     }
@@ -98,7 +100,8 @@ TodoListComponent.propTypes = {
     onTodoDelete: React.PropTypes.func.isRequired,
     onTodoEdit: React.PropTypes.func.isRequired,
     onSwitchTodoDisplayMode: React.PropTypes.func.isRequired,
-    onTodoSortUpdate: React.PropTypes.func.isRequired
+    onTodoSortUpdate: React.PropTypes.func.isRequired,
+    onToggleTodoIsStarredStatus: React.PropTypes.func.isRequired
 };
 
 export default TodoListComponent;

@@ -45,6 +45,17 @@ class TodoComponent extends React.Component {
     }
 
     /**
+     * @param {Object} event
+     *
+     * @private
+     */
+    _onToggleIsStarredClick(event) {
+        event.preventDefault();
+
+        this.props.onToggleTodoIsStarredStatus(this.props.cid);
+    }
+
+    /**
      * @returns {XML}
      *
      * @private
@@ -52,6 +63,15 @@ class TodoComponent extends React.Component {
     _renderViewActions() {
         return (
             <ul className="list-inline todo-component-actions">
+                <li>
+                    <a href="#"
+                       className="todo-component-action js-tooltip"
+                       onClick={this._onToggleIsStarredClick.bind(this)}
+                       title="Mark as more important">
+                        <i className="glyphicon glyphicon-star" />
+                    </a>
+                </li>
+                <li className="todo-component-action-seperator">|</li>
                 <li>
                     <a href="#"
                        className="todo-component-action js-tooltip"
@@ -104,18 +124,21 @@ class TodoComponent extends React.Component {
 
 TodoComponent.defaultProps = {
     isCompleted: false,
-    isCurrent: false
+    isCurrent: false,
+    isStarred: false
 };
 
 TodoComponent.propTypes = {
     cid: React.PropTypes.string.isRequired,
     isCompleted: React.PropTypes.bool,
     isCurrent: React.PropTypes.bool,
+    isStarred: React.PropTypes.bool,
     title: React.PropTypes.string.isRequired,
     deadline: React.PropTypes.string,
     onTodoCompletedStatusChange: React.PropTypes.func.isRequired,
     onTodoDelete: React.PropTypes.func.isRequired,
-    onSwitchTodoDisplayMode: React.PropTypes.func.isRequired
+    onSwitchTodoDisplayMode: React.PropTypes.func.isRequired,
+    onToggleTodoIsStarredStatus: React.PropTypes.func.isRequired,
 };
 
 export default TodoComponent;

@@ -33,6 +33,7 @@ class TodoGroupListComponent extends React.Component {
                                     allowMoveBackwards={index !== 0}
                                     onTodoSortUpdate={this.props.onTodoSortUpdate}
                                     onGroupStarredStatusChange={this.props.onGroupStarredStatusChange}
+                                    onToggleTodoIsStarredStatus={this.props.onToggleTodoIsStarredStatus}
                                     allowMoveForward={index !== (this.props.todoGroups.count() - 1)} />
             );
         }.bind(this));
@@ -65,6 +66,7 @@ TodoGroupListComponent.propTypes = {
     onGroupStarredStatusChange: React.PropTypes.func.isRequired,
     onTodoSortUpdate: React.PropTypes.func.isRequired,
     onSwitchTodoDisplayMode: React.PropTypes.func.isRequired,
+    onToggleTodoIsStarredStatus: React.PropTypes.func.isRequired
 };
 
 export default TodoGroupListComponent;

@@ -2,6 +2,9 @@ import $ from 'jquery';
 
 require('jquery-match-height/jquery.matchHeight.js');
 
+// maintain scroll position when even when resizing components
+jQuery.fn.matchHeight._maintainScroll = true;
+
 /**
  * Resizes each row to fit the highest content
  */

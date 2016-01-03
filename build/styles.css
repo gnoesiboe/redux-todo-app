@@ -39,10 +39,17 @@ html,
     }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 900px) {
     .todo-group-component,
     .add-todo-group-component {
         width: 33.33%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .todo-group-component,
+    .add-todo-group-component {
+        width: 25%;
     }
 }
 

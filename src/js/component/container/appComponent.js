@@ -530,6 +530,9 @@ class AppComponent extends React.Component {
     render() {
         return (
             <div className="app-container-wrapper">
+                <div className="header-component">
+                    <h1 className="header-component-title">@_<sub>TODO</sub></h1>
+                </div>
                 <TodoGroupListComponent todoGroups={this.props.todoGroups}
                                         onAddTodo={this._onAddTodo.bind(this)}
                                         onAddTodoGroup={this._onAddTodoGroup.bind(this)}

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import _ from 'lodash';
 
 const MODE_CREATE = 'CREATE';
@@ -105,6 +106,7 @@ class AddTodoGroupComponent extends React.Component {
                         <input type="text"
                                id="group-name-input"
                                name="title"
+                               ref="title"
                                placeholder="Title.."
                                value={this.state.title}
                                className="form-control"
@@ -130,7 +132,14 @@ class AddTodoGroupComponent extends React.Component {
 
         this.setState({
             mode: MODE_CREATE
-        });
+        }, this._focusTitleField.bind(this));
+    }
+
+    /**
+     * @private
+     */
+    _focusTitleField() {
+        ReactDOM.findDOMNode(this.refs.title).focus();
     }
 
     /**

@@ -16,7 +16,7 @@ class ExplanationComponent extends React.Component {
                         <h3 className="panel-title">Introduction</h3>
                     </div>
                     <div className="panel-body">
-                        <div className="col-sm-6 col-md-4">
+                        <div className="col-sm-6 col-md-4 spacer-bottom-m">
                             <h5>Features:</h5>
                             <ul>
                                 <li>Create/edit/remote a todo group.</li>
@@ -35,7 +35,7 @@ class ExplanationComponent extends React.Component {
                                 <li>Display notifications when important events or errors occurred.</li>
                             </ul>
                         </div>
-                        <div className="col-sm-6 col-md-4">
+                        <div className="col-sm-6 col-md-4 spacer-bottom-m">
                             <h5>Keyboard shortcuts:</h5>
 
                             <table className="table">
@@ -91,7 +91,7 @@ class ExplanationComponent extends React.Component {
                                 </tbody>
                             </table>
                         </div>
-                        <div className="col-sm-6 col-md-4">
+                        <div className="col-sm-6 col-md-4 spacer-bottom-m">
                             <h5>Links</h5>
                             <ul className="list-group">
                                 <li className="list-group-item">

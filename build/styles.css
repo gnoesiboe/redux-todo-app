@@ -68,6 +68,10 @@ html,
     padding: 1px;
 }
 
+.spacer-bottom-m {
+    margin-bottom: 20px;
+}
+
 /* -------------------------------------------------------*/
 
 .todo-group-component {
@@ -292,9 +296,17 @@ html,
 
 /* -------------------------------------------------------*/
 
+.todo-component-title {
 
-.todo-component-title p {
-
-    /* markdown functionality adds 'p' tags, but title should be inline */
-    display: inline;
 }
+
+    .todo-component-title p {
+
+        /* markdown functionality adds 'p' tags, but title should be inline */
+        display: inline;
+    }
+
+    .todo-component-title a {
+        color: black;
+        text-decoration: underline;
+    }

@@ -2,6 +2,7 @@ import React from 'react';
 import mousetrap from 'mousetrap';
 import mousetrapGlobal from 'mousetrap/plugins/global-bind/mousetrap-global-bind';
 import ReactDOM from 'react-dom';
+import _ from 'lodash';
 
 /**
  * @author Gijs Nieuwenhuis <gijs.nieuwenhuis@freshheads.com>
@@ -135,13 +136,11 @@ class AddTodoComponent extends React.Component {
         // prevent backend submission
         event.preventDefault();
 
-        var title = this.state.title;
-
-        if (title.length === 0) {
+        if (!this._checkInputIsValid()) {
             return;
         }
 
-        this.props.onAddTodo(title);
+        this.props.onAddTodo(this.state.title);
 
         this._resetForm();
     }
@@ -151,6 +150,15 @@ class AddTodoComponent extends React.Component {
      */
     _resetForm() {
         this.setState(this._getResetState());
+    }
+
+    /**
+     * @returns {Boolean}
+     *
+     * @private
+     */
+    _checkInputIsValid() {
+        return _.isString(this.state.title) && this.state.title.length > 0;
     }
 
     /**

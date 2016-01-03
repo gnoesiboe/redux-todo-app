@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 
 const MODE_CREATE = 'CREATE';
 const MODE_VIEW = 'VIEW';
@@ -25,7 +26,8 @@ class AddTodoGroupComponent extends React.Component {
     _getResetState() {
         return {
             mode: MODE_VIEW,
-            title: null
+            title: null,
+            submitAllowed: false
         };
     }
 
@@ -40,6 +42,17 @@ class AddTodoGroupComponent extends React.Component {
         this.setState({
             [domElement.name]: domElement.value
         });
+
+        this._resetSubmitStatus();
+    }
+
+    /**
+     * @private
+     */
+    _resetSubmitStatus() {
+        this.setState({
+            submitAllowed: this._hasValidInput()
+        });
     }
 
     /**
@@ -52,9 +65,22 @@ class AddTodoGroupComponent extends React.Component {
         // prevent backend form submission
         event.preventDefault();
 
+        if (this._hasValidInput()) {
+            return;
+        }
+
         this.props.onAddTodoGroup(this.state.title);
 
         this._resetFormFields();
+    }
+
+    /**
+     * @returns {Boolean}
+     *
+     * @private
+     */
+    _hasValidInput() {
+        return _.isString(this.state.title) && this.state.title.length > 0;
     }
 
     /**
@@ -85,7 +111,7 @@ class AddTodoGroupComponent extends React.Component {
                                onChange={this._onFormFieldValueChange.bind(this)} />
                     </div>
                     <div className="text-center">
-                        <button type="submit" className="btn btn-success">Add group</button>
+                        <button type="submit" className="btn btn-success" disabled={!this._hasValidInput()}>Add group</button>
                     </div>
                 </form>
             </div>

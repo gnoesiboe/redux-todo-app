@@ -84,7 +84,9 @@ class AddTodoGroupComponent extends React.Component {
                                className="form-control"
                                onChange={this._onFormFieldValueChange.bind(this)} />
                     </div>
-                    <button type="submit" className="btn btn-success">Save</button>
+                    <div className="text-center">
+                        <button type="submit" className="btn btn-success">Add group</button>
+                    </div>
                 </form>
             </div>
         );
@@ -112,9 +114,9 @@ class AddTodoGroupComponent extends React.Component {
      */
     _renderViewMode() {
         return (
-            <div className="add-todo-group-component"
+            <div className="add-todo-group-component text-center"
                  data-match-height="js-container-block">
-                
+
                 <a href="#" className="add-todo-group-component-add-link" onClick={this._onAddLinkClick.bind(this)}>+</a>
             </div>
         )

@@ -65,7 +65,7 @@ class AddTodoGroupComponent extends React.Component {
         // prevent backend form submission
         event.preventDefault();
 
-        if (this._hasValidInput()) {
+        if (!this._hasValidInput()) {
             return;
         }
 

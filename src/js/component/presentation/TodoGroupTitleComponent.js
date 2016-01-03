@@ -62,21 +62,6 @@ class TodoGroupTitleComponent extends React.Component {
     }
 
     /**
-     * @returns {XML|null}
-     *
-     * @private
-     */
-    _renderIsStarredStatus() {
-        if (this.props.isStarred) {
-            return (
-                <i className="glyphicon glyphicon-star" />
-            );
-        } else {
-            return null;
-        }
-    }
-
-    /**
      * @returns {XML}
      *
      * @private
@@ -85,7 +70,7 @@ class TodoGroupTitleComponent extends React.Component {
         return (
             <div className="todo-group-title-component">
                 <h3 className="todo-group-title-component-title">
-                    { this._renderIsStarredStatus() }  { this.state.title }
+                    { this.state.title }
                     <a href="#" className="todo-group-title-component-edit-link" onClick={this._onEditLinkClick.bind(this)}>
                         <i className="glyphicon glyphicon-edit" />
                     </a>

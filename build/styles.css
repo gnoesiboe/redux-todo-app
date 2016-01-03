@@ -1,5 +1,5 @@
 body {
-    background: #f8f8f8;
+    background: #f8f6f1;
 }
 
 body,
@@ -65,6 +65,10 @@ html,
 .todo-group-component {
     position: relative;
 }
+
+    .todo-group-component--is-starred {
+        background: #e8e6e1;
+    }
 
 /* -------------------------------------------------------*/
 

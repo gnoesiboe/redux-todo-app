@@ -7,6 +7,7 @@ import mousetrap from 'mousetrap';
 import { ActionCreators } from 'redux-undo';
 import { resizeToContent } from './../../utility/rowResizer';
 import { notifySuccess, notifyError } from './../../utility/notifier';
+import ExplanationComponent from './../presentation/ExplanationComponent.js';
 
 /**
  * @author Gijs Nieuwenhuis <gijs.nieuwenhuis@freshheads.com>
@@ -543,6 +544,11 @@ class AppComponent extends React.Component {
                                         onToggleTodoIsStarredStatus={this._onToggleTodoIsStarredStatus.bind(this)}
                                         onGroupStarredStatusChange={this._onGroupStarredStatusChange.bind(this)}
                                         onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
+                <div className="row">
+                    <div className="col-xs-12">
+                        <ExplanationComponent />
+                    </div>
+                </div>
             </div>
         );
     }

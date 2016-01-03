@@ -256,6 +256,13 @@ html,
 /* -------------------------------------------------------*/
 
 
+.explanation-component {
+    padding: 15px;
+}
+
+/* -------------------------------------------------------*/
+
+
 .todo-component-title p {
 
     /* markdown functionality adds 'p' tags, but title should be inline */

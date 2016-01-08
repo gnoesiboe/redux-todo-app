@@ -1,0 +1,49 @@
+.todo-list-component {
+
+}
+
+    .todo-list-component-list {
+        padding-bottom: 30px; /* padding on bottom to be able to drag todos into it when the list is emtpy */
+    }
+
+    .todo-list-component-list-item--is-current .todo-component-actions {
+        background: #0fb47b;
+    }
+
+    .todo-list-component-list-item--is-current label,
+    .todo-list-component-list-item--is-current .text-tag,
+    .todo-list-component-list-item--is-current .text-assignment {
+        color: white;
+    }
+
+    .todo-component-action-seperator {
+        color: #ddd;
+    }
+
+    .todo-component-action {
+        color: #0fb47b;
+    }
+
+    .todo-list-component-list-item--is-current .todo-component-action {
+        color: #fff;
+    }
+
+    .todo-component-action:hover {
+        color: #393939;
+    }
+
+    .todo-list-component-list .list-group-item {
+        padding: 0 10px;
+    }
+
+    .todo-list-component-list-item--is-current {
+        background: #0fb47b;
+    }
+
+    .todo-list-component-list-item {
+        border-left: 10px solid #ddd;
+    }
+
+    .todo-component--is-starred {
+        border-left: 10px solid #0f784b;
+    }

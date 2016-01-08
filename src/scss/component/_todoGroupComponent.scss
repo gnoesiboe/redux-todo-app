@@ -1,0 +1,50 @@
+.todo-group-component {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    position: relative;
+}
+
+    .todo-group-component--is-starred {
+        background: #ebe9e4;
+    }
+
+    .todo-group-component-body {
+        /* Workaround to get the todo actions sticky to the bottom of the todo-group-component */
+
+        height: 100%;
+        padding-top: 120px;
+        margin: -120px 15px 15px;
+    }
+
+    .todo-group-component-footer {
+        margin: 0 15px 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+@media screen and (min-width: 320px) {
+    .todo-group-component {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .todo-group-component {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .todo-group-component {
+        width: 33.33%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .todo-group-component {
+        width: 25%;
+    }
+}

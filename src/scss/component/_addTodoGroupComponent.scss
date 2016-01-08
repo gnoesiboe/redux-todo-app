@@ -1,0 +1,46 @@
+.add-todo-group-component {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    position: relative;
+    padding: 15px;
+}
+
+    .add-todo-group-component-add-link {
+        font-size: 100px;
+        padding: 10%;
+        color: #ddd;
+        border-radius: 10px;
+        margin: auto;
+    }
+
+    .add-todo-group-component-add-link:hover {
+        text-decoration: none;
+        color: #999;
+    }
+
+@media screen and (min-width: 320px) {
+    .add-todo-group-component {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .add-todo-group-component {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .add-todo-group-component {
+        width: 33.33%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .add-todo-group-component {
+        width: 25%;
+    }
+}

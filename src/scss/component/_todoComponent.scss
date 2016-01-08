@@ -1,0 +1,51 @@
+.todo-component {
+    position: relative;
+    border-radius: 3px;
+    padding-left: 3px;
+
+    &:hover {
+        .todo-component-actions {
+            display: block;
+        }
+    }
+}
+
+    .todo-component-title {
+        p {
+            /* markdown functionality adds 'p' tags, but title should be inline */
+            display: inline;
+        }
+
+        a {
+            color: black;
+            text-decoration: underline;
+        }
+    }
+
+    .todo-component-actions {
+        display: none;
+        position: absolute;
+        font-size: 10px;
+        right: 0;
+        top: 0;
+        background: #fff;
+        height: 100%;
+    }
+
+    .todo-component-form {
+        background: #ebebeb;
+        padding: 15px;
+        border-radius: 3px;
+        margin: 15px 0;
+    }
+
+    .todo-component--is-completed label,
+    .todo-component--is-completed .todo-component-action,
+    .todo-component--is-completed .text-assignment,
+    .todo-component--is-completed .text-tag {
+        opacity: 0.3;
+    }
+
+    .todo-component--is-completed label {
+        text-decoration: line-through;
+    }

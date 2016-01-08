@@ -1,0 +1,39 @@
+.todo-group-title-component {
+
+}
+
+    .todo-group-title-component-title {
+
+    }
+
+        .todo-group-title-component-title {
+            padding: 5px 20px 5px 0;
+            color: #333;
+            font-size: 22px;
+            position: relative;
+
+            .todo-group-title-component-edit-link {
+                display: none;
+            }
+
+            &:hover {
+                .todo-group-title-component-edit-link {
+                    display: inherit;
+                }
+            }
+        }
+
+    .todo-group-title-component-edit-link {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        color: #0e995c;
+    }
+
+    .todo-group-title-component-edit-link:hover {
+        color: #333;
+    }
+
+    .todo-group-title-component-form {
+        padding: 20px 0;
+    }

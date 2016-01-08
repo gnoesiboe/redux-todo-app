@@ -1,4 +1,3 @@
 /node_modules
 .idea
-/build/app.js
-/build/index.html
+/build/*

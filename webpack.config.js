@@ -1,33 +1,38 @@
-var webpack = require('webpack');
+var webpack = require('webpack'),
+    path = require('path'),
+    HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     context: __dirname + "/src",
     entry: {
-        javascript: "./js/app.js",
-        html: "./index.html"
+        app: path.resolve(__dirname, 'src/js/app.js'),
+        styles: path.resolve(__dirname, 'src/scss/styles.scss')
     },
     output: {
-        filename: "app.js",
-        path: __dirname + "/build"
+        filename: '[name].js',
+        path: __dirname + "/build",
+        hash: true
     },
+    devtool: 'inline-source-map',
     module: {
         loaders: [
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loaders: ["react-hot", "babel-loader"]
-            },            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loaders: ["babel-loader"]
             },
             {
-                test: /\.html$/,
-                loader: "file?name=[name].[ext]"
+                test: /\.scss$/,
+                loaders: ["style-loader", "css-loader", "sass-loader"]
             }
         ]
     },
     plugins: [
+        new HTMLWebpackPlugin({
+            title: 'My App',
+            filename: 'index.html',
+            template: path.resolve(__dirname, 'src/index.html')
+        }),
         new webpack.ProvidePlugin({
             jQuery: 'jquery',
             'window.$': 'jquery',

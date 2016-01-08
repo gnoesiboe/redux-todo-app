@@ -29,9 +29,10 @@ module.exports = {
     },
     plugins: [
         new HTMLWebpackPlugin({
-            title: 'My App',
             filename: 'index.html',
-            template: path.resolve(__dirname, 'src/index.html')
+            template: path.resolve(__dirname, 'src/index.html'),
+            inject: 'body',
+            hash: true
         }),
         new webpack.ProvidePlugin({
             jQuery: 'jquery',

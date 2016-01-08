@@ -1,8 +1,8 @@
 {
-  "name": "webpack-react-ecma6-bootstrap",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "redux-todo-app",
+  "version": "0.1.0",
+  "description": "Todo app created using React and Redux",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --hot --inline"
@@ -20,6 +20,7 @@
     "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
+    "bootstrap": "^3.3.6",
     "deep-freeze-strict": "^1.1.1",
     "jquery": "^2.1.4",
     "jquery-match-height": "^0.6.0",

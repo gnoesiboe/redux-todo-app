@@ -5,10 +5,17 @@
     box-sizing: border-box;
     overflow-y: scroll;
     position: relative;
+    border: 1px solid #f8f6f1;
+    margin-top: 10px;
 }
 
     .todo-group-component--is-starred {
         background: #ebe9e4;
+    }
+
+    .todo-group-component--is-current {
+        border: 1px solid #ddd;
+        background: #e6e4df;
     }
 
     .todo-group-component-body {

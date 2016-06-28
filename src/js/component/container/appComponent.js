@@ -64,12 +64,12 @@ class AppComponent extends React.Component {
         mousetrap.bind('meta+shift+z', this._onRedoKeybindingPressedCallback);
 
         // group navigation
-        mousetrap.bind('right', this._onSelectNextGroupCallback);
-        mousetrap.bind('left', this._onSelectPreviousGroupCallback);
+        mousetrap.bind(['right', 'n'], this._onSelectNextGroupCallback);
+        mousetrap.bind(['left', 'p'], this._onSelectPreviousGroupCallback);
 
         // todo navigation
-        mousetrap.bind('down', this._onSelectNextTodoCallback);
-        mousetrap.bind('up', this._onSelectPreviousTodoCallback);
+        mousetrap.bind(['down', 'j'], this._onSelectNextTodoCallback);
+        mousetrap.bind(['up', 'k'], this._onSelectPreviousTodoCallback);
 
         // actions to current item
         mousetrap.bind('e', this._onEditCurrentTodoKeybindingPressedCallback);

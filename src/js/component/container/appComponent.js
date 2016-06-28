@@ -37,6 +37,7 @@ class AppComponent extends React.Component {
         this._onToggleTodoIsCompletedStatusKeybindingPressedCallback = this._onToggleTodoIsCompletedStatusKeybindingPressed.bind(this);
         this._onDeleteCurrentTodoKeybindingPressedCallback = this._onDeleteCurrentTodoKeybindingPressed.bind(this);
         this._onToggleCurrentTodoIsStarredStatusKeybindingPressedCallback = this._onToggleCurrentTodoIsStarredStatusKeybindingPressed.bind(this);
+        this._onToggleShowExplanationCallback = this._onToggleShowExplanationKeybindingPressed.bind(this);
     }
 
     /**
@@ -75,6 +76,9 @@ class AppComponent extends React.Component {
         mousetrap.bind('space', this._onToggleTodoIsCompletedStatusKeybindingPressedCallback);
         mousetrap.bind('x', this._onDeleteCurrentTodoKeybindingPressedCallback);
         mousetrap.bind('s', this._onToggleCurrentTodoIsStarredStatusKeybindingPressedCallback);
+
+        // show explanation
+        mousetrap.bind('?', this._onToggleShowExplanationCallback);
     }
 
     /**
@@ -99,6 +103,22 @@ class AppComponent extends React.Component {
         mousetrap.unbind('space', this._onToggleTodoIsCompletedStatusKeybindingPressedCallback);
         mousetrap.unbind('x', this._onDeleteCurrentTodoKeybindingPressedCallback);
         mousetrap.unbind('s', this._onToggleCurrentTodoIsStarredStatusKeybindingPressedCallback);
+
+        // show explanation
+        mousetrap.unbind('?', this._onToggleShowExplanationCallback);
+    }
+
+    /**
+     * @param {Object} event
+     *
+     * @private
+     */
+    _onToggleShowExplanationKeybindingPressed(event) {
+        event.preventDefault();
+
+        this.props.dispatch(
+            actionFactory.createToggleShowExplanationAction()
+        );
     }
 
     /**
@@ -526,6 +546,25 @@ class AppComponent extends React.Component {
 
     /**
      * @returns {XML}
+     *
+     * @private
+     */
+    _renderExplanation() {
+        if (!this.props.showExplanation) {
+            return null;
+        }
+
+        return (
+            <div className="row">
+                <div className="col-xs-12">
+                    <ExplanationComponent />
+                </div>
+            </div>
+        );
+    }
+
+    /**
+     * @returns {XML}
      */
     render() {
         return (
@@ -547,11 +586,7 @@ class AppComponent extends React.Component {
                                         onToggleTodoIsStarredStatus={this._onToggleTodoIsStarredStatus.bind(this)}
                                         onGroupStarredStatusChange={this._onGroupStarredStatusChange.bind(this)}
                                         onTodoCompletedStatusChange={this._onTodoCompletedStatusChange.bind(this)} />
-                <div className="row">
-                    <div className="col-xs-12">
-                        <ExplanationComponent />
-                    </div>
-                </div>
+                {this._renderExplanation()}
             </div>
         );
     }
@@ -566,7 +601,8 @@ var mapCompleteStateToAppComponentProps = function (completeState) {
     return {
         undoPossible: completeState[stateNamespace.TODO_GROUPS].past.length > 0,
         redoPossible: completeState[stateNamespace.TODO_GROUPS].future.length > 0,
-        todoGroups: completeState[stateNamespace.TODO_GROUPS].present
+        todoGroups: completeState[stateNamespace.TODO_GROUPS].present,
+        showExplanation: completeState[stateNamespace.CURRENT].showExplanation
     };
 };
 

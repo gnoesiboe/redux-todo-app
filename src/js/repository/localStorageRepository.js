@@ -7,8 +7,11 @@ import { createTodoGroupCollectionFromStorageInput } from './../model/todoGroupF
  */
 export function persist(state) {
     Object.keys(stateNamespaces).map(function (key) {
-        var stateValue = state[stateNamespaces[key]].present,
-            dataToStore = typeof stateValue.toNative !== 'undefined' ? stateValue.toNative() : stateValue;
+        var stateValue = typeof state[stateNamespaces[key]].present !== 'undefined'
+            ? state[stateNamespaces[key]].present
+            : state[stateNamespaces[key]];
+
+        var dataToStore = typeof stateValue.toNative !== 'undefined' ? stateValue.toNative() : stateValue;
 
         store.set(stateNamespaces[key], dataToStore);
     });

@@ -277,3 +277,12 @@ export function createToggleCurrentTodoIsStarredStatusAction() {
         type: actionTypes.TOGGLE_CURRENT_TODO_IS_STARRED_STATUS
     });
 }
+
+/**
+ * @returns {Object}
+ */
+export function createToggleShowExplanationAction() {
+    return {
+        type: actionTypes.TOGGLE_SHOW_EXPLANATION
+    };
+}
